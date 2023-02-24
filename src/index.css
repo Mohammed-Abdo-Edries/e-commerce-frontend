@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.App .pages .signup {
+    box-shadow: 0 10px 25px rgba(92, 99, 105, 0.2);
+}
+
+.forminput {
+    border: 1px solid #dadce0;
+}
+.formlable {
+    transition: 0.3s;
+}
+.forminput::first-line {
+    background: none;
+}
+.forminput:focus+.formlable,
+.forminput:not(:placeholder-shown).forminput:not(:focus)+.formlable {
+    top: -12px;
+    left: 16px;
+    color:blue;
+    font-size: 12px;
+    font-weight: 500;
+    z-index: 10;
+}
+.forminput:focus {
+    border: 1.5px solid blue;
+    background-color: white;
+}
