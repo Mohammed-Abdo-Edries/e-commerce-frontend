@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { useAuthContext } from '../hooks/useAuthContext'
-// import apiClint from "../http-common"
 import axios from "axios"
+import url from "../http-common"
 
 const AdminsOnly = () => {
     const [title, setTitle] = useState();
@@ -17,7 +17,6 @@ const AdminsOnly = () => {
     }
     const sendImage = (e) => {
         e.preventDefault()
-        const url = "http://localhost:4000/product/create"
         const token = user.token;
         const formData = new FormData()
         formData.append('name', title);
@@ -25,7 +24,7 @@ const AdminsOnly = () => {
         formData.append('category', category);
         formData.append('details', details);
         formData.append('image', image);
-        axios.post(url, formData,
+        axios.post(`${url}/product/create`, formData,
             Headers = {
                 headers: {
                     "Content-Type": "multipart/form-data"

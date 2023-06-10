@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { Product } from '../components/product'
 import axios from 'axios'
+import url from "../http-common"
 
 const Pants = () => {
   const [pants, setPants] = useState([])
   useEffect(() => {
-    axios.get('http://localhost:4000/product/',
+    axios.get(`${url}/product/`,
       Headers = {
         headers: {
           "Content-Type": "multipart/form-data",

@@ -1,1 +1,1 @@
-export const url = "https://localhost:4000";
+export const url = "https://backend-czo2.onrender.com";

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useShopContext } from '../Context/ShopContext';
 import { useParams } from 'react-router-dom';
 import axios from 'axios'
+import url from "../http-common"
 import { useCookies } from 'react-cookie';
 
 const Details = () => {
@@ -21,7 +22,7 @@ const Details = () => {
     });
   }, [id, cart, amount]);
   useEffect(() => {
-    axios.get(`http://localhost:4000/product/${id}`,
+    axios.get(`${url}/product/${id}`,
       Headers = {
         headers: {
           "Content-Type": "multipart/form-data",

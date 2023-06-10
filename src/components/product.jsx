@@ -5,6 +5,7 @@ import { useAuthContext } from '../hooks/useAuthContext'
 import Popup from "reactjs-popup";
 import { useShopContext } from '../Context/ShopContext'
 import axios from "axios"
+import url from "../http-common"
 
 export const Product = (props) => {
   const { _id, name, price, imgURL, category, details } = props.data;
@@ -69,7 +70,7 @@ export const Product = (props) => {
     setRefresh(!refresh);
   };
   const deleteProduct = () => {
-    axios.delete("http://localhost:4000/product/delete",
+    axios.delete(`${url}/product/delete`,
       Headers = {
         headers: {
           "Content-Type": "multipart/form-data",

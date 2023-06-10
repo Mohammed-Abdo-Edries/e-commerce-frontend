@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useShopContext } from '../Context/ShopContext';
 import axios from 'axios'
+import url from "../http-common"
 
 export const CartItem = (props) => {
   const { id, name, price, category, amount } = props.data;
@@ -8,7 +9,7 @@ export const CartItem = (props) => {
   const { cart, setCart, refresh, setRefresh } = useShopContext();
 
   useEffect(() => {
-    axios.get(`http://localhost:4000/product/${id}`,
+    axios.get(`${url}/product/${id}`,
       Headers = {
         headers: {
           "Content-Type": "multipart/form-data",
