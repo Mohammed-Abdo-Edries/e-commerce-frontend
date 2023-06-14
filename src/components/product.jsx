@@ -82,7 +82,7 @@ export const Product = (props) => {
   }
   return (
     <div className='mt-5' id={_id}>
-      <img src={`http://localhost:4000/images/${imgURL}`} className='rounded-lg w-50 h-50' />
+      <img src={`${url}/images/${imgURL}`} className='rounded-lg w-50 h-50' />
       <div className='flex flex-col items-center'>
         <div className=''><b>{name}</b></div>
         <div> ${price}</div>

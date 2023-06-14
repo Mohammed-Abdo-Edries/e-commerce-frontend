@@ -81,7 +81,7 @@ const Details = () => {
   };
   return (
     <div id={details._id} className='mt-5'>
-      <img src={`http://localhost:4000/images/${details.imgURL}`} className='rounded-lg w-50 h-50' />
+      <img src={`${url}/images/${details.imgURL}`} className='rounded-lg w-50 h-50' />
       <div className='flex flex-col items-center'>
         <div className=''><b>{details.name}</b></div>
         <div>{details.price}</div>
