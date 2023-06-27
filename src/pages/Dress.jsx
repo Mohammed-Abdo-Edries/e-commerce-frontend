@@ -20,9 +20,9 @@ const Dress = () => {
   }, [])
   return (
     <div className='grid mt-5 grid-cols-3 gap-10'>
-      {dress.map((product) => (
+      {dress.length ? dress.map((product) => (
         <Product data={product} />
-      ))}
+      )) : <div>there are no products</div>}
     </div>
   )
 }

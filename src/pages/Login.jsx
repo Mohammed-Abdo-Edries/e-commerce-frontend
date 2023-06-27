@@ -1,17 +1,17 @@
 import { useState } from 'react'
 import { useLogin } from '../hooks/useLogin'
-import { useAuthContext } from '../hooks/useAuthContext'
-
+// import { useAuthContext } from '../hooks/useAuthContext'
+import { Link } from 'react-router-dom'
 
 const Login = () => {
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-    const {login, error, isLoading} = useLogin()
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const { login, error, isLoading } = useLogin()
 
-    const handleSubmit = async (e) => {
-        e.preventDefault()
-        await login(email, password)
-    }
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    await login(email, password)
+  }
   return (
     <div className="myform h-screen flex justify-center items-center">
       <form className='Login signup h-64 w-96 py-5 px-6 rounded-lg' onSubmit={handleSubmit}>
@@ -26,6 +26,7 @@ const Login = () => {
         </div>
         <button className='pt-2 p-2 ml-auto bg-blue-600 w-20 block cursor-pointer text-white rounded-lg' disabled={isLoading} type="submit" >Log in</button>
         {error && <div className='error'>{error}</div>}
+        <div>dont have an account? <Link to="/signup">Signup</Link></div>
       </form>
     </div>
   )
