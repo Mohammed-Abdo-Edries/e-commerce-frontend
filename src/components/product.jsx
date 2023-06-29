@@ -105,9 +105,9 @@ export const Product = (props) => {
               <span className='border-4 border-black px-2 py-1 rounded-xl' onClick={onClickAddCart} >+</span>
             </div>
             :
-            <button
+            <button className='border-4 border-black px-2 py-1 rounded-xl'
               onClick={onClickAddCart}
-            >ADD TO CART</button>
+            >Add to cart</button>
         }
 
         <Link to={`/productDetails/${_id}`} >

@@ -19,25 +19,25 @@ const images = [
     },
     {
         id: 3,
-        src:image3,
+        src: image3,
         alt: "Image 3"
 
     },
     {
         id: 4,
-        src:image4,
+        src: image4,
         alt: "Image 4"
 
     },
     {
         id: 5,
-        src:image5,
+        src: image5,
         alt: "Image 5"
 
     },
     {
         id: 6,
-        src:image6,
+        src: image6,
         alt: "Image 6"
 
     },
