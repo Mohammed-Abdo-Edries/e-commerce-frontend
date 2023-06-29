@@ -3,8 +3,9 @@ import { Link } from 'react-router-dom'
 import { useShopContext } from '../Context/ShopContext';
 import { useLogout } from '../hooks/useLogout'
 import { useAuthContext } from '../hooks/useAuthContext'
-
-
+import { BsCart4, BsThreeDotsVertical } from "react-icons/bs"
+import { FcSettings } from "react-icons/fc"
+import Popup from "reactjs-popup"
 const Navbar = () => {
   const { openCart } = useShopContext();
   const { logout } = useLogout()
@@ -13,35 +14,51 @@ const Navbar = () => {
     logout()
   }
   return (
-    <div className='container bg-black text-white max-w-full flex py-2 px-10 h-20'>
-      {/* <div className=''> */}
-      <Link className='justify-start text-lg ml-2 mr-52' to="/">Luxury</Link>
-      <div className='justify-center hidden sm:flex'>
-        {user && (
+    <>
+      <div className='text-white bg-black h-12 py-2 max-w-full text-lg px-8 sm:px-40'>
+        <div className='flex justify-between'>
           <div>
-            <button className='ml-52' onClick={handelClick}>Log Out</button>
+            <Link className='' to="/">Luxury</Link>
           </div>
-        )}
-        {!user && (
-          <div>
-            <Link className='text-lg' to="/login">Login</Link>
+          <div className='hidden sm:flex'>
+            {user && (
+              <div>
+                <button className='' onClick={handelClick}>Log Out</button>
+              </div>
+            )}
+            {!user && (
+              <div>
+                <Link className='' to="/login">Login</Link>
+              </div>
+            )}
+            {user && (
+              user.isAdmin ?
+                <Link className='ml-2' to="/adminsonly"><FcSettings /></Link>
+                : null)}
+            <Link id="cart" onClick={openCart} className='ml-4 pt-1'><BsCart4 /></Link>
           </div>
-        )}
-        {user && (
-          user.isAdmin ?
-            <Link className='ml-4 text-lg' to="/adminsonly">Cntrol panel</Link>
-            : null)}
-        <Link id="cart" onClick={openCart} className='text-lg ml-4'>Cart</Link>
+          <div className='flex justify-end sm:hidden'>
+            {/* <Link className='' to="/login">Login</Link> */}
+            <Link id="cart" onClick={openCart} className='pt-1 ml-2'><BsCart4 /></Link>
+            <Popup className='' trigger={<button className='ml-2 pt-1'><BsThreeDotsVertical /></button>} position="bottom right" closeOnDocumentClick>
+              <ul className='bg-white border-2 border-black rounded py-2 px-4'>
+                <li><div>{user ? user.firstname + user.lastname : <Link className='' to="/login">Login</Link>}</div></li>
+                <li><Link className='' to="/dress">Dress</Link></li>
+                <li><Link className='' to="/shirts">Shirts</Link></li>
+                <li><Link className='' to="/pants">pants</Link></li>
+                <li><Link className='' to="/shoes">shoes</Link></li>
+              </ul>
+            </Popup>
+          </div>
+        </div>
       </div>
-      {/* </div> */}
-      <div className='hidden sm:flex justify-between pt-3 px-2 text-blue-500'>
-        <Link className='ml-4 text-lg' to="/dress">Dress</Link>
-        <Link className='ml-4 text-lg' to="/shirts">Shirts</Link>
-        <Link className='ml-4 text-lg' to="/pants">Pants</Link>
+      <div className='hidden sm:flex justify-between text-white pt-3 h-12 bg-black max-w-full px-40'>
+        <Link className='' to="/dress">Dress</Link>
+        <Link className='' to="/shirts">Shirts</Link>
+        <Link className='' to="/pants">Pants</Link>
+        <Link className='' to="/shoes">Shoes</Link>
       </div>
-      <div className='justify-end block sm:hidden text-white'>menue</div>
-    </div>
-
+    </>
   )
 }
 
