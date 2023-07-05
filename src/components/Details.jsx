@@ -81,32 +81,22 @@ const Details = () => {
   };
   return (
     <div id={details._id} className='mt-5'>
-      <img src={`${url}/images/${details.imgURL}`} className='rounded-lg w-50 h-50' />
-      <div className='flex flex-col items-center'>
+      <img src={`${url}/images/${details.imgURL}`} className='rounded-lg w-50 h-50 ml-20' />
+      <div className='flex flex-col text-left'>
         <div className=''><b>{details.name}</b></div>
         <div>{details.price}</div>
         <div>{details.details}</div>
-        {/* <div> {productDetails}</div> */}
-        {/* <button className='border-4 border-black px-2 py-1 rounded-xl' onClick={() => addToCart(id)}>
-          Add To Cart
-        </button> */}
         {
           inCart
             ?
-            <div className='d-flex' >
+            <div className='flex my-2' >
               <button className='border-4 border-black px-2 py-1 rounded-xl' onClick={onClickRemoveCart} disabled={amount === 0}>-</button>
               <div className='text-center w-24' >{amount}</div>
               <button className='border-4 border-black px-2 py-1 rounded-xl' onClick={onClickAddCart} >+</button>
             </div>
             :
-            <button
+            <button className='mb-5 text-left'
               onClick={onClickAddCart}
-              my={1}
-              me={{ base: 0, md: 2 }}
-              maxWidth={530}
-              colorScheme='facebook'
-              height={10}
-              width='100%'
             >ADD TO CART</button>
         }
       </div>

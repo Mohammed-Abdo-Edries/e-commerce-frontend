@@ -28,17 +28,19 @@ const cart = ({ open }) => {
     removeCookie('cart', { path: '/' });
   };
   return (
-    <Drawer anchor={"right"} open={open} onClose={closeCart} className='d-flex flex-column' >
-      <div className='text-center w-full' >
+    <Drawer anchor={"right"} open={open} onClose={closeCart} data-aos="fade-left" data-aos-duration="1000" className='d-flex flex-column' >
+      <div className='text-center w-full px-4' >
         {cart.length ?
           cart.map((product) => (
             <CartItem data={product} />
-          )) : <h2 className='text-center' >You have nothing in your cart.</h2>}
-        <div className='flex-column' >
-          <div >Product Amount: {totalAmount}</div>
-          <div >Total Price: {totalPrice} $</div>
-          {cart.length ? <button className='' onClick={onClickRemove} >Remove All</button> : null}
-        </div>
+          )) : <h2 className='text-center' >You have'nt bought enything yet</h2>}
+        {cart.length ?
+          <div className='flex-column' >
+            <div >Product Amount: {totalAmount}</div>
+            <div >Total Price: {totalPrice} $</div>
+            <button className='' onClick={onClickRemove} >Remove All</button>
+          </div>
+          : null}
       </div>
     </Drawer>
   )

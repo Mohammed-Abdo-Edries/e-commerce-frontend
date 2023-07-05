@@ -16,7 +16,7 @@ const Navbar = () => {
     logout()
   }
   return (
-    <>
+    <div className='sticky top-0'>
       <div className='text-white bg-black h-16 max-w-full text-lg px-8 sm:px-40'>
         <div className='flex justify-between'>
           <div>
@@ -50,9 +50,9 @@ const Navbar = () => {
                 <Link className='ml-2 pt-6' to="/adminsonly"><FcSettings /></Link>
                 : null)}
             <Link id="cart" onClick={openCart} className='pt-6 ml-2'><BsCart4 /></Link>
-            <Popup className='' trigger={<button className='ml-2 pb-2'><BsThreeDotsVertical /></button>} position="bottom right" closeOnDocumentClick>
-              <ul className='bg-white border-2 border-black rounded py-2 px-4'>
-                <li><div>{user ? user.firstname + user.lastname : <Link className='' to="/login">Login</Link>}</div></li>
+            <Popup trigger={<button className='ml-2 pb-2'><BsThreeDotsVertical /></button>} position="bottom right" closeOnDocumentClick>
+              <ul className='bg-white border-2 border-black rounded py-2 px-4 -mt-7' data-aos="fade-up" ease-in-out data-aos-duration="2000" >
+                <li className='text-lg'><div className='text-lg font-medium' >{user ? user.firstname + " " + user.lastname : <Link className='' to="/login">Login</Link>}</div></li>
                 {user && (
                   <li>
                     <button className='' onClick={handelClick}>Log Out</button>
@@ -68,12 +68,12 @@ const Navbar = () => {
         </div>
       </div>
       <div className='hidden sm:flex justify-between text-white pt-3 h-12 bg-black max-w-full px-40'>
-        <Link className='' to="/dress">Dress</Link>
-        <Link className='' to="/shirts">Shirts</Link>
-        <Link className='' to="/pants">Pants</Link>
-        <Link className='' to="/shoes">Shoes</Link>
+        <Link className='text-lg font-medium' to="/dress">Dress</Link>
+        <Link className='text-lg font-medium' to="/shirts">Shirts</Link>
+        <Link className='text-lg font-medium' to="/pants">Pants</Link>
+        <Link className='text-lg font-medium' to="/shoes">Shoes</Link>
       </div>
-    </>
+    </div>
   )
 }
 

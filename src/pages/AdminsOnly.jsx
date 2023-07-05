@@ -36,9 +36,9 @@ const AdminsOnly = () => {
             )
     }
     return (
-        <div>
+        <div className="mx-12 px-4 pt-8 pb-4">
             <form onSubmit={sendImage} action="http://localhost:4000/product/create" method="post" encType="multipart/form-data">
-                <input type='name' placeholder="name" onChange={(e) => setTitle(e.target.value)} value={title}></input>
+                <input type='name' placeholder="name" className="border-2 border-gray-700 rounded-lg w-60" onChange={(e) => setTitle(e.target.value)} value={title}></input>
                 <br />
                 <hr />
                 <br />
@@ -56,13 +56,13 @@ const AdminsOnly = () => {
                 <br />
                 <hr />
                 <br />
-                <input placeholder="details" type='text' onChange={(e) => setDetails(e.target.value)} value={details}></input>
+                <input placeholder="details" type='text' className="border-2 border-gray-700 rounded-lg w-60" onChange={(e) => setDetails(e.target.value)} value={details}></input>
                 <br />
                 <hr />
                 <br />
                 <input type="file" onChange={handelChange} />
                 <br />
-                <button type="submit" className='pt-2 p-2 ml-auto bg-blue-600 w-20 block cursor-pointer text-white rounded-lg' onClick={() => console.log(category)} >Do Itttt</button>
+                <button type="submit" className='pt-2 p-2 bg-blue-600 w-20 block cursor-pointer text-white rounded-lg mt-4 mx-auto' onClick={() => console.log(category)} >Do Itttt</button>
             </form>
         </div>
     )

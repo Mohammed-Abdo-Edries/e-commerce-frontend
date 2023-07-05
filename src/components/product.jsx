@@ -82,30 +82,22 @@ export const Product = (props) => {
       .catch(error => console.log(error))
   }
   return (
-    <div className='mt-5' id={_id}>
+    <div className='mt-5 items-center' id={_id}>
       <img src={`${url}/images/${imgURL}`} className='rounded-lg w-50 h-50' />
       <div className='flex flex-col items-center'>
         <div className=''><b>{name}</b></div>
         <div> ${price}</div>
         <div> {details}</div>
-        {/* {user ?
-          <button className='border-4 border-black px-2 py-1 rounded-xl' onClick={() => addToCart(id)}>
-            Add To Cart {cartItemsAmount > 0 && <> ({cartItemsAmount}) </>}
-          </button>
-          : <Popup className='bg-red-700' trigger={<button className='border-4 border-black px-2 py-1 rounded-xl'>Add to Cart</button>}>Sorry, your not logged in
-          </Popup>
-        } */}
-
         {
           inCart
             ?
-            <div className='d-flex my-2' >
+            <div className='flex my-2' >
               <span className='border-4 border-black px-2 py-1 rounded-xl' onClick={onClickRemoveCart} disabled={amount === 0}>-</span>
-              <span className='text-center w-24 px-1' >{amount}</span>
+              <span className='text-center w-8 px-1 pt-1' >{amount}</span>
               <span className='border-4 border-black px-2 py-1 rounded-xl' onClick={onClickAddCart} >+</span>
             </div>
             :
-            <button className='border-4 border-black px-2 py-1 rounded-xl'
+            <button className='border-4 border-black px-2 py-1 my-2 rounded-xl'
               onClick={onClickAddCart}
             >Add to cart</button>
         }
@@ -116,8 +108,8 @@ export const Product = (props) => {
           </button>
         </Link>
         {user?.isAdmin ?
-          <div>
-            <button onClick={deleteProduct}>delete</button>
+          <div className='mx-auto'>
+            <button className='border-4 border-black px-2 py-1 rounded-xl my-2 mx-auto justify-center items-center align-center' onClick={deleteProduct}>delete</button>
           </div>
           : null}
       </div>

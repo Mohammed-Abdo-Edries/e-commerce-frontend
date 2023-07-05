@@ -23,8 +23,8 @@ export const CartItem = (props) => {
   }, [])
 
   return (
-    <div id={cartItem.id} className='cartItem flex text-center my-4 mx-10 bg-gray-700 w-48'>
-      <img className='w-20 h-20' src={`${url}/images/${cartItem.imgURL}`} />
+    <div id={cartItem.id} className='cartItem flex text-center my-4 mx-2 bg-gray-700 w-48'>
+      <img className='w-24 h-24' src={`${url}/images/${cartItem.imgURL}`} />
       <div>
         <div className='flex'> <p>{name}</p> in <p>{category}</p> </div>
         <p> ${cartItem.price}</p>
