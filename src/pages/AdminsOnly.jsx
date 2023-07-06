@@ -24,10 +24,13 @@ const AdminsOnly = () => {
         formData.append('category', category);
         formData.append('details', details);
         formData.append('image', image);
+        email = user?.email
+
         axios.post(`${url}/product/create`, formData,
             Headers = {
                 headers: {
-                    "Content-Type": "multipart/form-data"
+                    "Content-Type": "multipart/form-data",
+                    email
                 }
             })
             .then(response => console.log(response))

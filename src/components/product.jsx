@@ -6,14 +6,12 @@ import Popup from "reactjs-popup";
 import { useShopContext } from '../Context/ShopContext'
 import axios from "axios"
 import url from "../http-common"
-import { SpeedDialIcon } from '@mui/material';
 
 export const Product = (props) => {
   const { _id, name, price, imgURL, category, details } = props.data;
   const { cart, setCart, refresh, setRefresh } = useShopContext();
   const { user } = useAuthContext()
   const [inCart, setInCart] = useState(false);
-  const [product, setProduct] = useState("");
   const [amount, setAmount] = useState(0);
   const [cookies, setCookies, removeCookie] = useCookies(['cart']);
 
@@ -71,11 +69,13 @@ export const Product = (props) => {
     setRefresh(!refresh);
   };
   const deleteProduct = () => {
+    email = user?.email
     axios.delete(`${url}/product/delete`,
       Headers = {
         headers: {
           "Content-Type": "multipart/form-data",
-          id: _id
+          id: _id,
+          email
         }
       })
       .then(response => console.log(response))

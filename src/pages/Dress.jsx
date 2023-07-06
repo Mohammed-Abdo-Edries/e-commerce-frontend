@@ -8,11 +8,13 @@ const Dress = () => {
   const [dress, setDress] = useState([])
   const { user } = useAuthContext()
   const deleteAllProudcts = () => {
+    email = user?.email
     axios.delete(`${url}/product/deleteAllProudcts`,
       Headers = {
         headers: {
           "Content-Type": "multipart/form-data",
-          category: "dress"
+          category: "dress",
+          email
         }
       })
       .then(response => console.log(response))
