@@ -12,6 +12,7 @@ import Details from './components/Details'
 import AdminsOnly from './pages/AdminsOnly'
 import AOS from "aos";
 import "./index.css"
+import Footer from './components/footer';
 
 function App() {
   useEffect(() => {
@@ -35,6 +36,7 @@ function App() {
             <Route path="/adminsonly" element={<AdminsOnly />} exact />
           </Routes>
         </div>
+        <Footer />
       </BrowserRouter>
     </div>
   )

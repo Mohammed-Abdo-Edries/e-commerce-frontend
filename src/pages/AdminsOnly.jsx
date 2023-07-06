@@ -37,7 +37,7 @@ const AdminsOnly = () => {
     }
     return (
         <div className="mx-12 px-4 pt-8 pb-4">
-            <form onSubmit={sendImage} action="http://localhost:4000/product/create" method="post" encType="multipart/form-data">
+            <form onSubmit={sendImage} action={`${url}/product/create`} method="post" encType="multipart/form-data">
                 <input type='name' placeholder="name" className="border-2 border-gray-700 rounded-lg w-60" onChange={(e) => setTitle(e.target.value)} value={title}></input>
                 <br />
                 <hr />
@@ -46,12 +46,11 @@ const AdminsOnly = () => {
                 <br />
                 <hr />
                 <br />
-                <select placeholder="category" onChange={(e) => setCategory(e.target.value)} value={category}>
-                    <option onClick={() => {
-                        setCategory("pants")
-                    }} >pants</option>
+                <select placeholder="category" onChange={(e) => setCategory(e.target.value)} value={category} >
+                    <option onClick={() => setCategory("pants")} >pants</option>
                     <option onClick={() => setCategory("shirt")} >shirt</option>
                     <option onClick={() => setCategory("dress")} >dress</option>
+                    <option onClick={() => setCategory("shoes")} >shoes</option>
                 </select>
                 <br />
                 <hr />

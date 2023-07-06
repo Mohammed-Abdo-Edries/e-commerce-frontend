@@ -38,7 +38,7 @@ const Shirts = () => {
           <Product data={product} />
         )) : <div>there are no products</div>}
       </div>
-      <div>{shirts.length ? user?.isAdmin ? <button className='border-4 border-black px-2 py-1 rounded-xl my-5' onClick={deleteAllProudcts}>delete all products</button> : null : null}</div>
+      <div>{shirts.length ? user?.isAdmin ? <button className='border-4 border-black block text-center mx-auto px-2 py-1 rounded-xl my-5' onClick={deleteAllProudcts}>delete all products</button> : null : null}</div>
     </>
 
   )

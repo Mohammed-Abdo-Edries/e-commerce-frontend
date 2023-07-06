@@ -21,8 +21,8 @@ const Navbar = () => {
         <div className='flex justify-between'>
           <div>
             <Link className='' to="/">
-              <div className=' overflow-hidden h-20 w-16'>
-                <img className="rounded-xl" src={logo} alt={"nnn"} />
+              <div className=' overflow-hidden sm:h-22 sm:w-32'>
+                <img className="rounded-xl h-16 w-28 sm:h-20 sm:w-32" src={logo} alt={"nnn"} />
               </div>
             </Link>
           </div>
@@ -51,17 +51,17 @@ const Navbar = () => {
                 : null)}
             <Link id="cart" onClick={openCart} className='pt-6 ml-2'><BsCart4 /></Link>
             <Popup trigger={<button className='ml-2 pb-2'><BsThreeDotsVertical /></button>} position="bottom right" closeOnDocumentClick>
-              <ul className='bg-white border-2 border-black rounded py-2 px-4 -mt-7' data-aos="fade-up" ease-in-out data-aos-duration="2000" >
-                <li className='text-lg'><div className='text-lg font-medium' >{user ? user.firstname + " " + user.lastname : <Link className='' to="/login">Login</Link>}</div></li>
+              <ul className='bg-white -mt-7 divide-y-2 bg-gray-300 rounded-xl divide-gray-400'  >
+                <li className='text-lg '><div className='text-lg font-medium bg-gray-300 pl-2 rounded-xl' data-aos="slide-left" ease-in-out data-aos-duration="500" >{user ? user.firstname + " " + user.lastname : <Link className='' to="/login">Login</Link>}</div></li>
+                <li><Link className='' to="/dress" ><div className='pr-28 pl-2 py-1' data-aos="fade-up" data-aos-duration="600">Dress</div></Link></li>
+                <li><Link className='' to="/shirts"><div className='pr-28 pl-2 py-1' data-aos="fade-up" data-aos-duration="700">Shirts</div></Link></li>
+                <li><Link className='' to="/pants" ><div className='pr-28 pl-2 py-1' data-aos="fade-up" data-aos-duration="800">pants</div></Link></li>
+                <li><Link className='' to="/shoes" ><div className='pr-28 pl-2 py-1' data-aos="fade-up" data-aos-duration="900">shoes</div></Link></li>
                 {user && (
                   <li>
-                    <button className='' onClick={handelClick}>Log Out</button>
+                    <button className='pr-24 pl-2 divide-x' onClick={handelClick} data-aos="slide-right" ease-in-out data-aos-duration="1000">Log Out</button>
                   </li>
                 )}
-                <li><Link className='' to="/dress">Dress</Link></li>
-                <li><Link className='' to="/shirts">Shirts</Link></li>
-                <li><Link className='' to="/pants">pants</Link></li>
-                <li><Link className='' to="/shoes">shoes</Link></li>
               </ul>
             </Popup>
           </div>

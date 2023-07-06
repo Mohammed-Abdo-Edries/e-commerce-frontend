@@ -24,19 +24,10 @@ const Home = () => {
     prevArrow: <BsFillArrowLeftCircleFill />
   };
   return (
-    <>
-      <div>Hello there, {user?.firstname + user?.lastname}</div>
-      <div className="w-screen h-96 overflow-hidden">
-        <Slider {...settings} >
-          {images.map((item) => (
-            <div key={item.id}>
-              <img className="rounded-xl overflow-hidden h-max" src={item.src} alt={item.alt} />
-            </div>
-          ))}
-        </Slider>
-      </div>
-      {user ? <div>Hello there, {user.firstname + user.lastname}</div> : null}
-    </>
+    <div className='ml-12 mr-8 px-2 mt-12 py-2 font-bold text-lg'>
+      <div>Hello there {user ? user.firstname + " " + user.lastname : null}</div><br />
+      <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam expedita sunt repellendus.</div>
+    </div>
   )
 }
 
