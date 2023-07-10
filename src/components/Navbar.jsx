@@ -50,7 +50,7 @@ const Navbar = () => {
                 <Link className='ml-2 pt-6' to="/adminsonly"><FcSettings /></Link>
                 : null)}
             <Link id="cart" onClick={openCart} className='pt-6 ml-2'><BsCart4 /></Link>
-            <Popup trigger={<button className='ml-2 pb-2'><BsThreeDotsVertical /></button>} position="bottom right" closeOnDocumentClick>
+            <Popup trigger={<button className='ml-2 pb-2 pt-3'><BsThreeDotsVertical /></button>} position="bottom right" closeOnDocumentClick>
               <ul className='bg-white -mt-7 divide-y-2 bg-gray-300 rounded-xl divide-gray-400'  >
                 <li className='text-lg '><div className='text-lg font-medium bg-gray-300 pl-2 rounded-xl' data-aos="slide-left" ease-in-out data-aos-duration="500" >{user ? user.firstname + " " + user.lastname : <Link className='' to="/login">Login</Link>}</div></li>
                 <li><Link className='' to="/dress" ><div className='pr-28 pl-2 py-1' data-aos="fade-up" data-aos-duration="600">Dress</div></Link></li>

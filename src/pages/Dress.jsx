@@ -3,6 +3,7 @@ import axios from 'axios'
 import { Product } from '../components/product'
 import url from "../http-common"
 import { useAuthContext } from '../hooks/useAuthContext'
+import { motion } from "framer-motion"
 
 const Dress = () => {
   const [dress, setDress] = useState([])
@@ -34,14 +35,18 @@ const Dress = () => {
       .catch(err => console.log(err))
   }, [])
   return (
-    <>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
       <div className='grid mt-5 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mx-10'>
         {dress.length ? dress.map((product) => (
           <Product data={product} />
         )) : <div>there are no products</div>}
       </div>
       <div>{dress.length ? user?.isAdmin ? <button className='border-4 border-black block text-center mx-auto px-2 py-1 rounded-xl my-5' onClick={deleteAllProudcts}>delete all products</button> : null : null}</div>
-    </>
+    </motion.div>
   )
 }
 

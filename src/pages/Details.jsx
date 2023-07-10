@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios'
 import url from "../http-common"
 import { useCookies } from 'react-cookie';
+import { motion } from "framer-motion"
 
 const Details = () => {
   const { id } = useParams();
@@ -80,7 +81,10 @@ const Details = () => {
     setRefresh(!refresh);
   };
   return (
-    <div id={details._id} className='mt-5'>
+    <motion.div id={details._id} className='mt-5'
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}>
       <img src={`${url}/images/${details.imgURL}`} className='rounded-lg w-50 h-50 ml-20' />
       <div className='flex flex-col text-left'>
         <div className=''><b>{details.name}</b></div>
@@ -100,7 +104,7 @@ const Details = () => {
             >ADD TO CART</button>
         }
       </div>
-    </div>
+    </motion.div>
   )
 }
 

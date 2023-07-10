@@ -6,6 +6,7 @@ import { BsFillArrowRightCircleFill, BsFillAspectRatioFill } from 'react-icons/b
 import { BsFillArrowLeftCircleFill } from 'react-icons/bs'
 import images from "../components/Images"
 import { useAuthContext } from '../hooks/useAuthContext'
+import { motion } from "framer-motion"
 
 const Home = () => {
   const { user } = useAuthContext()
@@ -24,10 +25,12 @@ const Home = () => {
     prevArrow: <BsFillArrowLeftCircleFill />
   };
   return (
-    <div className='ml-12 mr-8 px-2 mt-12 py-2 font-bold text-lg'>
+    <motion.div className='ml-12 mr-8 px-2 mt-12 py-2 font-bold text-lg' initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}>
       <div>Hello there {user ? user.firstname + " " + user.lastname : null}</div><br />
       <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam expedita sunt repellendus.</div>
-    </div>
+    </motion.div>
   )
 }
 

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useSignup } from '../hooks/useSignup'
-import { Link } from 'react-router-dom'
+import { motion } from "framer-motion"
 
 const Signup = () => {
   const [email, setEmail] = useState('')
@@ -13,7 +13,9 @@ const Signup = () => {
     await signup(firstname, lastname, email, password)
   }
   return (
-    <div className="myform h-screen flex justify-center items-center">
+    <motion.div className="myform h-screen flex justify-center items-center" initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}>
       <form className='signup h-64 w-96 py-5 px-6 rounded-lg' onSubmit={handleSubmit}>
         <h3 className='pb-5 text-4xl'>Sign up</h3>
         <div className='formdiv h-12 mb-4 relative'>
@@ -44,7 +46,7 @@ const Signup = () => {
         {error && <div className='error'>{error}</div>}
       </form>
       {/* <div>you dont have an account?<Link className='ml-4 text-lg' to="/signup">Signup</Link></div> */}
-    </div>
+    </motion.div>
   )
 }
 
