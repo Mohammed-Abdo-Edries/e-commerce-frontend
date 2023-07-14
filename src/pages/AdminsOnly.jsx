@@ -40,9 +40,9 @@ const AdminsOnly = () => {
             )
     }
     return (
-        <motion.div initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}>
+        <motion.div initial={{ y: 10, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0 }}>
 
             <div className="mx-12 px-4 pt-8 pb-4">
                 <form onSubmit={sendImage} action={`${url}/product/create`} method="post" encType="multipart/form-data">

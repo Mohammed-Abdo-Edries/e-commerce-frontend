@@ -2,8 +2,8 @@ import React from "react"
 
 const Footer = () => {
     return (
-        <div className="max-w-full bg-black text-white bottom-0 inset-x-0 text-center py-2 ">
-            All rights are reserved
+        <div className=" block bottom-0 w-full mt-auto text-center py-4 ">
+            &copy; {new Date().getFullYear()} Mohammed Abdo. All Rights Reserved
         </div>
     )
 }

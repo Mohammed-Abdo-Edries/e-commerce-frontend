@@ -2,6 +2,42 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+    font-family: 'Montserrat', sans-serif;
+}
+
+.App .logo {
+    font-family: 'Freehand', cursive;
+    margin-top: 10px;
+    font-family: 'Freehand', cursive;
+    font-size: x-large;
+    letter-spacing: 8px;
+    position: relative;
+    height: 40px;
+    width: 130px;
+}
+
+.App .logo::before {
+    position: absolute;
+    content: "stylish outfits";
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10px;
+    width: 100px;
+    height: 5px;
+    bottom: 15px;
+    letter-spacing: 2px;
+}
+
+.App .logo::after {
+    font-family: 'Montserrat', sans-serif;
+    position: absolute;
+    content: "TM";
+    right: 15px;
+    top: -5px;
+    letter-spacing: 0px;
+    font-size: 8px;
+}
+
 .App .pages .signup {
     box-shadow: 0 10px 25px rgba(92, 99, 105, 0.2);
 }
@@ -9,21 +45,25 @@
 .forminput {
     border: 1px solid #dadce0;
 }
+
 .formlable {
     transition: 0.3s;
 }
+
 .forminput::first-line {
     background: none;
 }
+
 .forminput:focus+.formlable,
 .forminput:not(:placeholder-shown).forminput:not(:focus)+.formlable {
     top: -12px;
     left: 16px;
-    color:blue;
+    color: blue;
     font-size: 12px;
     font-weight: 500;
     z-index: 10;
 }
+
 .forminput:focus {
     border: 1.5px solid blue;
     background-color: white;
