@@ -27,12 +27,13 @@ const Home = () => {
   };
   return (
     <motion.div className='ml-12 mr-8 px-2 mt-12 py-2 h-screen font-bold text-lg'
-      initial={{ y: 10, opacity: 0 }}
+      initial={{ y: 20, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.8, delay: 0 }}>
+      transition={{ duration: 0.8, type: 'easeInOut' }}
+      exit={{ opacity: 0, y: 20 }}>
       <div>Hello there {user ? user.firstname + " " + user.lastname : null}</div><br />
       <img className="rounded-xl mx-auto mt-10 h-96 w-64 sm:h-96 sm:w-96" src={homepage} alt={"nnn"} />
-      <div className='pt-12'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore debitis dolorem suscipit consequuntur aliquam quos dolorum incidunt praesentium consectetur architecto?</div>
+      <motion.div className='pt-12' transition={{ duration: 0.8, delay: 0.8, type: 'easeInOut' }}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore debitis dolorem suscipit consequuntur aliquam quos dolorum incidunt praesentium consectetur architecto?</motion.div>
     </motion.div>
   )
 }

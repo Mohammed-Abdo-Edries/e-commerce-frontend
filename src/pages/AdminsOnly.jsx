@@ -42,9 +42,9 @@ const AdminsOnly = () => {
     return (
         <motion.div initial={{ y: 10, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0 }}>
+            transition={{ duration: 0.8, delay: 0 }} className="h-screen w-screen ">
 
-            <div className="mx-12 px-4 pt-8 pb-4">
+            <div className="mx-12 px-4 pt-8 pb-4 h-screen">
                 <form onSubmit={sendImage} action={`${url}/product/create`} method="post" encType="multipart/form-data">
                     <input type='name' placeholder="name" className="border-2 border-gray-700 rounded-lg w-60" onChange={(e) => setTitle(e.target.value)} value={title}></input>
                     <br />

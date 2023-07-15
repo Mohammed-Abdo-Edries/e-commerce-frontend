@@ -31,7 +31,7 @@ const cart = ({ open }) => {
   return (
     <Drawer anchor={"right"} open={open} onClose={closeCart} data-aos="fade-left" data-aos-duration="1000" className='d-flex flex-column' >
       <div className='text-center w-full px-4' >
-        {cart.ength ?
+        {cart.length ?
           cart.map((product) => (
             <CartItem data={product} />
           )) :
