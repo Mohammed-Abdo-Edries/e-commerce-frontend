@@ -6,6 +6,7 @@ import Popup from "reactjs-popup";
 import { useShopContext } from '../Context/ShopContext'
 import axios from "axios"
 import url from "../http-common"
+import { motion } from "framer-motion"
 
 export const Product = (props) => {
   const { _id, name, price, imgURL, category, details } = props.data;
@@ -82,34 +83,34 @@ export const Product = (props) => {
       .catch(error => console.log(error))
   }
   return (
-    <div className='mt-5 items-center' id={_id}>
+    <div className='mt-5 items-center rounded-xl shadow-xl pb-4' id={_id}>
       <img src={`${url}/images/${imgURL}`} className='rounded-lg w-50 h-50' />
       <div className='flex flex-col items-center'>
-        <div className=''><b>{name}</b></div>
+        <div className='pt-2'><b>{name}</b></div>
         <div> ${price}</div>
-        <div> {details}</div>
         {
           inCart
             ?
             <div className='flex my-2' >
-              <span className='border-4 border-black px-2 py-1 rounded-xl' onClick={onClickRemoveCart} disabled={amount === 0}>-</span>
+              <span className='bg-purple-700 text-white text-base px-3 py-1 rounded-xl' onClick={onClickRemoveCart} disabled={amount === 0}>-</span>
               <span className='text-center w-8 px-1 pt-1' >{amount}</span>
-              <span className='border-4 border-black px-2 py-1 rounded-xl' onClick={onClickAddCart} >+</span>
+              <span className='bg-purple-700 text-white text-base px-3 py-1 rounded-xl' onClick={onClickAddCart} >+</span>
             </div>
             :
-            <button className='border-4 border-black px-2 py-1 my-2 rounded-xl'
+            <motion.button initial={{ x: -250 }} animate={{ x: -10 }} transition={{ delay: 1.5, type: 'spring', stiffness: 500 }} whileHover={{ scale: 1.1 }} className='bg-purple-700 px-3 py-2 text-white text-base my-2 rounded-xl'
               onClick={onClickAddCart}
-            >Add to cart</button>
+            >Add to cart</motion.button>
         }
 
         <Link to={`/productDetails/${_id}`} >
-          <button className='border-4 border-black px-2 py-1 rounded-xl'>
+          <motion.button initial={{ x: -250 }} animate={{ x: -10 }} transition={{ delay: 1.5, type: 'spring', stiffness: 500 }} whileHover={{ scale: 1.1 }} className='bg-purple-700 px-3 py-2 text-white text-base rounded-xl'>
             Show More Details
-          </button>
+          </motion.button>
         </Link>
         {user?.isAdmin ?
           <div className='mx-auto'>
-            <button className='border-4 border-black px-2 py-1 rounded-xl my-2 mx-auto justify-center items-center align-center' onClick={deleteProduct}>delete</button>
+            <motion.button initial={{ x: -250 }} animate={{ x: -10 }} transition={{ delay: 1.5, type: 'spring', stiffness: 500 }} whileHover={{ scale: 1.1 }} className='bg-purple-700 px-3 py-2 text-white text-base rounded-xl my-2 mx-auto justify-center items-center align-center'
+              onClick={deleteProduct}>delete</motion.button>
           </div>
           : null}
       </div>

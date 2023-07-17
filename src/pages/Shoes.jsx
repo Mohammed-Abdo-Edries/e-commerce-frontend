@@ -48,12 +48,13 @@ const Shoes = () => {
           }
         </div>
         :
-        <div className='text-center h-screen overflow-hidden mx-auto w-96'>
+        <div className='container text-center mx-auto h-[calc(100vh-160px)]'>
           <img className="rounded-xl block mx-auto mt-10 h-96 w-64 sm:w-96" src={empty} alt={"nnn"} />
-          <div className='pt-10 sm:mt-4 '>there are no products</div>
+          <div className='pt-4 sm:mt-4 '>there are no products</div>
         </div>
       }
-      <div>{shoes.length ? user?.isAdmin ? <button className='border-4 border-black block text-center mx-auto px-2 py-1 rounded-xl my-5' onClick={deleteAllProudcts}>delete all products</button> : null : null}</div>
+      <div>{shoes.length ? user?.isAdmin ? <motion.button initial={{ x: -250 }} animate={{ x: -10 }} transition={{ delay: 1.5, type: 'spring', stiffness: 500 }} whileHover={{ scale: 1.1 }}
+        className='bg-purple-700 px-3 py-2 text-white text-base block text-center mx-auto rounded-xl my-5' onClick={deleteAllProudcts}>delete all products</motion.button> : null : null}</div>
     </motion.div>
 
   )

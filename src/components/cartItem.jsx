@@ -23,23 +23,12 @@ export const CartItem = (props) => {
   }, [])
 
   return (
-    <div id={cartItem.id} className='cartItem flex text-center my-4 mx-2 bg-gray-700 w-48'>
-      <img className='w-24 h-24' src={`${url}/images/${cartItem.imgURL}`} />
-      <div>
-        <div className='flex'> <p>{name}</p> in <p>{category}</p> </div>
-        <p> ${cartItem.price}</p>
-        <p> x{amount}</p>
-        {/* <p><b>{cartItem.price  amount}</b></p> */}
-        {/* <p> {cartItem.category}</p> */}
-        <p> {price}</p>
-        {/* <p> {category}</p> */}
-        <div>
-          <div className='d-flex' >
-          </div>
-          {/* <button className='ml-5' onClick={() => removeFromCart(id)}> - </button> */}
-          {/* <input className='w-5' value={cartItems[id]} onChange={(e) => updateItemAmount(Number(e.target.value), id)} /> */}
-          {/* <button onClick={() => addToCart(id)}> + </button> */}
-        </div>
+    <div id={cartItem.id} className='cartItem flex text-center my-4 rounded shadow-xl w-64 h-44'>
+      <img className='w-32 h-44 rounded-xl' src={`${url}/images/${cartItem.imgURL}`} />
+      <div className='flex-column w-32 mx-4 mt-4 text-gray-700'>
+        <div className='font-semibold flex justify-between'>{name}  <p> x{amount}</p></div>
+        <div> in {category} </div>
+        <p> ${price}</p>
       </div>
     </div>
   )

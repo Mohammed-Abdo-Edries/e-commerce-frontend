@@ -16,7 +16,7 @@ const Navbar = () => {
     logout()
   }
   return (
-    <div className='sticky top-0 backdrop-blur-2xl bg-orange-50/30 backdrop-brightness-80'>
+    <div className='sticky top-0 backdrop-blur-2xl bg-zinc-100/30 z-10 backdrop-brightness-80'>
       <div className='text-black  h-16 max-w-full text-lg px-8 sm:px-40'>
         <div className='flex justify-between'>
           <div>

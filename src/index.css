@@ -56,9 +56,9 @@ body {
 
 .forminput:focus+.formlable,
 .forminput:not(:placeholder-shown).forminput:not(:focus)+.formlable {
-    top: -12px;
+    top: -16px;
     left: 16px;
-    color: blue;
+    background-color: #e4e4e7;
     font-size: 12px;
     font-weight: 500;
     z-index: 10;

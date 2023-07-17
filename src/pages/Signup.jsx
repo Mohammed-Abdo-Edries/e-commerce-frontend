@@ -13,37 +13,38 @@ const Signup = () => {
     await signup(firstname, lastname, email, password)
   }
   return (
-    <motion.div className="myform h-screen flex justify-center items-center"
+    <motion.div className="myform h-[calc(100vh-160px)] flex justify-center items-center"
       initial={{ y: 10, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.8, delay: 0 }}>
-      <form className='signup h-64 w-96 py-5 px-6 rounded-lg' onSubmit={handleSubmit}>
-        <h3 className='pb-5 text-4xl'>Sign up</h3>
+      <form className='signup h-96 w-96 py-3 px-6 rounded-xl shadow-xl' onSubmit={handleSubmit}>
+        <h3 className='pb-5 text-4xl font-light'>Sign up</h3>
         <div className='formdiv h-12 mb-4 relative'>
           <input type="name" placeholder=' '
             className='forminput w-full h-full text-lg absolute p-4 bg-none rounded-lg  outline-none focus:border-blue-500 transition duration-200'
             onChange={(e) => setFirstname(e.target.value)} value={firstname} />
-          <label className='formlable absolute bg-white text-gray-700 text-base top-2 left-4 p-1'>firstname</label>
+          <label className='formlable absolute rounded-xl text-gray-700 text-base top-2 left-4 p-1'>firstname</label>
         </div>
         <div className='formdiv h-12 mb-4 relative'>
           <input type="name" placeholder=' '
             className='forminput w-full h-full text-lg absolute p-4 bg-none rounded-lg  outline-none focus:border-blue-500 transition duration-200'
             onChange={(e) => setLastname(e.target.value)} value={lastname} />
-          <label className='formlable absolute bg-white text-gray-700 text-base top-2 left-4 p-1'>lastname</label>
+          <label className='formlable absolute rounded-xl text-gray-700 text-base top-2 left-4 p-1'>lastname</label>
         </div>
         <div className='formdiv h-12 mb-4 relative'>
           <input type="email" placeholder=' '
             className='forminput w-full h-full text-lg absolute p-4 bg-none rounded-lg  outline-none focus:border-blue-500 transition duration-200'
             onChange={(e) => setEmail(e.target.value)} value={email} />
-          <label className='formlable absolute bg-white text-gray-700 text-base top-2 left-4 p-1'>Email</label>
+          <label className='formlable absolute rounded-xl text-gray-700 text-base top-2 left-4 p-1'>Email</label>
         </div>
         <div className='formdiv h-12 mb-2 relative'>
           <input type="password" placeholder=' '
             className='forminput w-full h-full absolute text-lg p-4 bg-none rounded-lg  outline-none focus:border-blue-500 transition duration-200'
             onChange={(e) => setPassword(e.target.value)} value={password} />
-          <label className='formlable absolute bg-white text-gray-700 text-base top-2 left-4 p-1'>Password</label>
+          <label className='formlable absolute rounded-xl text-gray-700 text-base top-2 left-4 p-1'>Password</label>
         </div>
-        <button className='pt-2 p-2 ml-auto bg-blue-600 w-20 block cursor-pointer text-white rounded-lg' disabled={isLoading}>Sign up</button>
+        <motion.button initial={{ x: -250 }} animate={{ x: -10 }} transition={{ delay: 1.5, type: 'spring', stiffness: 500 }} whileHover={{ scale: 1.1 }}
+          className='py-2 px-2 bg-purple-700 ml-auto mt-4 w-20 block cursor-pointer text-white rounded-lg' disabled={isLoading}>Sign up</motion.button>
         {error && <div className='error'>{error}</div>}
       </form>
       {/* <div>you dont have an account?<Link className='ml-4 text-lg' to="/signup">Signup</Link></div> */}

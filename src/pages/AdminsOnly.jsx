@@ -42,10 +42,10 @@ const AdminsOnly = () => {
     return (
         <motion.div initial={{ y: 10, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0 }} className="h-screen w-screen ">
+            transition={{ duration: 0.8, delay: 0.8, type: 'easeInOut' }} >
 
-            <div className="mx-12 px-4 pt-8 pb-4 h-screen">
-                <form onSubmit={sendImage} action={`${url}/product/create`} method="post" encType="multipart/form-data">
+            <div className="container mx-auto pt-8 pb-4 h-[calc(100vh-160px)]">
+                <form onSubmit={sendImage} className="ml-10" action={`${url}/product/create`} method="post" encType="multipart/form-data">
                     <input type='name' placeholder="name" className="border-2 border-gray-700 rounded-lg w-60" onChange={(e) => setTitle(e.target.value)} value={title}></input>
                     <br />
                     <hr />
@@ -69,7 +69,8 @@ const AdminsOnly = () => {
                     <br />
                     <input type="file" onChange={handelChange} />
                     <br />
-                    <button type="submit" className='pt-2 p-2 bg-blue-600 w-20 block cursor-pointer text-white rounded-lg mt-4 mx-auto' onClick={() => console.log(category)} >Do Itttt</button>
+                    <motion.button initial={{ x: -250 }} animate={{ x: -10 }} transition={{ delay: 1.5, type: 'spring', stiffness: 500 }} whileHover={{ scale: 1.1 }} type="submit"
+                        className='py-2 px-2 bg-purple-700 w-20 block cursor-pointer text-white rounded-lg mt-4 mx-auto' onClick={() => console.log(category)} >Do Itttt</motion.button>
                 </form>
             </div>
         </motion.div>

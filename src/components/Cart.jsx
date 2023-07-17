@@ -29,8 +29,8 @@ const cart = ({ open }) => {
     removeCookie('cart', { path: '/' });
   };
   return (
-    <Drawer anchor={"right"} open={open} onClose={closeCart} data-aos="fade-left" data-aos-duration="1000" className='d-flex flex-column' >
-      <div className='text-center w-full px-4' >
+    <Drawer anchor={"right"} open={open} onClose={closeCart} data-aos="fade-left" data-aos-duration="1000" className=' flex-column' >
+      <div className='text-center w-full px-2 pb-4' >
         {cart.length ?
           cart.map((product) => (
             <CartItem data={product} />

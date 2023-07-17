@@ -12,7 +12,7 @@ function App() {
     AOS.refresh();
   }, []);
   return (
-    <div className="App bg-orange-200 w-screen">
+    <div className="App bg-zinc-200 text-gray-700">
       <BrowserRouter>
         <Navbar />
         <AnimatedRoutes />
