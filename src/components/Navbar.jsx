@@ -1,37 +1,50 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useShopContext } from '../Context/ShopContext';
 import { useLogout } from '../hooks/useLogout'
 import { useAuthContext } from '../hooks/useAuthContext'
-import { BsCart4, BsThreeDotsVertical } from "react-icons/bs"
+import { BsCart4, BsThreeDotsVertical, BsSunFill, BsFillMoonStarsFill } from "react-icons/bs"
 import { FcSettings } from "react-icons/fc"
 import Popup from "reactjs-popup"
 import logo from "../assets/r.jpg"
-
+import { AnimatePresence, motion } from "framer-motion"
+import { useLocation } from 'react-router-dom'
 const Navbar = () => {
+  const [theme, setTheme] = useState("light")
   const { openCart } = useShopContext();
   const { logout } = useLogout()
   const { user } = useAuthContext()
+  const location = useLocation()
   const handelClick = () => {
     logout()
   }
+  const variants = {
+    hidden: { y: -20, opacity: 0 },
+    enter: { y: 0, opacity: 1 },
+    exit: { y: -40, opacity: 0 }
+  }
+  useEffect(() => {
+    if (theme === "dark") {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  }, [theme])
   return (
-    <div className='sticky top-0 backdrop-blur-2xl bg-zinc-100/30 z-10 backdrop-brightness-80'>
-      <div className='text-black  h-16 max-w-full text-lg px-8 sm:px-40'>
+    <div className='sticky top-0 backdrop-blur-2xl bg-zinc-100/30 z-10 backdrop-brightness-90 dark:text-zinc-200'>
+      <div className='h-16 max-w-full text-lg px-8 sm:px-40'>
         <div className='flex justify-between'>
           <div>
             <Link className='' to="/">
-              <div className=' overflow-hidden sm:h-22 sm:w-32'>
-                <div className='logo'>Luxury</div>
-                {/* <span className='mini-logo'>stylish outfits</span> */}
-                {/* <img className="rounded-xl h-16 w-28 sm:h-20 sm:w-32" src={logo} alt={"nnn"} /> */}
-              </div>
+              <div className='logo text-black'>Luxury</div>
+              {/* <span className='mini-logo'>stylish outfits</span> */}
+              {/* <img className="rounded-xl h-16 w-28 sm:h-20 sm:w-32" src={logo} alt={"nnn"} /> */}
             </Link>
           </div>
           <div className='hidden sm:flex pt-4'>
             {user && (
               <div>
-                <button className='' onClick={handelClick}>Log Out</button>
+                <button className='mr-2' onClick={handelClick}>Log Out</button>
               </div>
             )}
             {!user && (
@@ -39,6 +52,29 @@ const Navbar = () => {
                 <Link className='pt-1' to="/login">Login</Link>
               </div>
             )}
+            {theme === "dark" ?
+              <AnimatePresence location={location}>
+                <motion.button initial={variants.hidden}
+                  animate={variants.enter}
+                  exit={variants.exit}
+                  transition={{ duration: 0.2 }}
+                  className='w-9 h-8 px-2 rounded-md bg-orange-200 text-gray-900'
+                  onClick={() => setTheme(theme === "dark" ? "light" : "dark")}>
+                  <BsSunFill className='' />
+                </motion.button>
+              </AnimatePresence>
+              :
+              <AnimatePresence location={location}>
+                <motion.div initial={variants.hidden}
+                  animate={variants.enter}
+                  exit={variants.exit}
+                  transition={{ duration: 0.2 }}
+                  className='px-2 w-9 pt-2 h-8 rounded-md bg-purple-700 text-white'
+                  onClick={() => setTheme(theme === "light" ? "dark" : "light")}>
+                  <BsFillMoonStarsFill className='' />
+                </motion.div>
+              </AnimatePresence>
+            }
             {user && (
               user.isAdmin ?
                 <Link className='ml-2 pt-1' to="/adminsonly"><FcSettings /></Link>
@@ -47,6 +83,30 @@ const Navbar = () => {
           </div>
           <div className='phone flex justify-end sm:hidden'>
             {/* <Link className='' to="/login">Login</Link> */}
+            {/* <div className={darkMode ? "dark" : ""} onClick={() => setDarkMode(!darkMode)}>darkMode</div> */}
+            {theme === "dark" ?
+              <AnimatePresence location={location}>
+                <motion.button initial={variants.hidden}
+                  animate={variants.enter}
+                  exit={variants.exit}
+                  transition={{ duration: 0.2 }}
+                  className='w-9 h-8 px-2 mt-5 rounded-md bg-orange-200 text-gray-900'
+                  onClick={() => setTheme(theme === "dark" ? "light" : "dark")}>
+                  <BsSunFill className='' />
+                </motion.button>
+              </AnimatePresence>
+              :
+              <AnimatePresence location={location}>
+                <motion.div initial={variants.hidden}
+                  animate={variants.enter}
+                  exit={variants.exit}
+                  transition={{ duration: 0.2 }}
+                  className='px-2 w-9 pt-2 h-8 mt-5 rounded-md bg-purple-700 text-white'
+                  onClick={() => setTheme(theme === "light" ? "dark" : "light")}>
+                  <BsFillMoonStarsFill className='' />
+                </motion.div>
+              </AnimatePresence>
+            }
             {user && (
               user.isAdmin ?
                 <Link className='ml-2 pt-6' to="/adminsonly"><FcSettings /></Link>
@@ -69,13 +129,13 @@ const Navbar = () => {
           </div>
         </div>
       </div>
-      <div className='hidden sm:flex justify-between text-black pt-3 h-12 max-w-full px-40'>
+      <div className='hidden sm:flex justify-between pt-3 h-12 max-w-full px-40'>
         <Link className=' font-medium' to="/dress">Dress</Link>
         <Link className=' font-medium' to="/shirts">Shirts</Link>
         <Link className=' font-medium' to="/pants">Pants</Link>
         <Link className=' font-medium' to="/shoes">Shoes</Link>
       </div>
-    </div>
+    </div >
   )
 }
 

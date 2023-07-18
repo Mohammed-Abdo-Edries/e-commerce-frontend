@@ -29,15 +29,15 @@ const cart = ({ open }) => {
     removeCookie('cart', { path: '/' });
   };
   return (
-    <Drawer anchor={"right"} open={open} onClose={closeCart} data-aos="fade-left" data-aos-duration="1000" className=' flex-column' >
-      <div className='text-center w-full px-2 pb-4' >
+    <Drawer anchor={"right"} open={open} onClose={closeCart} data-aos="fade-left" data-aos-duration="1000" className='flex-column' >
+      <div className='text-center w-full px-2 pb-4 h-full dark:bg-gray-900 dark:text-zinc-200' >
         {cart.length ?
           cart.map((product) => (
             <CartItem data={product} />
           )) :
-          <div>
+          <div className='dark:mt-24'>
             <img className="rounded-xl mx-auto mt-10 h-96 w-64 sm:h-96 sm:w-96" src={empty} alt={"nnn"} />
-            <h2 className='text-center' >You have'nt bought enything yet</h2>
+            <h2 className='text-center mt-4' >You have'nt bought enything yet</h2>
           </div>
         }
         {cart.length ?

@@ -83,7 +83,7 @@ export const Product = (props) => {
       .catch(error => console.log(error))
   }
   return (
-    <div className='mt-5 items-center rounded-xl shadow-xl pb-4' id={_id}>
+    <div className='mt-5 rounded-xl shadow-xl pb-4 dark:bg-slate-400' id={_id}>
       <img src={`${url}/images/${imgURL}`} className='rounded-lg w-50 h-50' />
       <div className='flex flex-col items-center'>
         <div className='pt-2'><b>{name}</b></div>
@@ -97,19 +97,22 @@ export const Product = (props) => {
               <span className='bg-purple-700 text-white text-base px-3 py-1 rounded-xl' onClick={onClickAddCart} >+</span>
             </div>
             :
-            <motion.button initial={{ x: -250 }} animate={{ x: -10 }} transition={{ delay: 1.5, type: 'spring', stiffness: 500 }} whileHover={{ scale: 1.1 }} className='bg-purple-700 px-3 py-2 text-white text-base my-2 rounded-xl'
+            <motion.button initial={{ x: -250 }} animate={{ x: 0 }} transition={{ delay: 1.5, type: 'spring', stiffness: 500 }} whileHover={{ scale: 1.1 }}
+              className='bg-purple-700 px-3 py-2 text-white text-base my-2 rounded-xl w-32'
               onClick={onClickAddCart}
             >Add to cart</motion.button>
         }
 
         <Link to={`/productDetails/${_id}`} >
-          <motion.button initial={{ x: -250 }} animate={{ x: -10 }} transition={{ delay: 1.5, type: 'spring', stiffness: 500 }} whileHover={{ scale: 1.1 }} className='bg-purple-700 px-3 py-2 text-white text-base rounded-xl'>
+          <motion.button initial={{ x: -250 }} animate={{ x: 0 }} transition={{ delay: 1.5, type: 'spring', stiffness: 500 }} whileHover={{ scale: 1.1 }}
+            className='bg-purple-700 px-3 py-2 text-white text-base rounded-xl'>
             Show More Details
           </motion.button>
         </Link>
         {user?.isAdmin ?
           <div className='mx-auto'>
-            <motion.button initial={{ x: -250 }} animate={{ x: -10 }} transition={{ delay: 1.5, type: 'spring', stiffness: 500 }} whileHover={{ scale: 1.1 }} className='bg-purple-700 px-3 py-2 text-white text-base rounded-xl my-2 mx-auto justify-center items-center align-center'
+            <motion.button initial={{ x: -250 }} animate={{ x: 0 }} transition={{ delay: 1.5, type: 'spring', stiffness: 500 }} whileHover={{ scale: 1.1 }}
+              className='bg-purple-700 px-3 py-2 text-white text-base rounded-xl my-2'
               onClick={deleteProduct}>delete</motion.button>
           </div>
           : null}

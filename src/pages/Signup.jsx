@@ -13,10 +13,10 @@ const Signup = () => {
     await signup(firstname, lastname, email, password)
   }
   return (
-    <motion.div className="myform h-[calc(100vh-160px)] flex justify-center items-center"
+    <motion.div className=" myform h-[calc(100vh-120px)] flex justify-center items-center"
       initial={{ y: 10, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.8, delay: 0 }}>
+      transition={{ duration: 0.8, delay: 0 }} exit={{ opacity: 0, y: 20 }}>
       <form className='signup h-96 w-96 py-3 px-6 rounded-xl shadow-xl' onSubmit={handleSubmit}>
         <h3 className='pb-5 text-4xl font-light'>Sign up</h3>
         <div className='formdiv h-12 mb-4 relative'>

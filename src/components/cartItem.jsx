@@ -23,9 +23,9 @@ export const CartItem = (props) => {
   }, [])
 
   return (
-    <div id={cartItem.id} className='cartItem flex text-center my-4 rounded shadow-xl w-64 h-44'>
+    <div id={cartItem.id} className='cartItem flex text-center my-4 rounded-xl shadow-xl w-64 h-44 dark:bg-slate-400'>
       <img className='w-32 h-44 rounded-xl' src={`${url}/images/${cartItem.imgURL}`} />
-      <div className='flex-column w-32 mx-4 mt-4 text-gray-700'>
+      <div className='flex-column w-32 mx-4 mt-4 text-gray-700 dark:text-zinc-200'>
         <div className='font-semibold flex justify-between'>{name}  <p> x{amount}</p></div>
         <div> in {category} </div>
         <p> ${price}</p>
