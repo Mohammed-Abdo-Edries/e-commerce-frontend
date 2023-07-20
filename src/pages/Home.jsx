@@ -1,37 +1,19 @@
 import React from 'react'
-import Slider from "react-slick";
-import 'slick-carousel/slick/slick.css'
-import 'slick-carousel/slick/slick-theme.css'
-import { BsFillArrowRightCircleFill, BsFillAspectRatioFill } from 'react-icons/bs'
-import { BsFillArrowLeftCircleFill } from 'react-icons/bs'
-import images from "../components/Images"
 import { useAuthContext } from '../hooks/useAuthContext'
 import { motion } from "framer-motion"
 import homepage from "../assets/homepage.jpg"
 
 const Home = () => {
   const { user } = useAuthContext()
-  const settings = {
-    dots: false,
-    arrows: true,
-    pauseOnHover: false,
-    autoplay: true,
-    fade: BsFillAspectRatioFill,
-    infinite: true,
-    speed: 2000,
-    slidestoShow: 1,
-    slidesToScroll: 1,
-    autoplaySpeed: 5000,
-    nextArrow: <BsFillArrowRightCircleFill />,
-    prevArrow: <BsFillArrowLeftCircleFill />
-  };
+
   return (
     <motion.div className='ml-12 mr-8 px-2 mt-4 py-2 sm:h-[calc(100vh-100px)] font-bold text-lg'
       initial={{ opacity: 0, y: 40 }}
       animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.8, delay: .5 }}
+      transition={{ duration: 0.8, delay: .3 }}
       exit={{ opacity: 0, y: 20 }}>
       <div className=''>Hello there {user ? user.firstname + " " + user.lastname : null}</div><br />
+      {/* <motion.div></motion.div> */}
       <motion.img initial={{ opacity: 0, y: 40 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.8, delay: 0.8 }}

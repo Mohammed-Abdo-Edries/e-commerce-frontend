@@ -19,9 +19,9 @@ const Navbar = () => {
     logout()
   }
   const variants = {
-    hidden: { y: -20, opacity: 0 },
+    hidden: { y: -30, opacity: 0 },
     enter: { y: 0, opacity: 1 },
-    exit: { y: -40, opacity: 0 }
+    exit: { y: 30, opacity: 0 }
   }
   useEffect(() => {
     if (theme === "dark") {
@@ -49,30 +49,34 @@ const Navbar = () => {
             )}
             {!user && (
               <div>
-                <Link className='pt-1' to="/login">Login</Link>
+                <Link className='pt-1 mr-2' to="/login">Login</Link>
               </div>
             )}
-            {theme === "dark" ?
-              <AnimatePresence location={location}>
-                <motion.button initial={variants.hidden}
-                  animate={variants.enter}
-                  exit={variants.exit}
-                  transition={{ duration: 0.2 }}
-                  className='w-9 h-8 px-2 rounded-md bg-orange-200 text-gray-900'
-                  onClick={() => setTheme(theme === "dark" ? "light" : "dark")}>
-                  <BsSunFill className='' />
-                </motion.button>
+            {theme === 'dark' ?
+              <AnimatePresence mode='wait' >
+                {theme === "dark" && (
+                  <motion.button key='sun' variants={variants} initial='hidden'
+                    animate="enter"
+                    exit='exit'
+                    transition={{ duration: 0.5 }}
+                    className='w-9 h-8 px-2 rounded-md bg-orange-200 text-gray-900'
+                    onClick={() => setTheme(theme === "dark" ? "light" : "dark")}>
+                    <BsSunFill className='' />
+                  </motion.button>
+                )}
               </AnimatePresence>
               :
-              <AnimatePresence location={location}>
-                <motion.div initial={variants.hidden}
-                  animate={variants.enter}
-                  exit={variants.exit}
-                  transition={{ duration: 0.2 }}
-                  className='px-2 w-9 pt-2 h-8 rounded-md bg-purple-700 text-white'
-                  onClick={() => setTheme(theme === "light" ? "dark" : "light")}>
-                  <BsFillMoonStarsFill className='' />
-                </motion.div>
+              <AnimatePresence mode='wait' >
+                {theme === "light" && (
+                  <motion.button key='moon' variants={variants} initial="hidden"
+                    animate="enter"
+                    exit="exit"
+                    transition={{ duration: 0.3 }}
+                    className='px-2 w-9 h-8 rounded-md bg-purple-700 text-white'
+                    onClick={() => setTheme(theme === "light" ? "dark" : "light")}>
+                    <BsFillMoonStarsFill className='' />
+                  </motion.button>
+                )}
               </AnimatePresence>
             }
             {user && (
@@ -84,27 +88,31 @@ const Navbar = () => {
           <div className='phone flex justify-end sm:hidden'>
             {/* <Link className='' to="/login">Login</Link> */}
             {/* <div className={darkMode ? "dark" : ""} onClick={() => setDarkMode(!darkMode)}>darkMode</div> */}
-            {theme === "dark" ?
-              <AnimatePresence location={location}>
-                <motion.button initial={variants.hidden}
-                  animate={variants.enter}
-                  exit={variants.exit}
-                  transition={{ duration: 0.2 }}
-                  className='w-9 h-8 px-2 mt-5 rounded-md bg-orange-200 text-gray-900'
-                  onClick={() => setTheme(theme === "dark" ? "light" : "dark")}>
-                  <BsSunFill className='' />
-                </motion.button>
+            {theme === 'dark' ?
+              <AnimatePresence mode='wait' >
+                {theme === "dark" && (
+                  <motion.button key='sun' variants={variants} initial='hidden'
+                    animate="enter"
+                    exit='exit'
+                    transition={{ duration: 0.3 }}
+                    className='w-9 h-8 px-2 mt-4 rounded-md bg-orange-200 text-gray-900'
+                    onClick={() => setTheme(theme === "dark" ? "light" : "dark")}>
+                    <BsSunFill className='' />
+                  </motion.button>
+                )}
               </AnimatePresence>
               :
-              <AnimatePresence location={location}>
-                <motion.div initial={variants.hidden}
-                  animate={variants.enter}
-                  exit={variants.exit}
-                  transition={{ duration: 0.2 }}
-                  className='px-2 w-9 pt-2 h-8 mt-5 rounded-md bg-purple-700 text-white'
-                  onClick={() => setTheme(theme === "light" ? "dark" : "light")}>
-                  <BsFillMoonStarsFill className='' />
-                </motion.div>
+              <AnimatePresence mode='wait' >
+                {theme === "light" && (
+                  <motion.button key='moon' variants={variants} initial="hidden"
+                    animate="enter"
+                    exit="exit"
+                    transition={{ duration: 0.3 }}
+                    className='px-2 w-9 h-8 mt-4 rounded-md bg-purple-700 text-white'
+                    onClick={() => setTheme(theme === "light" ? "dark" : "light")}>
+                    <BsFillMoonStarsFill className='' />
+                  </motion.button>
+                )}
               </AnimatePresence>
             }
             {user && (

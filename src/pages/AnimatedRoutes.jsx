@@ -10,6 +10,7 @@ import Details from './Details'
 import AdminsOnly from './AdminsOnly'
 import { Routes, Route, useLocation } from 'react-router-dom'
 import { AnimatePresence } from "framer-motion"
+import NotFound from "./NotFound"
 
 const AnimatedRoutes = () => {
     const location = useLocation();
@@ -25,6 +26,7 @@ const AnimatedRoutes = () => {
                 <Route path="/shoes" element={<Shoes />} />
                 <Route path="/productDetails/:id" element={<Details />} />
                 <Route path="/adminsonly" element={<AdminsOnly />} />
+                <Route path="/*" element={<NotFound />} />
             </Routes>
         </AnimatePresence>
     )

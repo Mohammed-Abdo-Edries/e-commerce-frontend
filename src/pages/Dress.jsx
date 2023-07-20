@@ -37,9 +37,9 @@ const Dress = () => {
   }, [dress])
   return (
     <motion.div
-      initial={{ opacity: 0, y: 40 }}
+      initial={{ opacity: 0, y: 20 }}
       animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 2, delay: .5 }}
+      transition={{ duration: .8, delay: .3 }}
       exit={{ opacity: 0, y: 20 }}
       className='text-center'
     >

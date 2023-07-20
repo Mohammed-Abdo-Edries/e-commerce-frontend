@@ -82,9 +82,9 @@ const Details = () => {
   };
   return (
     <motion.div id={details._id}
-      initial={{ y: 10, opacity: 0 }}
+      initial={{ y: 20, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      transition={{ delay: .5, duration: .5 }} exit={{ opacity: 0, y: 20 }}>
+      transition={{ delay: .5, duration: .3 }} exit={{ opacity: 0, y: 20 }}>
       <div className='container mt-12 ml-8 h-[calc(100vh-180px)]'>
         <img src={`${url}/images/${details.imgURL}`} className='rounded-lg w-64 h-50' />
         <div className='flex flex-col text-left mt-8'>
