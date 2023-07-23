@@ -5,6 +5,8 @@ import { useCookies } from 'react-cookie';
 import Drawer from '@mui/material/Drawer'
 // import { useNavigate } from 'react-router-dom';
 import empty from "../assets/empty-cart.jpg"
+import '@dotlottie/player-component'
+
 
 const cart = ({ open }) => {
   const [totalPrice, setTotalPrice] = useState(0);
@@ -35,8 +37,10 @@ const cart = ({ open }) => {
           cart.map((product) => (
             <CartItem data={product} />
           )) :
-          <div className='dark:mt-24'>
-            <img className="rounded-xl mx-auto mt-10 h-96 w-64 sm:h-96 sm:w-96" src={empty} alt={"nnn"} />
+          <div className='dark:mt-24 mx-auto mt-10 h-96 w-64 sm:h-96 sm:w-96'>
+            <dotLottie-player
+              src='https://lottie.host/eafaeb00-9793-498d-8de3-cbdc40c88620/1zQdw7c2yr.lottie'
+              autoplay loop mode='normal' ></dotLottie-player>
             <h2 className='text-center mt-4' >You have'nt bought enything yet</h2>
           </div>
         }
