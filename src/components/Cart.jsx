@@ -3,10 +3,7 @@ import { useShopContext } from '../Context/ShopContext';
 import { CartItem } from './cartItem';
 import { useCookies } from 'react-cookie';
 import Drawer from '@mui/material/Drawer'
-// import { useNavigate } from 'react-router-dom';
-import empty from "../assets/empty-cart.jpg"
 import '@dotlottie/player-component'
-
 
 const cart = ({ open }) => {
   const [totalPrice, setTotalPrice] = useState(0);

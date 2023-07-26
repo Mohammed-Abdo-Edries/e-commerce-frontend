@@ -28,14 +28,8 @@ body {
     letter-spacing: 2px;
 }
 
-.App .logo::after {
-    font-family: 'Montserrat', sans-serif;
-    position: absolute;
-    content: "TM";
-    right: 15px;
-    top: -5px;
-    letter-spacing: 0px;
-    font-size: 8px;
+.App .home .gsap {
+    line-height: 0;
 }
 
 .App .pages .signup {
