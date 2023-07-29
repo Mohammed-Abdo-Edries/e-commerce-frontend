@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useAuthContext } from '../hooks/useAuthContext'
 import { motion, AnimatePresence, AnimateSharedLayout } from "framer-motion"
 import homepage from "../assets/homepage.jpg"
@@ -16,30 +16,42 @@ const Home = () => {
     tl
       .from(splitTitle.chars, {
         opacity: 0,
-        y: 50,
+        y: 30,
         // rotateX: -20,
         delay: 0.5
       }, '<')
       .to(splitTitle.chars, {
         opacity: 0,
-        y: -50,
+        y: -30,
         // rotateX: 20,
       }, '<1')
   })
+  const letterAnimation = {
+    initial: { x: window.innerWidth > 380 ? "140vh" : "40vh" },
+    // initial: { x: "40vh" },
+    animate: { x: "-10vh" }
+  };
+  const [playMarquee, setPlayMarquee] = useState(false)
+  useEffect(() => {
+    // setTimeout(() => {
+    setPlayMarquee(true)
+    // }, 0.5);
+  }, []);
   return (
     <AnimatePresence>
-      {/* <Banner /> */}
-      <motion.div className='home ml-10 mr-8 px-2 h-screen mt-4 py-2 font-bold text-lg'
+      {/* <motion.div className='overflow-x-hidden w-24' variants={letterAnimation} initial="initial" animate="animate" */}
+      {/* transition={{ ease: "linear", duration: 3, repeat: "loop" }} >Collections</motion.div> */}
+      <motion.div className='home ml-10 mr-8 px-2 h-[calc(100vh+160px)] sm:h-screen mt-4 py-2 font-bold text-lg overflow-hidden'
         initial={{ opacity: 0, y: 40 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.8, delay: .3 }}
         exit={{ opacity: 0, y: 20 }}>
-        <div className=''>Hello there {user ? user.firstname + " " + user.lastname : null}</div><br />
         {/* <motion.img initial={{ opacity: 0, y: 40 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.8, delay: 0.8 }}
         exit={{ opacity: 0, y: 20 }}
-        className="rounded-xl mx-auto h-96 w-64 sm:h-96 sm:w-96" src={homepage} alt={"nnn"} /> */}
+      className="rounded-xl mx-auto h-96 w-64 sm:h-96 sm:w-96" src={homepage} alt={"nnn"} /> */}
+        <div className='mt-4 ml-10'>Hello there {user ? user.firstname + " " + user.lastname : null}</div><br />
         <motion.div className='pt-4 sm:px-20 mt-8' initial={{ opacity: 0, y: 40 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 2, delay: 1 }}
