@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from 'react'
-import axios from 'axios'
+import { useState, useEffect } from 'react'
 import { Product } from '../components/product'
-import url from "../http-common"
 import { useAuthContext } from '../hooks/useAuthContext'
 import { motion } from "framer-motion"
 import empty from "../assets/no-products.jpg"
+import { getDress } from './Services'
 
 const Dress = () => {
   const [dress, setDress] = useState([])
@@ -23,18 +22,13 @@ const Dress = () => {
       .catch(error => console.log(error))
   }
   useEffect(() => {
-    axios.get(`${url}/product/`,
-      Headers = {
-        headers: {
-          "Content-Type": "multipart/form-data",
-          category: "dress"
-        }
+    getDress()
+      .then((data) => {
+        console.log(data)
+        setDress(data)
       })
-      .then(response => {
-        setDress(response.data)
-      })
-      .catch(err => console.log(err))
   }, [dress])
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}

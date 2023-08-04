@@ -9,7 +9,7 @@ import { AnimatePresence, motion } from "framer-motion"
 import { useLocation, Link } from 'react-router-dom'
 const Navbar = () => {
   const [theme, setTheme] = useState("light")
-  const { openCart } = useShopContext();
+  const { setActivTab } = useShopContext();
   const { logout } = useLogout()
   const { user } = useAuthContext()
   const location = useLocation()
@@ -30,7 +30,7 @@ const Navbar = () => {
   }, [theme])
   return (
     <motion.div initial={{ opacity: 0, y: -180 }} animate={{ opacity: 1, y: 0 }} transition={{ ease: 'easeInOut', duration: 1, delay: .5 }}
-      id="nav" className='sticky top-0 backdrop-blur-2xl bg-zinc-100/30 z-10 backdrop-brightness-90 dark:text-zinc-200 h-16 max-w-full text-lg px-8 sm:px-40'>
+      id="nav" className='sticky top-0 backdrop-blur-2xl bg-white/30 z-10 backdrop-brightness-90 dark:text-zinc-200 h-16 max-w-full text-lg px-8 sm:px-40'>
       <div className='flex justify-between'>
         <div className='relative'>
           <Link className='' to="/">
@@ -70,7 +70,7 @@ const Navbar = () => {
               )}
             </AnimatePresence>
           }
-          <Link id="cart" onClick={openCart} className='ml-2 pt-1'><BsCart4 /></Link>
+          <Link to='/checkout' className='ml-2 pt-1'><BsCart4 /></Link>
           <Popup trigger={<button className='ml-2 pb-2 pt-1'><BsThreeDotsVertical /></button>} position="bottom right" closeOnDocumentClick>
             <ul className='bg-purple-700 text-white -mt-2 rounded'  >
               <li className='text-lg '><div className='text-lg font-medium pl-3 pt-1 rounded-xl' data-aos="slide-left" ease-in-out data-aos-duration="500" >{user ? user.firstname + " " + user.lastname : <Link className='' to="/login">Login</Link>}</div></li>
@@ -90,6 +90,13 @@ const Navbar = () => {
             </ul>
           </Popup>
         </div>
+      </div>
+      <div>
+        <button className='ml-4' onClick={() => setActivTab("dress")}>dress</button>
+        <button className='ml-4' onClick={() => setActivTab("pants")}>pants</button>
+        <button className='ml-4' onClick={() => setActivTab("shirt")}>shirts</button>
+        <button className='ml-4' onClick={() => setActivTab("shoes")}>shoes</button>
+        <button className='ml-4' onClick={() => setActivTab("home")}>Home</button>
       </div>
     </motion.div>
   )

@@ -5,7 +5,7 @@ import { useAuthContext } from '../hooks/useAuthContext'
 import Popup from "reactjs-popup";
 import { useShopContext } from '../Context/ShopContext'
 import axios from "axios"
-import url from "../http-common"
+import { url } from "../http-common"
 import { motion } from "framer-motion"
 
 export const Product = (props) => {
@@ -34,10 +34,10 @@ export const Product = (props) => {
     } else {
       setCart([...cart, {
         id: _id,
+        amount: 1,
         name: name,
         price: price,
-        category: category,
-        amount: 1
+        category: category
       }]);
       setCookies('cart', cart, { path: '/' });
     }

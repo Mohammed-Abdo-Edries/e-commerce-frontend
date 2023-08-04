@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useAuthContext } from './useAuthContext'
-import url from "../http-common"
+import { url } from "../http-common"
 
 export const useSignup = () => {
     const [error, setError] = useState(null)

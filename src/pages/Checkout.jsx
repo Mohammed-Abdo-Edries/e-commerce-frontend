@@ -1,15 +1,20 @@
 import React, { useState, useEffect } from 'react'
 import { useShopContext } from '../Context/ShopContext';
-import { CartItem } from './cartItem';
+import { CartItem } from '../components/cartItem';
 import { useCookies } from 'react-cookie';
-import Drawer from '@mui/material/Drawer'
+import { AnimatePresence, motion } from "framer-motion"
 import '@dotlottie/player-component'
+import { Elements } from "@stripe/react-stripe-js";
+import { stripeKey } from '../http-common'
+import CheckoutForm from './checkoutForm';
+// import { loadStripe } from '@stripe/stripe-js'
 
-const cart = ({ open }) => {
+const Checkout = () => {
   const [totalPrice, setTotalPrice] = useState(0);
   const [totalAmount, setTotalAmount] = useState(0);
-  const { cart, setCart, refresh, closeCart } = useShopContext();
+  const { cart, setCart, refresh, setOrder, order, clientSecret } = useShopContext();
   const [cookies, setCookie, removeCookie] = useCookies(['cart']);
+  // const stripePromise = loadStripe(stripeKey)
 
   useEffect(() => {
     var price = 0
@@ -23,12 +28,31 @@ const cart = ({ open }) => {
     setTotalPrice(price);
     setTotalAmount(amount);
   }, [cart, cookies.cart, refresh]);
+
+  const appearance = {
+    theme: 'stripe',
+  };
+  const options = {
+    clientSecret,
+    appearance,
+  };
+  useEffect(() => {
+    setOrder(cart.map((item) => {
+      const id = item.id
+      const amount = item.amount
+      console.log(order)
+      return { id, amount }
+    })
+    )
+  }, [])
+
+
   const onClickRemove = () => {
     setCart([]);
     removeCookie('cart', { path: '/' });
   };
   return (
-    <Drawer anchor={"right"} open={open} onClose={closeCart} data-aos="fade-left" data-aos-duration="1000" className='flex-column' >
+    <motion.div className='flex-column' >
       <div className='text-center w-full px-2 pb-4 h-full dark:bg-gray-900 dark:text-zinc-200' >
         {cart.length ?
           cart.map((product) => (
@@ -45,12 +69,23 @@ const cart = ({ open }) => {
           <div className='flex-column' >
             <div >Product Amount: {totalAmount}</div>
             <div >Total Price: {totalPrice} $</div>
-            <button className='' onClick={onClickRemove} >Remove All</button>
+            <button className='' onClick={onClickRemove} >Remove All</button> <hr />
+            <button onClick={() => {
+              console.log(cart)
+              console.log(order)
+              console.log(order)
+            }}
+            >Buy</button>
+            {clientSecret && (
+              <Elements options={options} stripe={stripePromise}>
+                <CheckoutForm />
+              </Elements>
+            )}
           </div>
           : null}
       </div>
-    </Drawer>
+    </motion.div>
   )
 }
 
-export default cart
+export default Checkout
