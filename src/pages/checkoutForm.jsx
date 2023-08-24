@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { url } from '../http-common'
 import {
     PaymentElement,
     LinkAuthenticationElement,
@@ -7,26 +6,17 @@ import {
     useElements
 } from "@stripe/react-stripe-js";
 import { useShopContext } from '../Context/ShopContext';
+// import { loadStripe } from '@stripe/stripe-js'
 
 export default function CheckoutForm() {
     const stripe = useStripe();
     const elements = useElements();
-    const { setClientSecret, order } = useShopContext();
 
     const [email, setEmail] = useState('');
     const [message, setMessage] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
+    // const stripePromise = loadStripe(stripeKey)
 
-    useEffect(() => {
-        // Create PaymentIntent as soon as the page loads
-        fetch(`${url}/stripe/create-payment-intent`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ items: order }),
-        })
-            .then((res) => res.json())
-            .then((data) => setClientSecret(data.clientSecret));
-    }, []);
 
     useEffect(() => {
         if (!stripe) {
@@ -74,7 +64,7 @@ export default function CheckoutForm() {
             elements,
             confirmParams: {
                 // Make sure to change this to your payment completion page
-                return_url: "http://localhost:3000",
+                return_url: "https://luxury-t0tu.onrender.com",
             },
         });
 

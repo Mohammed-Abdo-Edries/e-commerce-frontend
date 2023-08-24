@@ -1,18 +1,45 @@
 import React, { useState, useEffect } from 'react'
 import { useShopContext } from '../Context/ShopContext';
+import { CartItem } from '../components/cartItem';
 import { useLogout } from '../hooks/useLogout'
 import { useAuthContext } from '../hooks/useAuthContext'
-import { BsCart4, BsThreeDotsVertical, BsSunFill, BsFillMoonStarsFill } from "react-icons/bs"
+import { BsCart4, BsSunFill, BsFillMoonStarsFill } from "react-icons/bs"
+import { FaUserCircle } from "react-icons/fa"
 import { FcSettings } from "react-icons/fc"
+// import { BiLogOut } from "react-icons/bi"
+import { url } from "../http-common"
+import { getAllProducts } from '../pages/Services'
+import { useCookies } from 'react-cookie';
 import Popup from "reactjs-popup"
 import { AnimatePresence, motion } from "framer-motion"
-import { useLocation, Link } from 'react-router-dom'
+import { useLocation, Link, Navigate } from 'react-router-dom'
 const Navbar = () => {
   const [theme, setTheme] = useState("light")
-  const { setActivTab } = useShopContext();
+  const [totalPrice, setTotalPrice] = useState(0);
+  const [totalAmount, setTotalAmount] = useState(0);
+  const { cart, setCart, refresh, setSearch, setActivTab } = useShopContext();
+  const [cookies, setCookie, removeCookie] = useCookies(['cart']);
+  const [value, setValue] = useState('')
+  const [names, setNames] = useState('')
   const { logout } = useLogout()
   const { user } = useAuthContext()
   const location = useLocation()
+  useEffect(() => {
+    getAllProducts()
+      .then(response => {
+        // console.log(response)
+        setNames(response)
+      })
+  }, [names])
+  const onChange = (e) => {
+    setValue(e.target.value);
+  }
+  const onSearch = (searchTerm) => {
+    setSearch(searchTerm)
+    setValue(searchTerm)
+    console.log('search', searchTerm)
+  }
+
   const handelClick = () => {
     logout()
   }
@@ -21,6 +48,22 @@ const Navbar = () => {
     enter: { y: 0, opacity: 1 },
     exit: { y: 25, opacity: 0 }
   }
+  const onClickRemove = () => {
+    setCart([]);
+    removeCookie('cart', { path: '/' });
+  };
+  useEffect(() => {
+    var price = 0
+    var amount = 0;
+    cart.forEach((item) => {
+      if (item.price && item.amount) {
+        price += item.price;
+        amount += item.amount;
+      }
+    });
+    setTotalPrice(price);
+    setTotalAmount(amount);
+  }, [cart, cookies.cart, refresh]);
   useEffect(() => {
     if (theme === "dark") {
       document.documentElement.classList.add("dark");
@@ -30,13 +73,30 @@ const Navbar = () => {
   }, [theme])
   return (
     <motion.div initial={{ opacity: 0, y: -180 }} animate={{ opacity: 1, y: 0 }} transition={{ ease: 'easeInOut', duration: 1, delay: .5 }}
-      id="nav" className='sticky top-0 backdrop-blur-2xl bg-white/30 z-10 backdrop-brightness-90 dark:text-zinc-200 h-16 max-w-full text-lg px-8 sm:px-40'>
-      <div className='flex justify-between'>
+      id="nav" className='sticky top-0 backdrop-blur-2xl bg-white/30 z-10 backdrop-brightness-90 dark:text-zinc-200 h-14 sm:h-24 max-w-full text-lg px-4 sm:px-20'>
+      <div className='flex'>
         <div className='relative'>
           <Link className='' to="/">
             <div className='logo text-black dark:text-zinc-200'>Luxury</div>
             <span className='absolute bottom-4 right-2'>&reg;</span>
           </Link>
+        </div>
+        <div className='relative'>
+          <input type="text" value={value} onChange={onChange} />
+          <Link to="/" onClick={() => setActivTab("search")}>
+            <button onClick={() => onSearch(value)}>Search</button>
+          </Link>
+          <div className='z-20 absolute flex-column'>
+            {names && names.filter(item => {
+              const searchTerm = value.toLowerCase();
+              const fullName = item.name.toLowerCase();
+              return searchTerm && fullName.startsWith(searchTerm) && fullName !== searchTerm
+            }).slice(0, 10)
+              .map((item) => (
+                <div onClick={() => onSearch(item.name)}
+                  className='z-30' id={item._id}>{item.name}</div>
+              ))}
+          </div>
         </div>
         <div className='flex pt-4 ml-auto'>
           {theme === 'dark' ?
@@ -70,33 +130,59 @@ const Navbar = () => {
               )}
             </AnimatePresence>
           }
-          <Link to='/checkout' className='ml-2 pt-1'><BsCart4 /></Link>
-          <Popup trigger={<button className='ml-2 pb-2 pt-1'><BsThreeDotsVertical /></button>} position="bottom right" closeOnDocumentClick>
-            <ul className='bg-purple-700 text-white -mt-2 rounded'  >
-              <li className='text-lg '><div className='text-lg font-medium pl-3 pt-1 rounded-xl' data-aos="slide-left" ease-in-out data-aos-duration="500" >{user ? user.firstname + " " + user.lastname : <Link className='' to="/login">Login</Link>}</div></li>
-
-              <li><Link className='' to="/dress" ><div className='pr-8 pl-8 py-1' data-aos="fade-up" data-aos-duration="700">Dress</div></Link></li>
-              <li><Link className='' to="/shirts"><div className='pr-8 pl-8 py-1' data-aos="fade-up" data-aos-duration="800">Shirts</div></Link></li>
-              <li><Link className='' to="/pants" ><div className='pr-8 pl-8 py-1' data-aos="fade-up" data-aos-duration="900">pants</div></Link></li>
-              <li><Link className='' to="/shoes" ><div className='pr-8 pl-8 py-1' data-aos="fade-up" data-aos-duration="1000">shoes</div></Link></li>
-              {user && (
-                <li className='flex'>
-                  <div><button className='pr-4 pl-4 pb-1' onClick={handelClick} data-aos="slide-right" ease-in-out data-aos-duration="1000">Log Out</button></div>
-                  {user?.isAdmin ?
-                    <Link className='' to="/adminsonly"><div className='pl-4 pr-6 py-1' data-aos="fade-up" data-aos-duration="600"><FcSettings /></div></Link>
-                    : null}
-                </li>
-              )}
-            </ul>
+          <Popup trigger={<button className='ml-2'><BsCart4 /></button>} position="bottom right" closeOnDocumentClick >
+            <div className='flex-column text-center w-full px-2 pb-4 h-[calc(1vh+500px)] overflow-y-scroll rounded bg-zinc-200 -mt-10 dark:bg-gray-900 dark:text-zinc-200' >
+              {cart.length ?
+                cart.map((product) => (
+                  <CartItem data={product} />
+                ))
+                :
+                <div className='dark:mt-24 mx-auto mt-10 w-64 sm:h-96 sm:w-96'>
+                  <dotLottie-player
+                    src='https://lottie.host/eafaeb00-9793-498d-8de3-cbdc40c88620/1zQdw7c2yr.lottie'
+                    autoplay loop mode='normal' ></dotLottie-player>
+                  <h2 className='text-center' >You have'nt bought enything yet</h2>
+                </div>
+              }
+              {cart.length ?
+                <div className='flex-column' >
+                  <div >Product Amount: {totalAmount}</div>
+                  <div >Total Price: {totalPrice} $</div>
+                  <button className='' onClick={onClickRemove} >Remove All</button><hr />
+                  <button><Link to="/checkout">checkout</Link></button>
+                </div>
+                : null}
+            </div>
           </Popup>
+          {user?.isAdmin ?
+            <div className='flex'>
+              <Link className='' to="/adminsonly"><div className='pl-4 pr-6 py-1'><FcSettings /></div></Link>
+              <button onClick={logout}><BiLogOut /></button>
+            </div>
+            :
+            <Popup trigger={<button className='ml-2 pb-2 pt-1'><FaUserCircle /></button>} position="bottom right" closeOnDocumentClick>
+              <div className='bg-zinc-200 w-60 h-60 py-2 px-4 rounded'>
+                {user ?
+                  <div className='text-lg '>
+                    <div>{user.firstname + " " + user.lastname}</div>
+                    <div>{user.email}</div>
+                    <div><button className='pr-4 pl-4 pb-1' onClick={handelClick}>
+                      Log Out</button></div>
+                  </div>
+                  :
+                  <Link className='' to="/login">You are not logged in <span className='text-blue-700'>Login</span></Link>
+                }
+              </div>
+            </Popup>
+          }
         </div>
       </div>
-      <div>
-        <button className='ml-4' onClick={() => setActivTab("dress")}>dress</button>
-        <button className='ml-4' onClick={() => setActivTab("pants")}>pants</button>
-        <button className='ml-4' onClick={() => setActivTab("shirt")}>shirts</button>
-        <button className='ml-4' onClick={() => setActivTab("shoes")}>shoes</button>
-        <button className='ml-4' onClick={() => setActivTab("home")}>Home</button>
+      <div className='pt-1 hidden  sm:flex h-12'>
+        <Link to="/" className='ml-4 text-medium px-2' onClick={() => setActivTab("home")}>Home</Link>
+        <Link to="/" className='mx-auto' onClick={() => setActivTab("dress")}>dress</Link>
+        <Link to="/" className='mx-auto' onClick={() => setActivTab("pants")}>pants</Link>
+        <Link to="/" className='mx-auto' onClick={() => setActivTab("shirt")}>shirts</Link>
+        <Link to="/" className='mx-auto ' onClick={() => setActivTab("shoes")}>shoes</Link>
       </div>
     </motion.div>
   )

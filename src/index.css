@@ -52,7 +52,7 @@ body {
 .forminput:not(:placeholder-shown).forminput:not(:focus)+.formlable {
     top: -16px;
     left: 16px;
-    background-color: #e4e4e7;
+    background-color: white;
     font-size: 12px;
     font-weight: 500;
     z-index: 10;

@@ -3,12 +3,11 @@ import { useAuthContext } from '../hooks/useAuthContext'
 import { useShopContext } from '../Context/ShopContext';
 import { motion, AnimatePresence } from "framer-motion"
 import '@dotlottie/player-component'
-import gsap from 'gsap'
-import SplitTextJS from 'split-text-js'
 import { getDress } from './Services'
 import { getPants } from './Services'
 import { getShirts } from './Services'
 import { getShoes } from './Services'
+import { getSearch } from './Services'
 import { deleteAllProudcts } from './Services'
 import { Product } from '../components/product'
 import empty from "../assets/no-products.jpg"
@@ -18,7 +17,8 @@ import { Link } from 'react-router-dom';
 const Home = () => {
   const [totalPrice, setTotalPrice] = useState(0);
   const [totalAmount, setTotalAmount] = useState(0);
-  const { cart, setCart, refresh, setOrder, order } = useShopContext();
+  const [results, setResults] = useState([]);
+  const { cart, setCart, refresh, search, setOrder, order } = useShopContext();
   const [cookies, setCookie, removeCookie] = useCookies(['cart']);
   const [dress, setDress] = useState([])
   const [pants, setPants] = useState([])
@@ -27,21 +27,7 @@ const Home = () => {
   const { user } = useAuthContext()
   const { activeTab } = useShopContext();
   const email = user?.email
-  const titles = gsap.utils.toArray('p')
-  const tl = gsap.timeline({ repeat: -1 });
-  titles.forEach(title => {
-    const splitTitle = new SplitTextJS(title);
-    tl
-      .from(splitTitle.chars, {
-        opacity: 0,
-        y: 30,
-        delay: 0.5
-      }, '<')
-      .to(splitTitle.chars, {
-        opacity: 0,
-        y: -30,
-      }, '<1')
-  })
+
   useEffect(() => {
     var price = 0
     var amount = 0;
@@ -96,6 +82,14 @@ const Home = () => {
       )
       .catch((error) => console.log(error))
   }, [shoes])
+  useEffect(() => {
+    getSearch(search)
+      .then((data) => {
+        setResults(data)
+        console.log(data)
+      })
+      .catch((error) => console.log(error))
+  }, [shoes])
   const deleteAllDress = (email) => {
     deleteAllProudcts(email)
       .then((response) => {
@@ -115,7 +109,7 @@ const Home = () => {
             className='text-center'
           >
             {dress.length ?
-              <div className='grid mt-5 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mr-10 ml-16 sm:ml-24'>
+              <div className='grid mt-5 grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 gap-10 mr-10 ml-16 sm:ml-24'>
                 {dress &&
                   dress.map((product) => (
                     <Product data={product} />
@@ -139,7 +133,7 @@ const Home = () => {
           transition={{ duration: 0.8, delay: 0.2 }}
           exit={{ opacity: 0, y: 20 }}>
           {pants.length ?
-            <div className='grid mt-5 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mx-10'>
+            <div className='grid mt-5 grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 gap-10 mx-10'>
               {pants &&
                 pants.map((product) => (
                   <Product data={product} />
@@ -161,7 +155,7 @@ const Home = () => {
           transition={{ duration: 0.8, delay: 0.2 }}
           exit={{ opacity: 0, y: 20 }}>
           {shirts.length ?
-            <div className='grid mt-5 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mx-10'>
+            <div className='grid mt-5 grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 gap-10 mx-10'>
               {shirts &&
                 shirts.map((product) => (
                   <Product data={product} />
@@ -183,11 +177,10 @@ const Home = () => {
           transition={{ duration: 0.8, delay: 0.2 }}
           exit={{ opacity: 0, y: 20 }}>
           {shoes.length ?
-            <div className='grid mt-5 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mx-10'>
-              {shoes &&
-                shoes.map((product) => (
-                  <Product data={product} />
-                ))
+            <div className='grid mt-5 grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 gap-10 mx-10'>
+              {shoes.map((product) => (
+                <Product data={product} />
+              ))
               }
             </div>
             :
@@ -199,6 +192,23 @@ const Home = () => {
 
         </motion.div>
       }
+      {activeTab === "search" &&
+        <motion.div initial={{ y: 10, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          exit={{ opacity: 0, y: 20 }}>
+          {results.length ?
+            <div className='grid mt-5 grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 gap-10 mx-10'>
+              {results?.map((product) => (
+                <Product data={product} />
+              ))
+              }
+            </div>
+            :
+            <div>there are no products with this name</div>
+          }
+        </motion.div>
+      }
       {activeTab === "home" &&
         <motion.div key="home" mode='wait' className='home ml-10 mr-8 px-2 h-[calc(100vh+160px)] sm:h-screen mt-4 py-2 font-bold text-lg overflow-hidden'
           initial={{ opacity: 0, y: 40 }}
@@ -206,26 +216,16 @@ const Home = () => {
           transition={{ duration: 0.8, delay: .3 }}
           exit={{ opacity: 0, y: 20 }}>
           <div className='mt-4 ml-10'>Hello there {user ? user.firstname + " " + user.lastname : null}</div><br />
+          <div className='mt-8 mb-4 w-72 h-56 flex flex-col sm:flex-row sm:w-full sm:h-96'>
+            <dotLottie-player className='basis-1/2'
+              src='https://lottie.host/dd0d62d9-f05d-412f-b731-3c4ecd3589cb/2nd1hkC0N9.lottie'
+              autoplay loop mode='normal' ></dotLottie-player>
+          </div>
           <motion.div className='pt-4 sm:px-20 mt-8' initial={{ opacity: 0, y: 40 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 2, delay: 1 }}
             exit={{ opacity: 0, y: 20 }}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore debitis dolorem suscipit consequuntur aliquam quos dolorum incidunt praesentium consectetur architecto?
           </motion.div>
-          <div className='mt-8 mb-4 w-72 h-56 flex flex-col sm:flex-row sm:w-full sm:h-96'>
-            <dotLottie-player className='basis-1/2'
-              src='https://lottie.host/dd0d62d9-f05d-412f-b731-3c4ecd3589cb/2nd1hkC0N9.lottie'
-              autoplay loop mode='normal' ></dotLottie-player>
-            <div className='basis-1/2 mt-4'>
-              <div className='gsap text-center leading-none'>
-                <p>title1</p>
-                <p>title2</p>
-                <p>title3</p>
-                <p>title4</p>
-              </div>
-              <div className='mt-8'>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate saepe voluptatum incidunt cupiditate quos quam commodi dolores nostrum vero accusamus reprehenderit, consequatur sint placeat tempore nobis! Nesciunt cum fuga itaque.</div>
-            </div>
-          </div>
         </motion.div>
       }
       {/* {activeTab === "checkout" &&

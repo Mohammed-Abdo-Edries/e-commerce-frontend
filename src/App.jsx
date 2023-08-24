@@ -4,28 +4,21 @@ import Navbar from './components/Navbar'
 import Home from './pages/Home'
 import Signup from './pages/Signup'
 import Login from './pages/Login'
-import Checkout from './pages/checkout'
+import Checkout from './pages/Checkout'
 import Details from './pages/Details'
 import AdminsOnly from './pages/AdminsOnly'
 import NotFound from "./pages/NotFound"
 import Footer from './components/footer';
-import AOS from "aos";
 import "./index.css"
 import { useAuthContext } from './hooks/useAuthContext'
-import { useShopContext } from './Context/ShopContext';
-import { loadStripe } from '@stripe/stripe-js'
-import { stripeKey } from './http-common'
-import { Elements } from "@stripe/react-stripe-js";
+// import { useShopContext } from './Context/ShopContext';
+// import { loadStripe } from '@stripe/stripe-js'
+// import { stripeKey } from './http-common'
 
 function App() {
   const { user } = useAuthContext()
-  const { clientSecret } = useShopContext()
-  const stripePromise = loadStripe(stripeKey)
-  useEffect(() => {
-    AOS.init();
-    AOS.refresh();
-  }, []);
-
+  // const { clientSecret } = useShopContext()
+  // const stripePromise = loadStripe(stripeKey)
   // const appearance = {
   //   theme: 'stripe',
   // };

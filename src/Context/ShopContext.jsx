@@ -9,10 +9,10 @@ export const ShopContextProvider = (props) => {
     const [cart, setCart] = useState(cookies.cart || [])
     const [refresh, setRefresh] = useState(false);
     const [activeTab, setActivTab] = useState("home")
-    const [clientSecret, setClientSecret] = useState("");
     const [order, setOrder] = useState([])
+    const [search, setSearch] = useState('')
 
-    const contextValue = { cart, setCart, refresh, setRefresh, activeTab, setActivTab, order, setOrder, clientSecret, setClientSecret }
+    const contextValue = { cart, setCart, search, setSearch, refresh, setRefresh, activeTab, setActivTab, order, setOrder }
     return <ShopContext.Provider value={contextValue}>
         {props.children}
     </ShopContext.Provider>
