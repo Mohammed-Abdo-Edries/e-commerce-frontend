@@ -60,12 +60,12 @@ export const getSearch = async (itemName) => {
         });
     return data;
 }
-export const deleteAllProudcts = async (email) => {
+export const deleteAllProudcts = async (email, category) => {
     const response = await axios.delete(`${url}/product/deleteAllProudcts`,
         Headers = {
             headers: {
                 "Content-Type": "multipart/form-data",
-                category: "dress",
+                category: category,
                 email
             }
         });

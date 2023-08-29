@@ -2,11 +2,12 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useCookies } from 'react-cookie';
 import { useAuthContext } from '../hooks/useAuthContext'
-import Popup from "reactjs-popup";
 import { useShopContext } from '../Context/ShopContext'
 import axios from "axios"
 import { url } from "../http-common"
 import { motion } from "framer-motion"
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 export const Product = (props) => {
   const { _id, name, price, imgURL, category, details } = props.data;
@@ -69,8 +70,9 @@ export const Product = (props) => {
     }
     setRefresh(!refresh);
   };
+  const email = user?.email
   const deleteProduct = () => {
-    email = user?.email
+    console.log(user.email)
     axios.delete(`${url}/product/delete`,
       Headers = {
         headers: {
@@ -79,8 +81,24 @@ export const Product = (props) => {
           email
         }
       })
-      .then(response => console.log(response))
-      .catch(error => console.log(error))
+      .then((response) => {
+        console.log(response)
+        toast(`${response.data.message}`, {
+          position: "top-right",
+          type: 'success',
+          theme: 'light',
+          autoClose: 5000
+        })
+      })
+      .catch(error => {
+        toast(`${error}`, {
+          position: "top-right",
+          type: 'error',
+          theme: 'light',
+          autoClose: 5000
+        })
+        console.log(error)
+      })
   }
   return (
     <div className='mt-5 rounded-xl shadow-xl pb-4 dark:bg-slate-400' id={_id}>
@@ -97,23 +115,27 @@ export const Product = (props) => {
               <span className='bg-purple-700 text-white text-base px-3 py-1 rounded-xl' onClick={onClickAddCart} >+</span>
             </div>
             :
-            <motion.button initial={{ x: -250 }} animate={{ x: 0 }} transition={{ delay: 1.5, type: 'spring', stiffness: 500 }} whileHover={{ scale: 1.1 }}
+            <motion.button initial={{ x: -250 }} animate={{ x: 0 }} transition={{ delay: .5 }}
               className='bg-purple-700 px-3 py-2 text-white text-base my-2 rounded-xl w-32'
               onClick={onClickAddCart}
             >Add to cart</motion.button>
         }
 
         <Link to={`/productDetails/${_id}`} >
-          <motion.button initial={{ x: -250 }} animate={{ x: 0 }} transition={{ delay: 1.5, type: 'spring', stiffness: 500 }} whileHover={{ scale: 1.1 }}
+          <motion.button initial={{ x: -250 }} animate={{ x: 0 }} transition={{ delay: .5 }}
             className='bg-purple-700 px-3 py-2 text-white text-base rounded-xl'>
             Show More Details
           </motion.button>
         </Link>
         {user?.isAdmin ?
           <div className='mx-auto'>
-            <motion.button initial={{ x: -250 }} animate={{ x: 0 }} transition={{ delay: 1.5, type: 'spring', stiffness: 500 }} whileHover={{ scale: 1.1 }}
+            <motion.button initial={{ x: -250 }} animate={{ x: 0 }} transition={{ delay: .5 }}
               className='bg-purple-700 px-3 py-2 text-white text-base rounded-xl my-2'
-              onClick={deleteProduct}>delete</motion.button>
+              onClick={
+                () => {
+                  deleteProduct()
+                }}>delete</motion.button>
+            <ToastContainer />
           </div>
           : null}
       </div>

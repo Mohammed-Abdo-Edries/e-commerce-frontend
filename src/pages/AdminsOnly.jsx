@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react"
-import { useShopContext } from '../Context/ShopContext';
 import { useAuthContext } from '../hooks/useAuthContext'
 import axios from "axios"
 import { url } from "../http-common"
 import { motion } from "framer-motion"
 import { Link } from "react-router-dom"
-import PacmanLoader from "react-spinners/PacmanLoader"
+import ScaleLoader from "react-spinners/ScaleLoader"
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 const AdminsOnly = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [response, setResponse] = useState(false);
@@ -15,11 +16,11 @@ const AdminsOnly = () => {
     const [image, setImage] = useState();
     const [details, setDetails] = useState();
     const { user } = useAuthContext()
-    const { order } = useShopContext();
 
     const handelChange = (e) => {
         setImage(e.target.files[0])
     }
+    const email = user?.email
     const sendImage = (e) => {
         e.preventDefault()
         const formData = new FormData()
@@ -28,27 +29,33 @@ const AdminsOnly = () => {
         formData.append('category', category);
         formData.append('details', details);
         formData.append('image', image);
-        const email = user?.email
-        if (!title || !price || !category || !details || !image) {
-            // setIsLoading(false)
-            setResponse("all feilds must be fild")
-        } else {
-
-            axios.post(`${url}/product/create`, formData,
-                Headers = {
-                    headers: {
-                        "Content-Type": "multipart/form-data",
-                        email
-                    }
+        axios.post(`${url}/product/create`, formData,
+            Headers = {
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                    email
+                }
+            })
+            .then(response => {
+                setIsLoading(false)
+                console.log(response.data.message)
+                toast(`${response.data.message}`, {
+                    position: "top-right",
+                    type: 'success',
+                    theme: 'light',
+                    autoClose: 5000
                 })
-                .then(response => {
-                    setIsLoading(false)
-                    console.log(response.data.message)
+            })
+            .catch(error => {
+                setIsLoading(false)
+                toast(`${error.response.data.message}`, {
+                    position: "top-right",
+                    type: 'error',
+                    theme: 'light',
+                    autoClose: 5000
                 })
-                .catch(error =>
-                    console.log(error.message)
-                )
-        }
+            }
+            )
     }
     return (
         <motion.div initial={{ y: 20, opacity: 0 }}
@@ -68,37 +75,24 @@ const AdminsOnly = () => {
                             </select>
                             <input placeholder="details" type='text' className="border-2 border-gray-700 my-2 ml-10 rounded-lg w-80 pl-2 py-1" onChange={(e) => setDetails(e.target.value)} value={details}></input>
                             <input type="file" onChange={handelChange} className='ml-10 my-2' />
-                            <motion.button initial={{ x: -250 }} animate={{ x: -10 }} transition={{ delay: 1.5, type: 'spring', stiffness: 500 }} whileHover={{ scale: 1.1 }} type="submit"
-                                className='py-2 px-2 bg-purple-700 w-20 block cursor-pointer text-white rounded-lg mt-4 mx-auto'
+                            <motion.button initial={{ x: -250 }} animate={{ x: -10 }}
+                                transition={{ delay: .5 }} type="submit"
+                                className='py-1 bg-purple-700 w-20 h-10 block cursor-pointer text-white rounded-lg mt-4 mx-auto'
                                 onClick={() => {
-                                    console.log(user.email)
                                     setIsLoading(true)
-                                }} >Do Itttt</motion.button>
-                            {/* {response ? <div></div> : */}
-                            <>
-                                {isLoading && <div><PacmanLoader className='text-purple-700 block mx-auto my-2' color="#7e22ce" size={20} /></div>}
-                            </>
-                            {/* } */}
+                                    console.log(email)
+                                }} >
+                                {isLoading ? <div><ScaleLoader className='block w-20 h-10' color="white"
+                                    size={1} /></div>
+                                    :
+                                    <div>Do Ittt</div>
+                                }
+                            </motion.button>
                         </form>
-                        <div className="orders">
-                            {order ?
-                                <div>
-                                    {order.map((item) =>
-                                        <div className={item.id}>
-                                            <div>{item.name}</div>
-                                            <div>{item.amount}</div>
-                                            <div>{item.category}</div>
-                                            <div>{item.price}</div>
-                                        </div>
-                                    )}
-                                </div>
-                                :
-                                <div>there are no new orders</div>
-                            }
-                        </div>
+                        <ToastContainer />
                     </>
                     :
-                    <div className="ml-4">why are you here, you must <Link className='ml-1 text-blue-700' to="/login">Login</Link></div>
+                    <div><Link to='/login' className="text-blue-200">Login</Link></div>
                 }
             </div>
         </motion.div>

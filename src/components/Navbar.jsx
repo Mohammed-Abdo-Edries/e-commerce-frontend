@@ -1,33 +1,30 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { useShopContext } from '../Context/ShopContext';
 import { CartItem } from '../components/cartItem';
 import { useLogout } from '../hooks/useLogout'
 import { useAuthContext } from '../hooks/useAuthContext'
-import { BsCart4, BsSunFill, BsFillMoonStarsFill } from "react-icons/bs"
+import { BsCart4, BsSunFill, BsFillMoonStarsFill, BsSearch } from "react-icons/bs"
 import { FaUserCircle } from "react-icons/fa"
 import { FcSettings } from "react-icons/fc"
-// import { BiLogOut } from "react-icons/bi"
-import { url } from "../http-common"
 import { getAllProducts } from '../pages/Services'
 import { useCookies } from 'react-cookie';
 import Popup from "reactjs-popup"
 import { AnimatePresence, motion } from "framer-motion"
-import { useLocation, Link, Navigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 const Navbar = () => {
   const [theme, setTheme] = useState("light")
   const [totalPrice, setTotalPrice] = useState(0);
   const [totalAmount, setTotalAmount] = useState(0);
-  const { cart, setCart, refresh, setSearch, setActivTab } = useShopContext();
-  const [cookies, setCookie, removeCookie] = useCookies(['cart']);
   const [value, setValue] = useState('')
   const [names, setNames] = useState('')
+  const [cookies, setCookie, removeCookie] = useCookies(['cart']);
+  const { cart, setCart, refresh, setSearch, setActivTab } = useShopContext();
   const { logout } = useLogout()
   const { user } = useAuthContext()
-  const location = useLocation()
+  // const location = useLocation()
   useEffect(() => {
     getAllProducts()
       .then(response => {
-        // console.log(response)
         setNames(response)
       })
   }, [names])
@@ -81,11 +78,13 @@ const Navbar = () => {
             <span className='absolute bottom-4 right-2'>&reg;</span>
           </Link>
         </div>
-        <div className='relative'>
-          <input type="text" value={value} onChange={onChange} />
-          <Link to="/" onClick={() => setActivTab("search")}>
-            <button onClick={() => onSearch(value)}>Search</button>
-          </Link>
+        <div className='relative mx-auto'>
+          <div className='mt-4'>
+            <input type="text" className='rounded mx-auto w-32 sm:w-80' value={value} onChange={onChange} />
+            <Link to="/" onClick={() => setActivTab("search")}>
+              <button onClick={() => onSearch(value)} className='absolute right-2 top-5'><BsSearch /></button>
+            </Link>
+          </div>
           <div className='z-20 absolute flex-column'>
             {names && names.filter(item => {
               const searchTerm = value.toLowerCase();
@@ -157,7 +156,7 @@ const Navbar = () => {
           {user?.isAdmin ?
             <div className='flex'>
               <Link className='' to="/adminsonly"><div className='pl-4 pr-6 py-1'><FcSettings /></div></Link>
-              <button onClick={logout}><BiLogOut /></button>
+              <button onClick={logout}>Log out</button>
             </div>
             :
             <Popup trigger={<button className='ml-2 pb-2 pt-1'><FaUserCircle /></button>} position="bottom right" closeOnDocumentClick>
