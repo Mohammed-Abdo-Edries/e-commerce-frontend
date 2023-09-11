@@ -70,7 +70,7 @@ const Navbar = () => {
   }, [theme])
   return (
     <motion.div initial={{ opacity: 0, y: -180 }} animate={{ opacity: 1, y: 0 }} transition={{ ease: 'easeInOut', duration: 1, delay: .5 }}
-      id="nav" className='sticky top-0 backdrop-blur-2xl bg-white/30 z-10 backdrop-brightness-90 dark:text-zinc-200 h-14 sm:h-24 max-w-full text-lg px-4 sm:px-20'>
+      id="nav" className='sticky top-0 backdrop-blur-2xl bg-white/30 z-10 backdrop-brightness-90 dark:text-zinc-200 h-14 sm:h-24 max-w-full text-lg px-4 sm:px-14'>
       <div className='flex'>
         <div className='relative'>
           <Link className='' to="/">
@@ -78,26 +78,37 @@ const Navbar = () => {
             <span className='absolute bottom-4 right-2'>&reg;</span>
           </Link>
         </div>
-        <div className='relative mx-auto'>
-          <div className='mt-4'>
-            <input type="text" className='rounded mx-auto w-32 sm:w-80' value={value} onChange={onChange} />
-            <Link to="/" onClick={() => setActivTab("search")}>
-              <button onClick={() => onSearch(value)} className='absolute right-2 top-5'><BsSearch /></button>
-            </Link>
+        <div className='flex pt-2 ml-auto items-center'>
+          <AnimatePresence >
+            <Popup className='' trigger={<button><BsSearch className='relative sm:hidden mr-2' /></button>} position="bottom center" closeOnDocumentClick >
+              <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ ease: 'easeInOut', duration: .5 }} exit={{ y: -20 }}
+                key="search" mode='wait' className='mt-10 w-80 block mx-auto'>
+                <input type="text" className='rounded w-full absolute bottom-0 pl-2 text-black mx-auto' value={value} onChange={onChange} />
+                <Link to="/" onClick={() => setActivTab("search")}>
+                  <button onClick={() => onSearch(value)} className='absolute right-2 top-5'><BsSearch /></button>
+                </Link>
+              </motion.div>
+            </Popup>
+          </AnimatePresence>
+          <div className='relative hidden sm:block'>
+            <div className='mr-4'>
+              <input type="text" className='rounded mx-auto w-32 sm:w-48 md:w-80 pl-2 text-black' value={value} onChange={onChange} />
+              <Link to="/" onClick={() => setActivTab("search")}>
+                <button onClick={() => onSearch(value)} className='absolute right-5 top-1'><BsSearch /></button>
+              </Link>
+            </div>
+            <div className='z-20 absolute flex-column'>
+              {names && names.filter(item => {
+                const searchTerm = value.toLowerCase();
+                const fullName = item.name.toLowerCase();
+                return searchTerm && fullName.startsWith(searchTerm) && fullName !== searchTerm
+              }).slice(0, 10)
+                .map((item) => (
+                  <div onClick={() => onSearch(item.name)}
+                    className='z-30' id={item._id}>{item.name}</div>
+                ))}
+            </div>
           </div>
-          <div className='z-20 absolute flex-column'>
-            {names && names.filter(item => {
-              const searchTerm = value.toLowerCase();
-              const fullName = item.name.toLowerCase();
-              return searchTerm && fullName.startsWith(searchTerm) && fullName !== searchTerm
-            }).slice(0, 10)
-              .map((item) => (
-                <div onClick={() => onSearch(item.name)}
-                  className='z-30' id={item._id}>{item.name}</div>
-              ))}
-          </div>
-        </div>
-        <div className='flex pt-4 ml-auto'>
           {theme === 'dark' ?
             <AnimatePresence mode='wait' >
               {theme === "dark" && (
@@ -130,7 +141,7 @@ const Navbar = () => {
             </AnimatePresence>
           }
           <Popup trigger={<button className='ml-2'><BsCart4 /></button>} position="bottom right" closeOnDocumentClick >
-            <div className='flex-column text-center w-full px-2 pb-4 h-[calc(1vh+500px)] overflow-y-scroll rounded bg-zinc-200 -mt-10 dark:bg-gray-900 dark:text-zinc-200' >
+            <div className='flex-column text-center w-full px-2 pb-4 h-[calc(1vh+500px)] overflow-y-scroll rounded bg-zinc-200 dark:bg-gray-900 dark:text-zinc-200' >
               {cart.length ?
                 cart.map((product) => (
                   <CartItem data={product} />
@@ -155,11 +166,11 @@ const Navbar = () => {
           </Popup>
           {user?.isAdmin ?
             <div className='flex'>
-              <Link className='' to="/adminsonly"><div className='pl-4 pr-6 py-1'><FcSettings /></div></Link>
+              <Link className='' to="/adminsonly"><div className='pl-2 pr-2 mt-1'><FcSettings /></div></Link>
               <button onClick={logout}>Log out</button>
             </div>
             :
-            <Popup trigger={<button className='ml-2 pb-2 pt-1'><FaUserCircle /></button>} position="bottom right" closeOnDocumentClick>
+            <Popup trigger={<button className='pl-2 mt-1'><FaUserCircle /></button>} position="bottom right" closeOnDocumentClick>
               <div className='bg-zinc-200 w-60 h-60 py-2 px-4 rounded'>
                 {user ?
                   <div className='text-lg '>
