@@ -81,13 +81,24 @@ const Navbar = () => {
         <div className='flex pt-2 ml-auto items-center'>
           <AnimatePresence >
             <Popup className='' trigger={<button><BsSearch className='relative sm:hidden mr-2' /></button>} position="bottom center" closeOnDocumentClick >
-              <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ ease: 'easeInOut', duration: .5 }} exit={{ y: -20 }}
+              <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ ease: 'easeInOut', duration: .5 }} exit={{ opacity: 0, y: -20 }}
                 key="search" mode='wait' className='mt-10 w-80 block mx-auto'>
-                <input type="text" className='rounded w-full absolute bottom-0 pl-2 text-black mx-auto' value={value} onChange={onChange} />
+                <input type="text" className='rounded w-full absolute bottom-0 pl-2 text-black mx-auto bg-zinc-200' value={value} onChange={onChange} />
                 <Link to="/" onClick={() => setActivTab("search")}>
                   <button onClick={() => onSearch(value)} className='absolute right-2 top-5'><BsSearch /></button>
                 </Link>
               </motion.div>
+              <div className='z-20 absolute flex-column bg-white rounded w-80'>
+                {names && names.filter(item => {
+                  const searchTerm = value.toLowerCase();
+                  const fullName = item.name.toLowerCase();
+                  return searchTerm && fullName.startsWith(searchTerm) && fullName !== searchTerm
+                }).slice(0, 10)
+                  .map((item) => (
+                    <div onClick={() => onSearch(item.name)}
+                      className='z-30' id={item._id}>{item.name}</div>
+                  ))}
+              </div>
             </Popup>
           </AnimatePresence>
           <div className='relative hidden sm:block'>

@@ -65,17 +65,17 @@ const Home = () => {
   // }
   return (
     <>
-      <AnimatePresence>
+      <AnimatePresence initial={false}>
         {activeTab === "dress" &&
           <motion.div key="dress" mode='wait' layout
             initial={{ opacity: 0, y: 20 }}
             animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: .8, delay: .3 }}
+            transition={{ layout: { duration: .4 }, duration: .8, delay: .3 }}
             exit={{ opacity: 0, y: 20 }}
             className='text-center'
           >
             {dress.length ?
-              <div className='grid mt-5 grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 gap-10 mr-10 ml-16 sm:ml-24'>
+              <div className='grid mt-5 grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 gap-10 mr-10 ml-16 sm:ml-24 min-h-[32rem]'>
                 {dress &&
                   dress.map((product) => (
                     <Product data={product} />
@@ -99,7 +99,7 @@ const Home = () => {
             transition={{ duration: 0.5 }}
             exit={{ opacity: 0, y: 20 }}>
             {pants.length ?
-              <div className='grid mt-5 grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 gap-10 mx-10'>
+              <div className='grid mt-5 grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 gap-10 min-h-[32rem] mx-10'>
                 {pants.map((product) => (
                   <Product data={product} />
                 ))
@@ -122,7 +122,7 @@ const Home = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
             exit={{ opacity: 0, y: 20 }}>
             {shirts.length ?
-              <div className='grid mt-5 grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 gap-10 mx-10'>
+              <div className='grid mt-5 grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 gap-10 min-h-[32rem] mx-10'>
                 {shirts &&
                   shirts.map((product) => (
                     <Product data={product} />
@@ -146,7 +146,7 @@ const Home = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
             exit={{ opacity: 0, y: 20 }} mode='wait'>
             {shoes.length ?
-              <div className='grid mt-5 grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 gap-10 mx-10'>
+              <div className='grid mt-5 grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 gap-10 min-h-[32rem] mx-10'>
                 {shoes.map((product) => (
                   <Product data={product} />
                 ))
@@ -169,7 +169,7 @@ const Home = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
             exit={{ opacity: 0, y: 20 }}>
             {results.length ?
-              <div className='grid mt-5 grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 gap-10 mx-10'>
+              <div className='grid mt-5 grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 gap-10 min-h-[32rem] mx-10'>
                 {results?.map((product) => (
                   <Product data={product} />
                 ))
