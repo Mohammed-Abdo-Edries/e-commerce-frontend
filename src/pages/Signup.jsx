@@ -17,7 +17,7 @@ const Signup = () => {
       initial={{ y: 10, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.8, delay: 0 }} exit={{ opacity: 0, y: 20 }}>
-      <form className='signup h-96 w-96 py-3 px-6 rounded-xl shadow-xl' onSubmit={handleSubmit}>
+      <form className='signup h-96 w-96 py-3 px-6' onSubmit={handleSubmit}>
         <h3 className='pb-5 text-4xl font-light'>Sign up</h3>
         <div className='formdiv h-12 mb-4 relative'>
           <input type="name" placeholder=' '

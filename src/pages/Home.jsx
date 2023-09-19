@@ -10,6 +10,8 @@ import { getSearch } from './Services'
 import { deleteAllProudcts } from './Services'
 import { Product } from '../components/product'
 import empty from "../assets/no-products.jpg"
+import gsap from 'gsap'
+import SplitTextJS from 'split-text-js'
 import '@dotlottie/player-component'
 
 const Home = () => {
@@ -20,6 +22,27 @@ const Home = () => {
   const [shirts, setShirts] = useState([])
   const [shoes, setShoes] = useState([])
   const { user } = useAuthContext()
+  const titles = gsap.utils.toArray('p')
+  const tl = gsap.timeline({ repeat: -1 });
+  titles.forEach(title => {
+    const splitTitle = new SplitTextJS(title);
+    tl
+      .from(splitTitle.chars, {
+        opacity: 0,
+        y: 50,
+        // y: 80,
+        rotateX: -90,
+        stagger: .02,
+        delay: 1
+      }, '<')
+      .to(splitTitle.chars, {
+        opacity: 0,
+        y: -50,
+        rotateX: 90,
+        stagger: .02,
+        // y: -80
+      }, '<1')
+  })
   const email = user?.email
 
   useEffect(() => {
@@ -75,7 +98,7 @@ const Home = () => {
             className='text-center'
           >
             {dress.length ?
-              <div className='grid mt-5 grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 gap-10 mr-10 ml-16 sm:ml-24 min-h-[32rem]'>
+              <div className='grid mt-5 grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 gap-5 mr-10 ml-16 sm:ml-24 min-h-[32rem]'>
                 {dress &&
                   dress.map((product) => (
                     <Product data={product} />
@@ -190,6 +213,12 @@ const Home = () => {
               <dotLottie-player className='basis-1/2'
                 src='https://lottie.host/dd0d62d9-f05d-412f-b731-3c4ecd3589cb/2nd1hkC0N9.lottie'
                 autoplay loop mode='normal' ></dotLottie-player>
+            </div>
+            <div className='gsap text-center leading-none'>
+              <p>title1</p>
+              <p>title2</p>
+              <p>title3</p>
+              <p>title4</p>
             </div>
             <motion.div className='pt-4 sm:px-20 mt-8' initial={{ opacity: 0, y: 40 }}
               animate={{ y: 0, opacity: 1 }}

@@ -18,7 +18,7 @@ const Login = () => {
       initial={{ y: 10, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.8, delay: 0 }} exit={{ opacity: 0, y: 20 }}>
-      <form className='Login h-72 w-96 py-3 px-6 rounded-xl shadow-xl' onSubmit={handleSubmit}>
+      <form className='Login h-72 w-96 py-3 px-6' onSubmit={handleSubmit}>
         <h3 className="pb-5 text-4xl">Log in</h3>
         <div className="formdiv h-12 mb-4 relative">
           <input type="email" placeholder=' ' className="forminput w-full h-full text-lg absolute p-4 bg-none rounded-lg  outline-none focus:border-blue-500 transition duration-200" onChange={(e) => setEmail(e.target.value)} value={email} />

@@ -178,9 +178,10 @@ const Navbar = () => {
           {user?.isAdmin ?
             <div className='flex'>
               <Link className='' to="/adminsonly"><div className='pl-2 pr-2 mt-1'><FcSettings /></div></Link>
-              <button onClick={logout}>Log out</button>
             </div>
             :
+            null
+            }
             <Popup trigger={<button className='pl-2 mt-1'><FaUserCircle /></button>} position="bottom right" closeOnDocumentClick>
               <div className='bg-zinc-200 w-60 h-60 py-2 px-4 rounded'>
                 {user ?
@@ -195,7 +196,6 @@ const Navbar = () => {
                 }
               </div>
             </Popup>
-          }
         </div>
       </div>
       <div className='pt-1 hidden  sm:flex h-12'>

@@ -64,16 +64,16 @@ const AdminsOnly = () => {
             <div className="container mx-auto pt-8 pb-4 h-[calc(100vh-120px)]">
                 {user?.isAdmin ?
                     <>
-                        <form onSubmit={sendImage} className="flex flex-col" action={`${url}/product/create`} method="post" encType="multipart/form-data">
+                        <form onSubmit={sendImage} className="flex flex-col text-black" action={`${url}/product/create`} method="post" encType="multipart/form-data">
                             <input type='name' placeholder="name" className="border-2 border-gray-700 rounded-lg w-48 sm:w-60 pl-2 my-2 ml-10 py-1" onChange={(e) => setTitle(e.target.value)} value={title}></input>
-                            <input type="number" placeholder="price" className="pl-2 py-1 ml-10 my-2 rounded-lg w-48" onChange={(e) => setPrice(e.target.value)} value={price} ></input>
+                            <input type="number" placeholder="price" className="border-2 border-gray-700 pl-2 py-1 ml-10 my-2 rounded-lg w-48" onChange={(e) => setPrice(e.target.value)} value={price} ></input>
                             <select placeholder="category" className="py-1 pl-2 ml-10 rounded-lg my-2 w-48" onChange={(e) => setCategory(e.target.value)} value={category} >
                                 <option onClick={() => setCategory("pants")} >pants</option>
                                 <option onClick={() => setCategory("shirt")} >shirt</option>
                                 <option onClick={() => setCategory("dress")} >dress</option>
                                 <option onClick={() => setCategory("shoes")} >shoes</option>
                             </select>
-                            <input placeholder="details" type='text' className="border-2 border-gray-700 my-2 ml-10 rounded-lg w-80 pl-2 py-1" onChange={(e) => setDetails(e.target.value)} value={details}></input>
+                            <input placeholder="details" type='text' className="border-2 border-gray-700 my-2 ml-10 rounded-lg w-52 sm:w-72 pl-2 py-1" onChange={(e) => setDetails(e.target.value)} value={details}></input>
                             <input type="file" onChange={handelChange} className='ml-10 my-2' />
                             <motion.button initial={{ x: -250 }} animate={{ x: -10 }}
                                 transition={{ delay: .5 }} type="submit"

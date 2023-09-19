@@ -101,8 +101,8 @@ export const Product = (props) => {
       })
   }
   return (
-    <div className='mt-5 rounded-xl shadow-xl pb-4 dark:bg-slate-400' id={_id}>
-      <img src={`${url}/images/${imgURL}`} className='rounded-lg w-50 h-50' />
+    <div className='mt-5 rounded-xl shadow-xl pb-4  dark:bg-slate-400' id={_id}>
+      <img src={`${url}/images/${imgURL}`} className='rounded-lg w-full h-50' />
       <div className='flex flex-col items-center'>
         <div className='pt-2'><b>{name}</b></div>
         <div> ${price}</div>
@@ -124,7 +124,7 @@ export const Product = (props) => {
         <Link to={`/productDetails/${_id}`} >
           <motion.button initial={{ x: -250 }} animate={{ x: 0 }} transition={{ delay: .5 }}
             className='bg-purple-700 px-3 py-2 text-white text-base rounded-xl'>
-            Show More Details
+            More Details
           </motion.button>
         </Link>
         {user?.isAdmin ?
