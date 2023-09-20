@@ -29,7 +29,7 @@ const Home = () => {
     tl
       .from(splitTitle.chars, {
         opacity: 0,
-        y: 50,
+        y: 30,
         // y: 80,
         rotateX: -90,
         stagger: .02,
@@ -37,7 +37,7 @@ const Home = () => {
       }, '<')
       .to(splitTitle.chars, {
         opacity: 0,
-        y: -50,
+        y: -30,
         rotateX: 90,
         stagger: .02,
         // y: -80
@@ -98,7 +98,7 @@ const Home = () => {
             className='text-center'
           >
             {dress.length ?
-              <div className='grid mt-5 grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 gap-5 mr-10 ml-16 sm:ml-24 min-h-[32rem]'>
+              <div className='grid mt-5 grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 gap-5 mr-4 ml-4 sm:ml-24 '>
                 {dress &&
                   dress.map((product) => (
                     <Product data={product} />

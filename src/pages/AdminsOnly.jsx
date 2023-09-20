@@ -47,8 +47,10 @@ const AdminsOnly = () => {
                 })
             })
             .catch(error => {
-                setIsLoading(false)
-                toast(`${error.response.data.message}`, {
+                setIsLoading(false),
+                    console.log(error)
+                console.log(error.response)
+                toast(`${error.response.message}`, {
                     position: "top-right",
                     type: 'error',
                     theme: 'light',
