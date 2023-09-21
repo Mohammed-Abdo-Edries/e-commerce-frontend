@@ -79,13 +79,6 @@ const Home = () => {
       })
       .catch((error) => console.log(error))
   }, [shoes])
-  // const deleteAllDress = (email) => {
-  //   deleteAllProudcts(email)
-  //     .then((response) => {
-  //       console.log(response.data)
-  //     })
-  //     .catch((error) => console.log(error))
-  // }
   return (
     <>
       <AnimatePresence initial={false}>
@@ -204,26 +197,32 @@ const Home = () => {
           </motion.div>
         }
         {activeTab === "home" &&
-          <motion.div key="home" mode='wait' className='home ml-10 mr-8 px-2 h-[calc(100vh+160px)] sm:h-screen mt-4 py-2 font-bold text-lg overflow-hidden'
+          <motion.div key="home" mode='wait' className='home ml-10 mr-8 px-2 h-[calc(100vh-180px)] sm:h-[calc(100vh+20px)] py-2 font-bold text-lg overflow-hidden'
             initial={{ opacity: 0, y: 40 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.5 }}
             exit={{ opacity: 0, y: 20 }}>
-            <div className='mt-8 mb-4 w-72 h-56 flex flex-col sm:flex-row sm:w-full sm:h-96'>
+            <div className='mb-2 w-72 h-56 flex flex-col sm:flex-row sm:w-full sm:h-96'>
               <dotLottie-player className='basis-1/2'
                 src='https://lottie.host/dd0d62d9-f05d-412f-b731-3c4ecd3589cb/2nd1hkC0N9.lottie'
                 autoplay loop mode='normal' ></dotLottie-player>
             </div>
             <div className='gsap text-center leading-none'>
-              <p>title1</p>
-              <p>title2</p>
-              <p>title3</p>
-              <p>title4</p>
+              <p>latest brands</p>
+              <p>for all seasons</p>
+              <p>always fits</p>
+              <p>Monthly sales</p>
             </div>
-            <motion.div className='pt-4 sm:px-20 mt-8' initial={{ opacity: 0, y: 40 }}
+            <motion.div className='sm:px-20 mt-8' initial={{ opacity: 0, y: 40 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: .5, delay: .5 }}
-              exit={{ opacity: 0, y: 20 }}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore debitis dolorem suscipit consequuntur aliquam quos dolorum incidunt praesentium consectetur architecto?
+              exit={{ opacity: 0, y: 20 }}>
+              Hi everyone!
+              welcome to my ecommerce website!
+              This is the place to come for all your shopping needs!
+              We Have a wide range of clothes available, including costumes.
+              We also have a great selection of sale items, so be sure to check them out!
+              Thanks for visiting, and I hope you enjoy your shopping experience!
             </motion.div>
           </motion.div>
         }

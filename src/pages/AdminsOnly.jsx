@@ -38,7 +38,6 @@ const AdminsOnly = () => {
             })
             .then(response => {
                 setIsLoading(false)
-                console.log(response.data.message)
                 toast(`${response.data.message}`, {
                     position: "top-right",
                     type: 'success',
@@ -48,14 +47,12 @@ const AdminsOnly = () => {
             })
             .catch(error => {
                 setIsLoading(false),
-                    console.log(error)
-                console.log(error.response)
-                toast(`${error.response.message}`, {
-                    position: "top-right",
-                    type: 'error',
-                    theme: 'light',
-                    autoClose: 5000
-                })
+                    toast(`${error.response.message}`, {
+                        position: "top-right",
+                        type: 'error',
+                        theme: 'light',
+                        autoClose: 5000
+                    })
             }
             )
     }
@@ -82,7 +79,6 @@ const AdminsOnly = () => {
                                 className='py-1 bg-purple-700 w-20 h-10 block cursor-pointer text-white rounded-lg mt-4 mx-auto'
                                 onClick={() => {
                                     setIsLoading(true)
-                                    console.log(email)
                                 }} >
                                 {isLoading ? <div><ScaleLoader className='block w-20 h-10' color="white"
                                     size={1} /></div>

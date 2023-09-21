@@ -28,7 +28,7 @@ const Login = () => {
           <input type="password" placeholder=' ' className="forminput w-full h-full absolute text-lg p-4 bg-none rounded-lg  outline-none focus:border-blue-500 transition duration-200" onChange={(e) => setPassword(e.target.value)} value={password} />
           <label className="formlable absolute text-gray-700 text-base top-2 left-4 p-1">Password</label>
         </div>
-        <motion.button initial={{ x: -250 }} animate={{ x: -10 }} transition={{ delay: 1.5, type: 'spring', stiffness: 500 }} whileHover={{ scale: 1.1 }}
+        <motion.button initial={{ x: -250 }} animate={{ x: -10 }} transition={{ delay: .5, type: 'spring', stiffness: 500 }}
           className='py-2 px-2 bg-purple-700 ml-auto w-20 block cursor-pointer text-white rounded-lg' disabled={isLoading} type="submit" >Log in</motion.button>
         {error && <div className='error'>{error}</div>}
         <div className=''>dont have an account? <Link to="/signup" className='text-blue-700'>Signup</Link></div>
