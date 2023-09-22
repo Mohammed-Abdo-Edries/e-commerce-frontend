@@ -197,7 +197,7 @@ const Home = () => {
           </motion.div>
         }
         {activeTab === "home" &&
-          <motion.div key="home" mode='wait' className='home ml-10 mr-8 px-2 h-[calc(100vh-180px)] sm:h-[calc(100vh+20px)] py-2 font-bold text-lg overflow-hidden'
+          <motion.div key="home" mode='wait' className='home ml-10 mr-8 px-2 h-fit sm:h-[calc(100vh+20px)] py-2 font-bold text-lg overflow-hidden'
             initial={{ opacity: 0, y: 40 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.5 }}

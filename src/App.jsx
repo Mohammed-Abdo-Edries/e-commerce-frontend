@@ -11,40 +11,28 @@ import NotFound from "./pages/NotFound"
 import Footer from './components/footer';
 import "./index.css"
 import { useAuthContext } from './hooks/useAuthContext'
-// import { useShopContext } from './Context/ShopContext';
-// import { loadStripe } from '@stripe/stripe-js'
-// import { stripeKey } from './http-common'
 
 function App() {
   const { user } = useAuthContext()
-  // const { clientSecret } = useShopContext()
-  // const stripePromise = loadStripe(stripeKey)
-  // const appearance = {
-  //   theme: 'stripe',
-  // };
-  // const options = {
-  //   clientSecret,
-  //   appearance,
-  // };
-
+  const url = "https://luxury-t0tu.onrender.com"
   return (
     <div className="App bg-white text-gray-700 dark:bg-gray-900 dark:text-zinc-200">
       <BrowserRouter>
         <Navbar />
         <Routes>
-          <Route exact path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/checkout" element={<Checkout />} />
-          <Route path="/productDetails/:id" element={<Details />} />
+          <Route exact path={url + "/"} element={<Home />} />
+          <Route path={url + "/login"} element={<Login />} />
+          <Route path={url + "/signup"} element={<Signup />} />
+          <Route path={url + "/checkout"} element={<Checkout />} />
+          <Route path={url + "/productDetails/:id"} element={<Details />} />
           {user?.isAdmin ?
-            <Route path="/adminsonly" element={<AdminsOnly />} />
+            <Route path={url + "/adminsonly"} element={<AdminsOnly />} />
             :
 
-            <Route path="/" element={<Navigate to='/' />} />
+            <Route path={url + "/"} element={<Navigate to={url + '/'} />} />
           }
 
-          <Route path="/*" element={<NotFound />} />
+          <Route path={url + "/*"} element={<NotFound />} />
         </Routes>
         <Footer />
       </BrowserRouter>
