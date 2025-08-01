@@ -13,6 +13,8 @@ import empty from "../assets/no-products.jpg"
 import gsap from 'gsap'
 import SplitTextJS from 'split-text-js'
 import '@dotlottie/player-component'
+import OurPolicy from '../components/OurPolicy';
+import NewsletterBox from '../components/NewsletterBox';
 
 const Home = () => {
   const [results, setResults] = useState([]);
@@ -22,27 +24,6 @@ const Home = () => {
   const [shirts, setShirts] = useState([])
   const [shoes, setShoes] = useState([])
   const { user } = useAuthContext()
-  const titles = gsap.utils.toArray('p')
-  const tl = gsap.timeline({ repeat: -1 });
-  titles.forEach(title => {
-    const splitTitle = new SplitTextJS(title);
-    tl
-      .from(splitTitle.chars, {
-        opacity: 0,
-        y: 30,
-        // y: 80,
-        rotateX: -90,
-        stagger: .02,
-        delay: 1
-      }, '<')
-      .to(splitTitle.chars, {
-        opacity: 0,
-        y: -30,
-        rotateX: 90,
-        stagger: .02,
-        // y: -80
-      }, '<1')
-  })
   const email = user?.email
 
   useEffect(() => {
@@ -91,7 +72,7 @@ const Home = () => {
             className='text-center'
           >
             {dress.length ?
-              <div className='grid mt-5 grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 gap-5 mr-4 ml-4 sm:ml-24 '>
+              <div className='grid mt-5 grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 gap-5'>
                 {dress &&
                   dress.map((product) => (
                     <Product data={product} />
@@ -197,23 +178,36 @@ const Home = () => {
           </motion.div>
         }
         {activeTab === "home" &&
-          <motion.div key="home" mode='wait' className='home ml-10 mr-8 px-2 h-fit sm:h-[calc(100vh+20px)] py-2 font-bold text-lg overflow-hidden'
+          <motion.div key="home" mode='wait' className='home py-2 font-bold text-lg overflow-hidden'
             initial={{ opacity: 0, y: 40 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.5 }}
             exit={{ opacity: 0, y: 20 }}>
-            <div className='mb-2 w-72 h-56 flex flex-col sm:flex-row sm:w-full sm:h-96'>
-              <dotLottie-player className='basis-1/2'
+              <div className='flex flex-col sm:flex-row w-full'>
+              <div className='w-full sm:w-1/2 flex items-center justify-center py-10 sm:py-16 px-6'>
+                <div className="text-[#414141]">
+                  <div className="flex items-center gap-2">
+                    <p className="w-8 md:w-11 h-[2px] bg-[#414141]"></p>
+                    <p className="font-semibold text-sm md:text-base">OUR BESTSELLERS</p>
+                  </div>
+                  <h1 className="prata-regular text-3xl sm:py-3 lg:text-5xl leading-relaxed">
+                    Latest Arrivals
+                  </h1>
+                  <div className="flex items-center gap-2">
+                    <div className="font-semibold text-sm md:text-base">SHOP NOW</div>
+                    <p className="w-8 md:w-11 h-[1px] bg-[#414141]"></p>
+                  </div>
+              </div>
+              </div>
+              <div className='w-full sm:w-1/2 flex items-center justify-center p-6'>
+              <dotLottie-player className='w-full max-w-md'
                 src='https://lottie.host/dd0d62d9-f05d-412f-b731-3c4ecd3589cb/2nd1hkC0N9.lottie'
-                autoplay loop mode='normal' ></dotLottie-player>
-            </div>
-            <div className='gsap text-center leading-none'>
-              <p>latest brands</p>
-              <p>for all seasons</p>
-              <p>always fits</p>
-              <p>Monthly sales</p>
-            </div>
-            <motion.div className='sm:px-20 mt-8' initial={{ opacity: 0, y: 40 }}
+                autoplay loop mode='normal' style={{height: '200px', margin: '0 auto'}} ></dotLottie-player>
+                </div>
+                </div>
+              <OurPolicy />
+              <NewsletterBox />
+            {/* <motion.div className='mt-8' initial={{ opacity: 0, y: 40 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: .5, delay: .5 }}
               exit={{ opacity: 0, y: 20 }}>
@@ -223,7 +217,7 @@ const Home = () => {
               We Have a wide range of clothes available, including costumes.
               We also have a great selection of sale items, so be sure to check them out!
               Thanks for visiting, and I hope you enjoy your shopping experience!
-            </motion.div>
+            </motion.div> */}
           </motion.div>
         }
       </AnimatePresence>

@@ -70,7 +70,7 @@ const Navbar = () => {
   }, [theme])
   return (
     <motion.div initial={{ opacity: 0, y: -180 }} animate={{ opacity: 1, y: 0 }} transition={{ ease: 'easeInOut', duration: 1, delay: .5 }}
-      id="nav" className='sticky top-0 backdrop-blur-2xl bg-white/30 z-10 backdrop-brightness-90 dark:text-zinc-200 h-14 sm:h-24 max-w-full text-lg px-4 sm:px-14'>
+     className='sticky top-0 backdrop-blur-2xl flex justify-between items-center z-10 dark:text-zinc-200 border-gray-300 border-b-2 text-lg py-4'>
       <div className='flex'>
         <div className='relative'>
           <Link className='' to="/">
@@ -78,7 +78,16 @@ const Navbar = () => {
             <span className='absolute bottom-4 right-2'>&reg;</span>
           </Link>
         </div>
-        <div className='flex pt-2 ml-auto items-center'>
+        <div className="flex-1 flex justify-center">
+        <div className='hidden sm:flex space-x-8'>
+        <Link to="/" className='text-medium px-4' onClick={() => setActivTab("home")}>Home</Link>
+        <Link to="/" className='px-4' onClick={() => setActivTab("dress")}>dress</Link>
+        <Link to="/" className='px-4' onClick={() => setActivTab("pants")}>pants</Link>
+        <Link to="/" className='px-4' onClick={() => setActivTab("shirt")}>shirts</Link>
+        {/* <Link to="/" className=' px-4' onClick={() => setActivTab("shoes")}>shoes</Link> */}
+        </div>
+        </div>
+        <div className='flex absolute right-0'>
           <AnimatePresence >
             <Popup className='' trigger={<button><BsSearch className='relative sm:hidden mr-2' /></button>} position="bottom center" closeOnDocumentClick >
               <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ ease: 'easeInOut', duration: .5 }} exit={{ opacity: 0, y: -20 }}
@@ -101,7 +110,7 @@ const Navbar = () => {
               </div>
             </Popup>
           </AnimatePresence>
-          <div className='relative hidden sm:block'>
+          {/* <div className='relative hidden sm:block'>
             <div className='mr-4'>
               <input type="text" className='rounded mx-auto w-32 sm:w-48 md:w-80 pl-2 text-black' value={value} onChange={onChange} />
               <Link to="/" onClick={() => setActivTab("search")}>
@@ -119,7 +128,7 @@ const Navbar = () => {
                     className='z-30' id={item._id}>{item.name}</div>
                 ))}
             </div>
-          </div>
+          </div> */}
           {theme === 'dark' ?
             <AnimatePresence mode='wait' >
               {theme === "dark" && (
@@ -127,7 +136,7 @@ const Navbar = () => {
                   animate="enter"
                   exit='exit'
                   transition={{ duration: 0.3 }}
-                  className='w-9 h-8 px-2 rounded bg-orange-200 text-gray-900'
+                  className='w-9 h-8 px-2 rounded text-orange-200'
                   onClick={() => {
                     setTheme(theme === "dark" ? "light" : "dark")
                   }}>
@@ -142,7 +151,7 @@ const Navbar = () => {
                   animate="enter"
                   exit="exit"
                   transition={{ duration: 0.3 }}
-                  className='px-2 w-9 h-8 rounded bg-purple-700 text-white'
+                  className='px-2 w-9 h-8 rounded text-purple-700'
                   onClick={() => {
                     setTheme(theme === "light" ? "dark" : "light")
                   }}>
@@ -197,13 +206,6 @@ const Navbar = () => {
             </div>
           </Popup>
         </div>
-      </div>
-      <div className='pt-1 hidden  sm:flex h-12'>
-        <Link to="/" className='ml-4 text-medium px-2' onClick={() => setActivTab("home")}>Home</Link>
-        <Link to="/" className='mx-auto' onClick={() => setActivTab("dress")}>dress</Link>
-        <Link to="/" className='mx-auto' onClick={() => setActivTab("pants")}>pants</Link>
-        <Link to="/" className='mx-auto' onClick={() => setActivTab("shirt")}>shirts</Link>
-        <Link to="/" className='mx-auto ' onClick={() => setActivTab("shoes")}>shoes</Link>
       </div>
     </motion.div>
   )
