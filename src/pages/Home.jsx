@@ -10,11 +10,10 @@ import { getSearch } from './Services'
 import { deleteAllProudcts } from './Services'
 import { Product } from '../components/product'
 import empty from "../assets/no-products.jpg"
-import gsap from 'gsap'
-import SplitTextJS from 'split-text-js'
 import '@dotlottie/player-component'
 import OurPolicy from '../components/OurPolicy';
 import NewsletterBox from '../components/NewsletterBox';
+import Footer from '../components/Footer2';
 
 const Home = () => {
   const [results, setResults] = useState([]);
@@ -178,16 +177,16 @@ const Home = () => {
           </motion.div>
         }
         {activeTab === "home" &&
-          <motion.div key="home" mode='wait' className='home py-2 font-bold text-lg overflow-hidden'
+          <motion.div key="home" mode='wait' className=' py-2 font-bold text-lg overflow-hidden'
             initial={{ opacity: 0, y: 40 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.5 }}
             exit={{ opacity: 0, y: 20 }}>
               <div className='flex flex-col sm:flex-row w-full'>
               <div className='w-full sm:w-1/2 flex items-center justify-center py-10 sm:py-16 px-6'>
-                <div className="text-[#414141]">
+                <div className="text-[#414141] dark:text-zinc-200">
                   <div className="flex items-center gap-2">
-                    <p className="w-8 md:w-11 h-[2px] bg-[#414141]"></p>
+                    <p className="w-8 md:w-11 h-[2px] bg-[#414141] "></p>
                     <p className="font-semibold text-sm md:text-base">OUR BESTSELLERS</p>
                   </div>
                   <h1 className="prata-regular text-3xl sm:py-3 lg:text-5xl leading-relaxed">
@@ -207,6 +206,7 @@ const Home = () => {
                 </div>
               <OurPolicy />
               <NewsletterBox />
+              {/* <Footer /> */}
             {/* <motion.div className='mt-8' initial={{ opacity: 0, y: 40 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: .5, delay: .5 }}

@@ -8,9 +8,13 @@ import Checkout from './pages/Checkout'
 import Details from './pages/Details'
 import AdminsOnly from './pages/AdminsOnly'
 import NotFound from "./pages/NotFound"
-import Footer from './components/footer';
 import "./index.css"
 import { useAuthContext } from './hooks/useAuthContext'
+import Collection from './pages/Collection';
+import About from './pages/About';
+import Contact from './pages/Contact';
+import Cart from './pages/Cart';
+import Footer from './components/Footer2';
 
 function App() {
   const { user } = useAuthContext()
@@ -25,6 +29,10 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/productDetails/:id" element={<Details />} />
+          <Route path="/collection" element={<Collection />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
           {user?.isAdmin ?
             <Route path="/adminsonly" element={<AdminsOnly />} />
             :

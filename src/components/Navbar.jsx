@@ -70,24 +70,27 @@ const Navbar = () => {
   }, [theme])
   return (
     <motion.div initial={{ opacity: 0, y: -180 }} animate={{ opacity: 1, y: 0 }} transition={{ ease: 'easeInOut', duration: 1, delay: .5 }}
-     className='sticky top-0 backdrop-blur-2xl flex justify-between items-center z-10 dark:text-zinc-200 border-gray-300 border-b-2 text-lg py-4'>
-      <div className='flex'>
-        <div className='relative'>
-          <Link className='' to="/">
+     className='sticky top-0 backdrop-blur-2xl items-center z-10 dark:text-zinc-200 border-gray-300 border-b-2 text-lg py-4'>
+      <div className='flex justify-between'>
+        {/* <div className='flex-shrink-0'> */}
+          <Link className='relative' to="/">
             <div className='logo text-black dark:text-zinc-200'>Luxury</div>
             <span className='absolute bottom-4 right-2'>&reg;</span>
           </Link>
-        </div>
-        <div className="flex-1 flex justify-center">
-        <div className='hidden sm:flex space-x-8'>
-        <Link to="/" className='text-medium px-4' onClick={() => setActivTab("home")}>Home</Link>
-        <Link to="/" className='px-4' onClick={() => setActivTab("dress")}>dress</Link>
-        <Link to="/" className='px-4' onClick={() => setActivTab("pants")}>pants</Link>
-        <Link to="/" className='px-4' onClick={() => setActivTab("shirt")}>shirts</Link>
+        {/* </div> */}
+        {/* <div className="flex-1 flex justify-center"> */}
+        <ul className='hidden sm:flex'>
+        <Link to="/" className='text-medium px-4' >Home</Link>
+        <Link to="/collection" className='text-medium px-4' >COLLECTION</Link>
+        <Link to="/about" className='text-medium px-4' >ABOUT</Link>
+        <Link to="/contact" className='text-medium px-4' >CONTACT</Link>
+        {/* <Link to="/" className='px-4' onClick={() => setActivTab("dress")}>dress</Link> */}
+        {/* <Link to="/" className='px-4' onClick={() => setActivTab("pants")}>pants</Link> */}
+        {/* <Link to="/" className='px-4' onClick={() => setActivTab("shirt")}>shirts</Link> */}
         {/* <Link to="/" className=' px-4' onClick={() => setActivTab("shoes")}>shoes</Link> */}
-        </div>
-        </div>
-        <div className='flex absolute right-0'>
+        </ul>
+        {/* </div> */}
+        <div className='flex items-center absolue right-0'>
           <AnimatePresence >
             <Popup className='' trigger={<button><BsSearch className='relative sm:hidden mr-2' /></button>} position="bottom center" closeOnDocumentClick >
               <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ ease: 'easeInOut', duration: .5 }} exit={{ opacity: 0, y: -20 }}
@@ -97,7 +100,7 @@ const Navbar = () => {
                   <button onClick={() => onSearch(value)} className='absolute right-2 top-5'><BsSearch /></button>
                 </Link>
               </motion.div>
-              <div className='z-20 absolute flex-column bg-white rounded w-80'>
+              <div className='z-20 flex-column bg-white rounded w-80'>
                 {names && names.filter(item => {
                   const searchTerm = value.toLowerCase();
                   const fullName = item.name.toLowerCase();
