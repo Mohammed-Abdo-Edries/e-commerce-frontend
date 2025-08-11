@@ -9,7 +9,7 @@ import { motion } from "framer-motion"
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
-export const Product = (props) => {
+const Product = () => {
   const { _id, name, price, imgURL, category, details } = props.data;
   const { cart, setCart, refresh, setRefresh } = useShopContext();
   const { user } = useAuthContext()
@@ -143,3 +143,4 @@ export const Product = (props) => {
   )
 };
 
+export default Product

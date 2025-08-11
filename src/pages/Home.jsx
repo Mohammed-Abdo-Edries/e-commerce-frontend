@@ -8,7 +8,7 @@ import { getShirts } from './Services'
 import { getShoes } from './Services'
 import { getSearch } from './Services'
 import { deleteAllProudcts } from './Services'
-import { Product } from '../components/product'
+import Product  from '../components/product'
 import empty from "../assets/no-products.jpg"
 import '@dotlottie/player-component'
 import OurPolicy from '../components/OurPolicy';
@@ -25,40 +25,40 @@ const Home = () => {
   const { user } = useAuthContext()
   const email = user?.email
 
-  useEffect(() => {
-    getDress()
-      .then((data) => {
-        setDress(data)
-      })
-  }, [dress])
-  useEffect(() => {
-    getPants()
-      .then((data) =>
-        setPants(data)
-      )
-      .catch((error) => console.log(error))
-  }, [pants])
-  useEffect(() => {
-    getShirts()
-      .then((data) =>
-        setShirts(data)
-      )
-      .catch((error) => console.log(error))
-  }, [shirts])
-  useEffect(() => {
-    getShoes()
-      .then((data) =>
-        setShoes(data)
-      )
-      .catch((error) => console.log(error))
-  }, [shoes])
-  useEffect(() => {
-    getSearch(search)
-      .then((data) => {
-        setResults(data)
-      })
-      .catch((error) => console.log(error))
-  }, [shoes])
+  // useEffect(() => {
+  //   getDress()
+  //     .then((data) => {
+  //       setDress(data)
+  //     })
+  // }, [dress])
+  // useEffect(() => {
+  //   getPants()
+  //     .then((data) =>
+  //       setPants(data)
+  //     )
+  //     .catch((error) => console.log(error))
+  // }, [pants])
+  // useEffect(() => {
+  //   getShirts()
+  //     .then((data) =>
+  //       setShirts(data)
+  //     )
+  //     .catch((error) => console.log(error))
+  // }, [shirts])
+  // useEffect(() => {
+  //   getShoes()
+  //     .then((data) =>
+  //       setShoes(data)
+  //     )
+  //     .catch((error) => console.log(error))
+  // }, [shoes])
+  // useEffect(() => {
+  //   getSearch(search)
+  //     .then((data) => {
+  //       setResults(data)
+  //     })
+  //     .catch((error) => console.log(error))
+  // }, [shoes])
   return (
     <>
       <AnimatePresence initial={false}>

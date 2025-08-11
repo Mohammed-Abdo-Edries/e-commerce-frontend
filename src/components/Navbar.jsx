@@ -5,6 +5,7 @@ import { useLogout } from '../hooks/useLogout'
 import { useAuthContext } from '../hooks/useAuthContext'
 import { BsCart4, BsSunFill, BsFillMoonStarsFill, BsSearch } from "react-icons/bs"
 import { FaUserCircle } from "react-icons/fa"
+import { GiHamburgerMenu } from "react-icons/gi"
 import { FcSettings } from "react-icons/fc"
 import { getAllProducts } from '../pages/Services'
 import { useCookies } from 'react-cookie';
@@ -84,15 +85,16 @@ const Navbar = () => {
         <Link to="/collection" className='text-medium px-4' >COLLECTION</Link>
         <Link to="/about" className='text-medium px-4' >ABOUT</Link>
         <Link to="/contact" className='text-medium px-4' >CONTACT</Link>
-        {/* <Link to="/" className='px-4' onClick={() => setActivTab("dress")}>dress</Link> */}
-        {/* <Link to="/" className='px-4' onClick={() => setActivTab("pants")}>pants</Link> */}
-        {/* <Link to="/" className='px-4' onClick={() => setActivTab("shirt")}>shirts</Link> */}
-        {/* <Link to="/" className=' px-4' onClick={() => setActivTab("shoes")}>shoes</Link> */}
+        {user?.isAdmin? 
+        <Link to="/adminsonly" className='text-medium px-4' >Admin</Link>
+        :
+        null
+      }
         </ul>
         {/* </div> */}
         <div className='flex items-center absolue right-0'>
-          <AnimatePresence >
-            <Popup className='' trigger={<button><BsSearch className='relative sm:hidden mr-2' /></button>} position="bottom center" closeOnDocumentClick >
+          {/* <AnimatePresence > */}
+            {/* <Popup className='' trigger={<button><BsSearch className='relative sm:hidden mr-2' /></button>} position="bottom center" closeOnDocumentClick >
               <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ ease: 'easeInOut', duration: .5 }} exit={{ opacity: 0, y: -20 }}
                 key="search" mode='wait' className='mt-10 w-80 block mx-auto'>
                 <input type="text" className='rounded w-full absolute bottom-0 pl-2 text-black mx-auto bg-zinc-200' value={value} onChange={onChange} />
@@ -112,7 +114,7 @@ const Navbar = () => {
                   ))}
               </div>
             </Popup>
-          </AnimatePresence>
+          </AnimatePresence> */}
           {/* <div className='relative hidden sm:block'>
             <div className='mr-4'>
               <input type="text" className='rounded mx-auto w-32 sm:w-48 md:w-80 pl-2 text-black' value={value} onChange={onChange} />
@@ -208,6 +210,22 @@ const Navbar = () => {
               }
             </div>
           </Popup>
+          <Popup trigger={<button><GiHamburgerMenu className='ml-2 sm:hidden'/></button>} closeOnDocumentClick position={"bottom right"}>
+                    <ul className='w-60 rounded-md bg-white dark:bg-slate-950 dark:text-white animate-slideInDown'>
+                        <li className='pb-2 hover:pl-6 pl-4 py-2 border-slate-300 border-b-2'>
+                            <a to='/' key={"home"} href="/home">Home</a>
+                        </li>
+                        <li className='pb-2 hover:pl-6 pl-4 py-2 border-slate-300 border-b-2'>
+                            <a to='/collection' key={"about"} href="/collection">Collections</a>
+                        </li>
+                        <li className='pb-2 hover:pl-6 pt-2 border-slate-300 pl-4 border-b-2'>
+                            <a to='/skills' key={"skills"} href="/about">About</a>
+                        </li>
+                        <li className='pb-2 hover:pl-6 py-2 border-slate-300 pl-4 border-b-2'>
+                            <a to='contact' key={"projects"} href="contact">Contact</a>
+                        </li>
+                    </ul>
+                </Popup>
         </div>
       </div>
     </motion.div>
