@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useCookies } from 'react-cookie';
 import { useAuthContext } from '../hooks/useAuthContext'
-import { useShopContext } from '../Context/ShopContext'
+import { useShopContext } from '../context/ShopContext'
 import axios from "axios"
 import { url } from "../http-common"
 import { motion } from "framer-motion"

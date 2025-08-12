@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useAuthContext } from '../hooks/useAuthContext'
-import { useShopContext } from '../Context/ShopContext';
+import { useShopContext } from '../context/ShopContext';
 import { motion, AnimatePresence } from "framer-motion"
 import { getDress } from './Services'
 import { getPants } from './Services'

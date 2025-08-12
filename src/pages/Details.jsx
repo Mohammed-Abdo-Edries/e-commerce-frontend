@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useShopContext } from '../Context/ShopContext';
+import { useShopContext } from '../context/ShopContext';
 import { useParams } from 'react-router-dom';
 import axios from 'axios'
 import { url } from "../http-common"

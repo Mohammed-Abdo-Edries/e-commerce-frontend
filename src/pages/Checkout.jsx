@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { useShopContext } from '../Context/ShopContext';
+import { useShopContext } from '../context/ShopContext';
 import { CartItem } from '../components/cartItem';
 import { useCookies } from 'react-cookie';
 import { AnimatePresence, motion } from "framer-motion"
