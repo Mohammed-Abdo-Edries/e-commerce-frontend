@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { useShopContext } from '../Context/ShopContext';
+import { useShopContext } from '../context1/ShopContext';
 import { AiFillHome } from "react-icons/ai"
 import { GiLargeDress, GiConverseShoe, GiArmoredPants, GiTShirt } from "react-icons/gi"
 const Footer = () => {

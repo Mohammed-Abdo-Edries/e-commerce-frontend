@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { useShopContext } from '../Context/ShopContext';
+import { useShopContext } from '../context1/ShopContext';
 import { CartItem } from '../components/cartItem';
 import { useLogout } from '../hooks/useLogout'
 import { useAuthContext } from '../hooks/useAuthContext'
