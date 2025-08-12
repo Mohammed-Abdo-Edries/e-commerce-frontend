@@ -29,11 +29,11 @@ const Collection = () => {
   const applyFilter = () => {
     let productsCopy = products.slice();
 
-    if (showSearch && search) {
-      productsCopy = productsCopy.filter((item) =>
-        item.name.toLowerCase().includes(search.toLowerCase())
-      );
-    }
+    // if (showSearch && search) {
+    //   productsCopy = productsCopy.filter((item) =>
+    //     item.name.toLowerCase().includes(search.toLowerCase())
+    //   );
+    // }
 
     if (category.length > 0) {
       productsCopy = productsCopy.filter((item) =>

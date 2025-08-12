@@ -28,10 +28,25 @@ export const ShopContextProvider = (props) => {
         }
       };
 
-    const contextValue = { cart, setCart, products, search, setSearch, refresh, setRefresh, activeTab, setActivTab }
+    const contextValue = { 
+      cart,
+      setCart,
+      products,
+      search,
+      setSearch,
+      refresh,
+      setRefresh,
+      activeTab,
+       setActivTab }
     return <ShopContext.Provider value={contextValue}>
         {props.children}
     </ShopContext.Provider>
 }
 
-export const useShopContext = () => useContext(ShopContext);
+export const useShopContext = () => {
+  const context = useContext(ShopContext); 
+  if (!context) {
+    throw new Error('useShopContext must be used within ShopContextProvider');
+  }
+  return context;
+};

@@ -15,6 +15,7 @@ import About from './pages/About';
 import Contact from './pages/Contact';
 import Cart from './pages/Cart';
 import Footer from './components/Footer2';
+import { ShopContextProvider } from './context/ShopContext'
 
 function App() {
   const { user } = useAuthContext()
@@ -22,6 +23,7 @@ function App() {
   return (
     <div className="px-4 sm:px-[5vw] md:px-[7vw] lg:px-[9vw] bg-white text-gray-700 dark:bg-gray-900 dark:text-zinc-200">
       <BrowserRouter>
+      <ShopContextProvider>
         <Navbar />
         <Routes>
           <Route exact path="/" element={<Home />} />
@@ -43,6 +45,7 @@ function App() {
           <Route path="/*" element={<NotFound />} />
         </Routes>
         <Footer />
+        </ShopContextProvider>
       </BrowserRouter>
     </div>
   )
