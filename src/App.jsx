@@ -15,7 +15,7 @@ import About from './pages/About';
 import Contact from './pages/Contact';
 import Cart from './pages/Cart';
 import Footer from './components/Footer2';
-import { ShopContextProvider } from './context/ShopContext'
+import { ShopContextProvider } from './context1/ShopContext'
 
 function App() {
   const { user } = useAuthContext()

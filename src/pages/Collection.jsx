@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useShopContext } from "../context/ShopContext";
+import { useShopContext } from "../context1/ShopContext";
 import Product from "../components/product";
 
 const Collection = () => {
