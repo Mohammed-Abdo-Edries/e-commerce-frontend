@@ -13,7 +13,6 @@ import empty from "../assets/no-products.jpg"
 import '@dotlottie/player-component'
 import OurPolicy from '../components/OurPolicy';
 import NewsletterBox from '../components/NewsletterBox';
-import Footer from '../components/Footer2';
 
 const Home = () => {
   const [results, setResults] = useState([]);

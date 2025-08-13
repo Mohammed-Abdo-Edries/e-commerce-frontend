@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from 'react'
+import React, { createContext, useContext, useState,useEffect } from 'react'
 import { useCookies } from "react-cookie"
 import { toast } from "react-toastify";
 import axios from "axios";
@@ -6,15 +6,48 @@ import { url } from "../http-common"
 
 const ShopContext = createContext();
 
-
 export const ShopContextProvider = (props) => {
-    const [cookies] = useCookies(['cart'])
+  const [cookies, setCookie, removeCookie] = useCookies(['cart']);
+  const [theme, setTheme] = useState("light")
+    // const [cookies] = useCookies(['cart'])
     const [cart, setCart] = useState(cookies.cart || [])
-    const [refresh, setRefresh] = useState(false);
     const [activeTab, setActivTab] = useState("home")
     const [search, setSearch] = useState('')
     const [products, setProducts] = useState([]);
+    const [totalPrice, setTotalPrice] = useState(0);
+  const [totalAmount, setTotalAmount] = useState(0);
+    
+    const onClickRemove = () => {
+      setCart([]);
+      removeCookie('cart', { path: '/' });
+    };
+    useEffect(() => {
+      var price = 0
+      var amount = 0;
+      cart.forEach((item) => {
+        if (item.price && item.amount) {
+          price += item.price;
+          amount += item.amount;
+        }
+      });
+      setTotalPrice(price);
+      setTotalAmount(amount);
+    }, [cart, cookies.cart]);
 
+    useEffect(() => {
+      const savedTheme = localStorage.getItem('theme') || 'light';
+      setTheme(savedTheme);
+    }, []);
+  
+    useEffect(() => {
+      document.documentElement.classList.remove('light', 'dark');
+      document.documentElement.classList.add(theme);
+      localStorage.setItem('theme', theme);
+    }, [theme]);
+  
+    const toggleTheme = () => {
+      setTheme((prev) => (prev === 'light' ? 'dark' : 'light'));
+    };
     const getProductsData = async (req, res) => {
         try {
           const response = await axios.get(url + "/product/");
@@ -31,11 +64,14 @@ export const ShopContextProvider = (props) => {
     const contextValue = { 
       cart,
       setCart,
+      onClickRemove,
+      totalAmount,
+      totalPrice,
+      theme,
+      toggleTheme,
       products,
       search,
       setSearch,
-      refresh,
-      setRefresh,
       activeTab,
        setActivTab }
     return <ShopContext.Provider value={contextValue}>

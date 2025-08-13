@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Navbar from './components/Navbar'
 import Home from './pages/Home'
@@ -35,13 +34,7 @@ function App() {
           <Route path="/cart" element={<Cart />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
-          {user?.isAdmin ?
-            <Route path="/adminsonly" element={<AdminsOnly />} />
-            :
-
-            <Route path="/" element={<Navigate to='/' />} />
-          }
-
+          <Route path="/adminsonly" element={user?.isAdmin ? <AdminsOnly /> : <Navigate to="/" />} />
           <Route path="/*" element={<NotFound />} />
         </Routes>
         <Footer />
