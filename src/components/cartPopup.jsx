@@ -8,7 +8,7 @@ function CartPopup() {
     const { cart,totalAmount,totalPrice } = useShopContext();
 
   return (
-    <Popup trigger={<button className='ml-2 hover:scale-125 duration-300'><BsCart4 /></button>} 
+    <Popup trigger={<button className='ml-2 text-2xl hover:scale-125 duration-300'><BsCart4 /></button>} 
     position="bottom right" closeOnDocumentClick >
       <div className='flex-column text-center w-full px-2 pb-4 h-[calc(1vh+500px)] overflow-y-scroll rounded
       bg-zinc-200 dark:bg-gray-900 dark:text-zinc-200' >

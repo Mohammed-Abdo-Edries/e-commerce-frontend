@@ -9,7 +9,6 @@ const ShopContext = createContext();
 export const ShopContextProvider = (props) => {
   const [cookies, setCookie, removeCookie] = useCookies(['cart']);
   const [theme, setTheme] = useState("light")
-    // const [cookies] = useCookies(['cart'])
     const [cart, setCart] = useState(cookies.cart || [])
     const [activeTab, setActivTab] = useState("home")
     const [search, setSearch] = useState('')
@@ -70,10 +69,7 @@ export const ShopContextProvider = (props) => {
       theme,
       toggleTheme,
       products,
-      search,
-      setSearch,
-      activeTab,
-       setActivTab }
+      }
     return <ShopContext.Provider value={contextValue}>
         {props.children}
     </ShopContext.Provider>

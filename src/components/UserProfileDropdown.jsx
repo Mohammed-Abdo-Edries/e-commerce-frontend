@@ -1,5 +1,5 @@
 import Popup from "reactjs-popup"
-import { FaUserCircle } from "react-icons/fa"
+import { FaUserCircle,FaRegUser } from "react-icons/fa"
 import { useAuthContext } from '../hooks/useAuthContext'
 import { Link } from 'react-router-dom'
 import { useLogout } from '../hooks/useLogout'
@@ -11,7 +11,7 @@ function userProfileDropdown() {
         logout()
       }
   return (
-    <Popup trigger={<button className='pl-2 mt-1 hover:scale-125 duration-300'><FaUserCircle /></button>} position="bottom right" closeOnDocumentClick>
+    <Popup trigger={<button className='pl-2 text-xl hover:scale-125 duration-300'><FaRegUser /></button>} position="bottom right" closeOnDocumentClick>
     <div className='bg-zinc-200 w-60 h-60 py-2 px-4 rounded'>
       {user ?
         <div className='text-lg '>

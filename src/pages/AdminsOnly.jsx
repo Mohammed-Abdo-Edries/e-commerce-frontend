@@ -10,9 +10,13 @@ import 'react-toastify/dist/ReactToastify.css'
 const AdminsOnly = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [response, setResponse] = useState(false);
-    const [title, setTitle] = useState();
+    const [name, setName] = useState();
     const [price, setPrice] = useState();
     const [category, setCategory] = useState("");
+    const [subCategory, setSubCategory] = useState("");
+    const [description, setDescription] = useState("");
+    const [bestseller, setBestseller] = useState(false);
+    const [sizes, setSizes] = useState([]);
     const [image, setImage] = useState();
     const [details, setDetails] = useState();
     const { user } = useAuthContext()
@@ -24,11 +28,15 @@ const AdminsOnly = () => {
     const sendImage = (e) => {
         e.preventDefault()
         const formData = new FormData()
-        formData.append('name', title);
+        formData.append('name', name);
         formData.append('price', price);
+        formData.append("description", description);
         formData.append('category', category);
+        formData.append('subCategory', subCategory);
         formData.append('details', details);
         formData.append('image', image);
+        formData.append("bestseller", bestseller);
+      formData.append("sizes", JSON.stringify(sizes));
         axios.post(`${url}/product/create`, formData,
             Headers = {
                 headers: {
@@ -36,6 +44,7 @@ const AdminsOnly = () => {
                     email
                 }
             })
+            
             .then(response => {
                 setIsLoading(false)
                 toast(`${response.data.message}`, {
@@ -64,13 +73,17 @@ const AdminsOnly = () => {
                 {user?.isAdmin ?
                     <>
                         <form onSubmit={sendImage} className="flex flex-col text-black" action={`${url}/product/create`} method="post" encType="multipart/form-data">
-                            <input type='name' placeholder="name" className="border-2 border-gray-700 rounded-lg w-48 sm:w-60 pl-2 my-2 ml-10 py-1" onChange={(e) => setTitle(e.target.value)} value={title}></input>
+                            <input type='name' placeholder="name" className="border-2 border-gray-700 rounded-lg w-48 sm:w-60 pl-2 my-2 ml-10 py-1" onChange={(e) => setName(e.target.value)} value={title}></input>
                             <input type="number" placeholder="price" className="border-2 border-gray-700 pl-2 py-1 ml-10 my-2 rounded-lg w-48" onChange={(e) => setPrice(e.target.value)} value={price} ></input>
-                            <select placeholder="category" className="py-1 pl-2 ml-10 rounded-lg my-2 w-48" onChange={(e) => setCategory(e.target.value)} value={category} >
-                                <option onClick={() => setCategory("pants")} >pants</option>
-                                <option onClick={() => setCategory("shirt")} >shirt</option>
-                                <option onClick={() => setCategory("dress")} >dress</option>
-                                <option onClick={() => setCategory("shoes")} >shoes</option>
+                            <select className="py-1 pl-2 ml-10 rounded-lg my-2 w-48" onChange={(e) => setCategory(e.target.value)} value={category} >
+                                <option onClick={() => setCategory("pants")} >men</option>
+                                <option onClick={() => setCategory("shirt")} >women</option>
+                                <option onClick={() => setCategory("dress")} >kids</option>
+                            </select>
+                            <select className="py-1 pl-2 ml-10 rounded-lg my-2 w-48" onChange={(e) => setCategory(e.target.value)} value={category} >
+                                <option onClick={() => setSubCategory("pants")} >topwear</option>
+                                <option onClick={() => setSubCategory("shirt")} >bottomwear</option>
+                                <option onClick={() => setSubCategory("dress")} >Winterwear</option>
                             </select>
                             <input placeholder="details" type='text' className="border-2 border-gray-700 my-2 ml-10 rounded-lg w-52 sm:w-72 pl-2 py-1" onChange={(e) => setDetails(e.target.value)} value={details}></input>
                             <input type="file" onChange={handelChange} className='ml-10 my-2' />

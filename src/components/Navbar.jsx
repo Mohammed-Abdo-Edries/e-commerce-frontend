@@ -48,7 +48,7 @@ const Navbar = () => {
                 animate="enter"
                 exit="exit"
                 transition={{ duration: 0.3 }}
-                className="text-orange-200 w-6 h-6 pr-2"
+                className="text-orange-200 pr-2"
               >
                 <BsSunFill  />
               </motion.div>
@@ -59,7 +59,7 @@ const Navbar = () => {
                 animate="enter"
                 exit="exit"
                 transition={{ duration: 0.3 }}
-                className="text-purple-700 w-6 h-6 pr-2"
+                className="text-purple-700  pr-2"
               >
                 <BsFillMoonStarsFill  />
               </motion.div>
@@ -71,7 +71,7 @@ const Navbar = () => {
           <MobileMenu />
           {user?.isAdmin ?
             <div className='flex'>
-              <Link className='' to="/adminsonly"><div className='pl-2 pr-2 mt-1 hover:scale-125 duration-300'><FcSettings /></div></Link>
+              <Link className='' to="/adminsonly"><div className='pl-2 pr-2 mt-1 text-2xl hover:scale-125 duration-300'><FcSettings /></div></Link>
             </div>
             :
             null
