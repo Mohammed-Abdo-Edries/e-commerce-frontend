@@ -81,9 +81,9 @@ const AdminsOnly = () => {
                                 <option onClick={() => setCategory("dress")} >kids</option>
                             </select>
                             <select className="py-1 pl-2 ml-10 rounded-lg my-2 w-48" onChange={(e) => setCategory(e.target.value)} value={category} >
-                                <option onClick={() => setSubCategory("pants")} >topwear</option>
-                                <option onClick={() => setSubCategory("shirt")} >bottomwear</option>
-                                <option onClick={() => setSubCategory("dress")} >Winterwear</option>
+                                <option onClick={() => setSubCategory("topwaer")} >topwear</option>
+                                <option onClick={() => setSubCategory("bottomwear")} >bottomwear</option>
+                                <option onClick={() => setSubCategory("winterwear")} >Winterwear</option>
                             </select>
                             <input placeholder="details" type='text' className="border-2 border-gray-700 my-2 ml-10 rounded-lg w-52 sm:w-72 pl-2 py-1" onChange={(e) => setDetails(e.target.value)} value={details}></input>
                             <input type="file" onChange={handelChange} className='ml-10 my-2' />
