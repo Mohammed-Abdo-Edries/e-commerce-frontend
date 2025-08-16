@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useLogin } from '../hooks/useLogin'
 import { Link } from 'react-router-dom'
 import { motion } from "framer-motion"
-
+import {Navigate} from "react-router-dom"
 const Login = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -11,6 +11,7 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     await login(email, password)
+    Navigate('/adminsonly')
   }
   return (
     <motion.div className="myform h-[calc(100vh-120px)] flex justify-center items-center"
