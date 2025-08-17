@@ -10,15 +10,12 @@ export const ShopContextProvider = (props) => {
   const [cookies, setCookie, removeCookie] = useCookies(['cart']);
   const [theme, setTheme] = useState("light")
     const [cart, setCart] = useState(cookies.cart || [])
-    const [activeTab, setActivTab] = useState("home")
-    const [search, setSearch] = useState('')
     const [products, setProducts] = useState([]);
     const [totalPrice, setTotalPrice] = useState(0);
   const [totalAmount, setTotalAmount] = useState(0);
-    
-    const onClickRemove = () => {
-      setCart([]);
-      removeCookie('cart', { path: '/' });
+  const onClickRemove = () => {
+    setCart([]);
+    removeCookie('cart', { path: '/' });
     };
     useEffect(() => {
       var price = 0
@@ -47,11 +44,12 @@ export const ShopContextProvider = (props) => {
     const toggleTheme = () => {
       setTheme((prev) => (prev === 'light' ? 'dark' : 'light'));
     };
-    const getProductsData = async (req, res) => {
+    useEffect(() => {
+      const getProductsData = async (req, res) => {
         try {
-          const response = await axios.get(url + "/product/");
-          if (response.data.success) {
-            setProducts(response.data.products);
+          const response = await axios.get(url + "/product");
+          if (Array.isArray(response.data)) {
+            setProducts(response.data);
           } else {
             toast.error(response.data.message);
           }
@@ -59,7 +57,9 @@ export const ShopContextProvider = (props) => {
           toast.error(error.message);
         }
       };
-
+      getProductsData();
+    },[])
+    const bestSellers = products.filter(p => p.bestseller === true);
     const contextValue = { 
       cart,
       setCart,
@@ -69,6 +69,7 @@ export const ShopContextProvider = (props) => {
       theme,
       toggleTheme,
       products,
+      bestSellers
       }
     return <ShopContext.Provider value={contextValue}>
         {props.children}

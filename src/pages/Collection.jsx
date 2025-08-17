@@ -5,7 +5,7 @@ import Product from "../components/product";
 const Collection = () => {
   const { products } = useShopContext();
   const [showFilter, setShowFilter] = useState(true);
-  const [filterProducts, setFilterProducts] = useState([]);
+  const [filterProducts, setFilterProducts] = useState(products);
   const [category, setCategory] = useState([]);
   const [subCategory, setSubCategory] = useState([]);
   const [sortType, setSortType] = useState("relevant");
@@ -60,17 +60,16 @@ const Collection = () => {
         setFilterProducts(fpCopy.sort((a, b) => b.price - a.price));
         break;
       default:
-        applyFilter();
+        // applyFilter();
         break;
     }
   };
 
   useEffect(() => {
-    applyFilter();
-  }, [category, 
-    // subCategory, 
-    //  products
-  ]);
+    // if (products.length > 0) {
+      applyFilter();
+    // }
+  }, [products, category, subCategory]);
 
   useEffect(() => {
     sortProduct();
@@ -174,16 +173,29 @@ const Collection = () => {
             <option value="high-low">Sort By: High to Low</option>
           </select>
         </div>
-
+        <div>
+          {products.map((item,index) => (
+            <Product
+            key={index}
+            name={item.name}
+            description={item.description}
+            id={item._id}
+            price={item.price}
+            imageURL={item.imageURL}
+            category={item.category}
+            />
+          )
+          )}
+        </div>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 gap-y-6">          
           {filterProducts.map((item, index) => (
             <Product
             key={index}
               name={item.name}
+              description={item.description}
               id={item._id}
               price={item.price}
               imageURL={item.imageURL}
-              details={item.details}
               category={item.category}
               />
             ))

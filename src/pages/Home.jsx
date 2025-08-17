@@ -3,9 +3,9 @@ import { motion, AnimatePresence } from "framer-motion"
 import '@dotlottie/player-component'
 import OurPolicy from '../components/OurPolicy';
 import NewsletterBox from '../components/NewsletterBox';
-
+import Product from '../components/product';
 const Home = () => {
-
+  const { bestSellers } = useShopContext();
   return (
     <>
       <AnimatePresence initial={false}>
@@ -30,6 +30,20 @@ const Home = () => {
                   </div>
               </div>
               </div>
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 gap-y-6">          
+          {bestSellers.map((item, index) => (
+            <Product
+            key={index}
+              name={item.name}
+              description={item.description}
+              id={item._id}
+              price={item.price}
+              imageURL={item.imageURL}
+              category={item.category}
+              />
+            ))
+          }
+        </div>
               <div className='w-full sm:w-1/2 flex items-center justify-center p-6'>
               <dotLottie-player className='w-full max-w-md'
                 src='https://lottie.host/dd0d62d9-f05d-412f-b731-3c4ecd3589cb/2nd1hkC0N9.lottie'

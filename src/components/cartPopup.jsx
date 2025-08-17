@@ -5,7 +5,7 @@ import Popup from "reactjs-popup"
 import {BsCart4} from "react-icons/bs"
 
 function CartPopup() {
-    const { cart,totalAmount,totalPrice } = useShopContext();
+    const { cart,totalAmount,totalPrice, onClickRemove } = useShopContext();
 
   return (
     <Popup trigger={<button className='ml-2 text-2xl hover:scale-125 duration-300'><BsCart4 /></button>} 
@@ -31,7 +31,7 @@ function CartPopup() {
             <button className='' onClick={onClickRemove} >Remove All</button><hr />
             <button><Link to="/checkout">checkout</Link></button>
           </div>
-          : null}
+          : null} 
         </div>
     </Popup>
 )
