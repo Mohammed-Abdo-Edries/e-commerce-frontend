@@ -17,7 +17,7 @@ const Collection = () => {
       setCategory((prev) => [...prev, e.target.value]);
     }
   };
-
+console.log(products)
   const toggleSubCategory = (e) => {
     if (subCategory.includes(e.target.value)) {
       setSubCategory((prev) => prev.filter((item) => item !== e.target.value));
@@ -181,7 +181,7 @@ const Collection = () => {
             description={item.description}
             id={item._id}
             price={item.price}
-            imageURL={item.imageURL}
+            imgURL={item.imgURL}
             category={item.category}
             />
           )
@@ -195,7 +195,7 @@ const Collection = () => {
               description={item.description}
               id={item._id}
               price={item.price}
-              imageURL={item.imageURL}
+              imgURL={item.imgURL}
               category={item.category}
               />
             ))

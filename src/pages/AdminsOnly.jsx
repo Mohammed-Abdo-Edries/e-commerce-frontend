@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import { useAuthContext } from '../hooks/useAuthContext'
 import axios from "axios"
 import { url } from "../http-common"
@@ -6,21 +6,23 @@ import { motion } from "framer-motion"
 import { Link } from "react-router-dom"
 import ScaleLoader from "react-spinners/ScaleLoader"
 import { ToastContainer, toast } from 'react-toastify'
+import { useShopContext } from "../context1/ShopContext";
 import 'react-toastify/dist/ReactToastify.css'
 const AdminsOnly = () => {
     const [isLoading, setIsLoading] = useState(false);
-    const [response, setResponse] = useState(false);
     const [name, setName] = useState();
     const [price, setPrice] = useState();
-    const [category, setCategory] = useState("");
-    const [subCategory, setSubCategory] = useState("");
+    const [subCategory, setSubCategory] = useState("topwear");
+    const [category, setCategory] = useState("men");
     const [description, setDescription] = useState("");
     const [bestseller, setBestseller] = useState(false);
     const [image, setImage] = useState();
+    const {getProductsData} = useShopContext()
     const { user } = useAuthContext()
 
     const handelChange = (e) => {
         setImage(e.target.files[0])
+        console.log("Submitting:", { category, subCategory, bestseller }); 
     }
     const email = user?.email
     const sendImage = (e) => {
@@ -33,11 +35,10 @@ const AdminsOnly = () => {
         formData.append('subCategory', subCategory);
         formData.append('image', image);
         formData.append("bestseller", String(bestseller));
-        console.log(formData);
+        console.log([...formData]);
         axios.post(`${url}/product/create`, formData,
             Headers = {
                 headers: {
-                    sizes: { type: Array, required: true },
                     "Content-Type": "multipart/form-data",
                     email
                 }
@@ -50,7 +51,8 @@ const AdminsOnly = () => {
                     type: 'success',
                     theme: 'light',
                     autoClose: 5000
-                })
+                }),
+                getProductsData();
             })
             .catch(error => {
                 console.log(formData)
@@ -75,12 +77,16 @@ const AdminsOnly = () => {
                             <input type='name' placeholder="name" className="border-2 border-gray-700 rounded-lg w-48 sm:w-60 pl-2 my-2 ml-10 py-1" onChange={(e) => setName(e.target.value)} value={name}></input>
                             <input type="number" placeholder="price" className="border-2 border-gray-700 pl-2 py-1 ml-10 my-2 rounded-lg w-48" onChange={(e) => setPrice(e.target.value)} value={price} ></input>
                             <input placeholder="description" type='text' className="border-2 border-gray-700 my-2 ml-10 rounded-lg w-52 sm:w-72 pl-2 py-1" onChange={(e) => setDescription(e.target.value)} value={description}></input>
-                            <select className="py-1 pl-2 ml-10 rounded-lg my-2 w-48" onChange={(e) => setCategory(e.target.value)} value={category} >
-                                <option onClick={() => setCategory("pants")} >men</option>
-                                <option onClick={() => setCategory("shirt")} >women</option>
-                                <option onClick={() => setCategory("dress")} >kids</option>
+                            <select className="py-1 pl-2 ml-10 rounded-lg my-2 w-48" onChange={(e) => 
+                                {console.log(category)
+                                setCategory(e.target.value)}} value={category} >
+                                <option value="men">men</option>
+                                <option value="women">women</option>
+                                <option value="kids">kids</option>
                             </select>
-                            <select className="py-1 pl-2 ml-10 rounded-lg my-2 w-48" onChange={(e) => setSubCategory(e.target.value)} value={subCategory} >
+                            <select className="py-1 pl-2 ml-10 rounded-lg my-2 w-48" onChange={(e) => 
+                                {console.log(subCategory)
+                                setSubCategory(e.target.value)}} value={subCategory} >
                                 <option value="topwear" >topwear</option>
                                 <option value="bottomwear" >bottomwear</option>
                                 <option value="winterwear" >Winterwear</option>

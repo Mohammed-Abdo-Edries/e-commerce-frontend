@@ -3,7 +3,7 @@ const NewsletterBox = () => {
     event.preventDefault();
   };
   return (
-    <div className="text-center">
+    <div className="text-center mt-10">
       <p className="text-2xl font-medium text-gray-800 dark:text-zinc-200">
         Subscribe now & get 20% off
       </p>

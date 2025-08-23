@@ -26,7 +26,7 @@ const Navbar = () => {
             <span className='absolute bottom-4 right-2'>&reg;</span>
           </Link>
 
-        <ul className='hidden sm:flex'>
+        <ul className='hidden md:flex'>
         <Link to="/" className='text-medium px-4' >Home</Link>
         <Link to="/collection" className='text-medium px-4' >COLLECTION</Link>
         <Link to="/about" className='text-medium px-4' >ABOUT</Link>

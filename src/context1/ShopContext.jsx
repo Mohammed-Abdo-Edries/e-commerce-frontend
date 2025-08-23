@@ -21,8 +21,8 @@ export const ShopContextProvider = (props) => {
       var price = 0
       var amount = 0;
       cart.forEach((item) => {
-        if (item.price && item.amount) {
-          price += item.price;
+        if (item.unitPrice && item.amount) {
+          price += item.unitPrice * item.amount;
           amount += item.amount;
         }
       });
@@ -44,9 +44,8 @@ export const ShopContextProvider = (props) => {
     const toggleTheme = () => {
       setTheme((prev) => (prev === 'light' ? 'dark' : 'light'));
     };
-    useEffect(() => {
-      const getProductsData = async (req, res) => {
-        try {
+    const getProductsData = async (req, res) => {
+      try {
           const response = await axios.get(url + "/product");
           if (Array.isArray(response.data)) {
             setProducts(response.data);
@@ -57,8 +56,10 @@ export const ShopContextProvider = (props) => {
           toast.error(error.message);
         }
       };
+      useEffect(() => {
       getProductsData();
     },[])
+    // console.log(products)
     const bestSellers = products.filter(p => p.bestseller === true);
     const contextValue = { 
       cart,
@@ -69,6 +70,7 @@ export const ShopContextProvider = (props) => {
       theme,
       toggleTheme,
       products,
+      getProductsData,
       bestSellers
       }
     return <ShopContext.Provider value={contextValue}>

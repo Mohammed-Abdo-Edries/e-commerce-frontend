@@ -11,8 +11,8 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const Product = (props) => {
   // NOTE: read the same prop names you pass from Collection: id, imageURL
-  const { id, name, description, price, imageURL, category } = props;
-
+  const { id, name, description, price, imgURL, category } = props;
+  // console.log('Product props:', props)
   const { cart, setCart } = useShopContext();
   const { user } = useAuthContext();
   const [cookies, setCookies, removeCookie] = useCookies(['cart']);
@@ -95,17 +95,18 @@ const Product = (props) => {
 
   return (
     <div className="mt-5 rounded-xl shadow-xl pb-4 dark:bg-slate-400" id={id}>
+      <Link to={`/productDetails/${id}`}>
       <img
-        src={`${url}/images/${imageURL}`} // NOTE: imageURL, not imgURL
+        src={`${url}/images/${imgURL}`} // NOTE: imageURL, not imgURL
         alt={name}
         className="rounded-lg w-full h-50 object-cover"
-      />
+        />
+        </Link>
       <div className="flex flex-col items-center">
         <div className="pt-2">
           <b>{name}</b>
         </div>
         <div>${price}</div>
-
         {inCart ? (
           <div className="flex my-2">
             <button
@@ -135,16 +136,14 @@ const Product = (props) => {
           </motion.button>
         )}
 
-        <Link to={`/productDetails/${id}`}>
-          <motion.button
+          {/* <motion.button
             initial={{ x: -250 }}
             animate={{ x: 0 }}
             transition={{ delay: 0.5 }}
             className="bg-purple-700 px-3 py-2 text-white text-base rounded-xl"
           >
             More Details
-          </motion.button>
-        </Link>
+          </motion.button> */}
 
         {user?.isAdmin ? (
           <div className="mx-auto">

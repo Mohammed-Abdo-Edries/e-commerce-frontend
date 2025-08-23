@@ -30,6 +30,13 @@ const Home = () => {
                   </div>
               </div>
               </div>
+              <div className='w-full sm:w-1/2 flex items-center justify-center p-6'>
+              <dotLottie-player className='w-full max-w-md'
+                src='https://lottie.host/dd0d62d9-f05d-412f-b731-3c4ecd3589cb/2nd1hkC0N9.lottie'
+                autoplay loop mode='normal' style={{height: '200px', margin: '0 auto'}} ></dotLottie-player>
+                </div>
+                </div>
+                <OurPolicy />
               <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 gap-y-6">          
           {bestSellers.map((item, index) => (
             <Product
@@ -38,19 +45,12 @@ const Home = () => {
               description={item.description}
               id={item._id}
               price={item.price}
-              imageURL={item.imageURL}
+              imgURL={item.imgURL}
               category={item.category}
               />
             ))
           }
         </div>
-              <div className='w-full sm:w-1/2 flex items-center justify-center p-6'>
-              <dotLottie-player className='w-full max-w-md'
-                src='https://lottie.host/dd0d62d9-f05d-412f-b731-3c4ecd3589cb/2nd1hkC0N9.lottie'
-                autoplay loop mode='normal' style={{height: '200px', margin: '0 auto'}} ></dotLottie-player>
-                </div>
-                </div>
-              <OurPolicy />
               <NewsletterBox />
           </motion.div>
       </AnimatePresence>

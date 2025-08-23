@@ -8,15 +8,15 @@ import '@dotlottie/player-component'
 const Checkout = () => {
   const [totalPrice, setTotalPrice] = useState(0);
   const [totalAmount, setTotalAmount] = useState(0);
-  const { cart, setCart, refresh, setOrder, order } = useShopContext();
+  const { cart, setCart, refresh } = useShopContext();
   const [cookies, setCookie, removeCookie] = useCookies(['cart']);
 
   useEffect(() => {
     var price = 0
     var amount = 0;
     cart.forEach((item) => {
-      if (item.price && item.amount) {
-        price += item.price;
+      if (item.unitPrice && item.amount) {
+        price += item.unitPrice * item.amount;
         amount += item.amount;
       }
     });
@@ -47,11 +47,13 @@ const Checkout = () => {
             <div className='flex-column' >
               <div >Product Amount: {totalAmount}</div>
               <div >Total Price: {totalPrice} $</div>
-              <button className='' onClick={onClickRemove} >Remove All</button> <hr />
-              <button onClick={() => {
+              <div className='flex justify-center mt-4' >
+              <button className='mr-4 py-1 px-2 bg-purple-700 cursor-pointer text-white rounded-lg' onClick={onClickRemove} >Remove All</button> <hr />
+              <button className='py-1 px-2 bg-purple-700 cursor-pointer text-white rounded-lg' onClick={() => {
                 console.log(cart)
               }}
               >Buy</button>
+              </div>
             </div>
             : null}
         </div>
