@@ -57,6 +57,7 @@ export const ShopContextProvider = (props) => {
         }
       };
       useEffect(() => {
+        console.log(products)
       getProductsData();
     },[])
     const bestSellers = products.filter(p => p.bestseller === true);

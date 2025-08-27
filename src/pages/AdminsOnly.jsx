@@ -50,6 +50,7 @@ const AdminsOnly = () => {
                     theme: 'light',
                     autoClose: 5000
                 }),
+                console.log(response.data),
                 getProductsData();
             })
             .catch(error => {

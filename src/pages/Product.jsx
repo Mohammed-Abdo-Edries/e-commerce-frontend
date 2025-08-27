@@ -6,6 +6,7 @@ import { url } from "../http-common"
 import { useCookies } from 'react-cookie';
 import { motion } from "framer-motion"
 import RelatedProducts from '../components/RelatedProducts';  
+import { FaRegStar, FaStar } from 'react-icons/fa'
 const Product = () => {
   const { id } = useParams();
   const [details, setDetails] = useState([])
@@ -13,6 +14,7 @@ const Product = () => {
   const [inCart, setInCart] = useState(false);
   const [amount, setAmount] = useState(0);
   const [cookies, setCookies, removeCookie] = useCookies(['cart']);
+  // const [size, setSize] = useState("");
 
   useEffect(() => {
     cart.forEach((item) => {
@@ -32,6 +34,7 @@ const Product = () => {
       })
       .then(response => {
         setDetails(response.data);
+        console.log(response.data);
       })
       .catch(err => console.log(err))
   }, [])
@@ -87,9 +90,33 @@ const Product = () => {
         <img src={`${url}/images/${details.imgURL}`} className='rounded-lg w-64 h-50' />
         <div className='flex flex-col text-left mt-8'>
           <div className='font-bold text-2xl'>{details.name}</div>
+          <div className='pt-2 font-bold text-2xl'>{details.category}</div>
+          <div className='flex'>
+            <FaStar />
+            <FaStar />
+            <FaStar />
+            <FaStar />
+            <FaRegStar />
+            <p className="pl-2">(122)</p>
+          </div>
           <div className='pt-4 font-bold text-2xl'>{details.price}</div>
           <div className='pt-2'>{details.description}</div>
-          <div className='pt-2'>{details.category}</div>
+          {/* <div className="flex flex-col gap-4 my-8">
+            <p>Select Size</p>
+            <div className="flex gap-2">
+              {details.sizes?.map((item, index) => (
+                <button
+                  onClick={() => setSize(item)}
+                  className={`border py-2 px-4 bg-gray-100 ${
+                    item === size ? "border-orange-500" : ""
+                  }`}
+                  key={index}
+                >
+                  {item}
+                </button>
+              ))}
+            </div>
+          </div> */}
           {
             inCart
               ?

@@ -34,7 +34,7 @@ const Product = (props) => {
         getProductsData();
       })
       .catch((error) => {
-        toast(`${error.response.data}`, {
+        toast(`${error.response.data.message}`, {
           position: 'top-right',
           type: 'error',
           theme: 'light',
