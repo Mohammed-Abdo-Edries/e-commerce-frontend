@@ -22,7 +22,6 @@ const AdminsOnly = () => {
 
     const handelChange = (e) => {
         setImage(e.target.files[0])
-        console.log("Submitting:", { category, subCategory, bestseller }); 
     }
     const email = user?.email
     const sendImage = (e) => {
@@ -35,7 +34,6 @@ const AdminsOnly = () => {
         formData.append('subCategory', subCategory);
         formData.append('image', image);
         formData.append("bestseller", String(bestseller));
-        console.log([...formData]);
         axios.post(`${url}/product/create`, formData,
             Headers = {
                 headers: {
@@ -55,9 +53,8 @@ const AdminsOnly = () => {
                 getProductsData();
             })
             .catch(error => {
-                console.log(formData)
                 setIsLoading(false),
-                    toast(`${error}`, {
+                    toast(`${error.response.data.message}`, {
                         position: "top-right",
                         type: 'error',
                         theme: 'light',

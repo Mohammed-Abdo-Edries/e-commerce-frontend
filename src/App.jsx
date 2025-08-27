@@ -4,7 +4,7 @@ import Home from './pages/Home'
 import Signup from './pages/Signup'
 import Login from './pages/Login'
 import Checkout from './pages/Checkout'
-import Details from './pages/Details'
+import Product from './pages/Product'
 import AdminsOnly from './pages/AdminsOnly'
 import NotFound from "./pages/NotFound"
 import "./index.css"
@@ -29,7 +29,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/checkout" element={<Checkout />} />
-          <Route path="/productDetails/:id" element={<Details />} />
+          <Route path="/product/:id" element={<Product />} />
           <Route path="/collection" element={<Collection />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/about" element={<About />} />

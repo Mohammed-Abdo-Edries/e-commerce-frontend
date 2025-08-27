@@ -5,11 +5,11 @@ import axios from 'axios'
 import { url } from "../http-common"
 import { useCookies } from 'react-cookie';
 import { motion } from "framer-motion"
-
-const Details = () => {
+import RelatedProducts from '../components/RelatedProducts';  
+const Product = () => {
   const { id } = useParams();
   const [details, setDetails] = useState([])
-  const { cart, setCart, refresh, setRefresh } = useShopContext();
+  const { cart, setCart } = useShopContext();
   const [inCart, setInCart] = useState(false);
   const [amount, setAmount] = useState(0);
   const [cookies, setCookies, removeCookie] = useCookies(['cart']);
@@ -31,7 +31,7 @@ const Details = () => {
         }
       })
       .then(response => {
-        setDetails(response.data)
+        setDetails(response.data);
       })
       .catch(err => console.log(err))
   }, [])
@@ -52,7 +52,6 @@ const Details = () => {
       }]);
       setCookies('cart', cart, { path: '/' });
     }
-    setRefresh(!refresh);
   };
 
   const onClickRemoveCart = () => {
@@ -78,45 +77,72 @@ const Details = () => {
         setCookies('cart', cart, { path: '/' });
       }
     }
-    setRefresh(!refresh);
   };
   return (
     <motion.div id={details._id}
       initial={{ y: 20, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ delay: .5, duration: .3 }} exit={{ opacity: 0, y: 20 }}>
-      <div className='container mt-12 ml-8 h-[calc(100vh+100px)] sm:h-[calc(100vh-100px)]'>
+      <div className='container mt-12 ml-8'>
         <img src={`${url}/images/${details.imgURL}`} className='rounded-lg w-64 h-50' />
         <div className='flex flex-col text-left mt-8'>
-          <motion.div
-            initial={{ y: 10, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: .8, duration: .8 }} className=''><b>{details.name}</b></motion.div>
-          <motion.div
-            initial={{ y: 10, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 1.2, duration: 1.2 }} className='pt-4'>{details.price}</motion.div>
-          <motion.div
-            initial={{ y: 10, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 1.5, duration: 1.5 }} className='pt-2'>{details.details}</motion.div>
+          <div className='font-bold text-2xl'>{details.name}</div>
+          <div className='pt-4 font-bold text-2xl'>{details.price}</div>
+          <div className='pt-2'>{details.description}</div>
+          <div className='pt-2'>{details.category}</div>
           {
             inCart
               ?
               <div className='flex my-2' >
-                <button className='bg-purple-700 px-3 py-2 text-white text-base rounded-xl' onClick={onClickRemoveCart} disabled={amount === 0}>-</button>
+                <button className='bg-black px-3 py-2 text-white text-base' onClick={onClickRemoveCart} disabled={amount === 0}>-</button>
                 <div className='text-center w-8' >{amount}</div>
-                <button className='bg-purple-700 px-3 py-2 text-white text-base rounded-xl' onClick={onClickAddCart} >+</button>
+                <button className='bg-black px-3 py-2 text-white text-base' onClick={onClickAddCart} >+</button>
               </div>
               :
-              <motion.button initial={{ x: -250 }} animate={{ x: -10 }} transition={{ delay: 1.5, type: 'spring', stiffness: 500 }} whileHover={{ scale: 1.1 }} className='text-left bg-purple-700 px-4 py-2 text-white text-base rounded-xl w-36 my-4'
+              <motion.button className='text-left bg-black px-4 py-2 text-white text-base w-36 my-4 animate-slideIn hover:scale-125 duration-300'
                 onClick={onClickAddCart}
               >ADD TO CART</motion.button>
           }
+          <hr className="mt-8 sm:w-4/5" />
+          <div className="text-gray-500 mt-2 flex flex-col">
+            <p>100% Original product</p>
+            <p>Cash on delivery available on this product.</p>
+            <p>Easy return and exchange policy within 7 days.</p>
+          </div>
+          {/* Description & Review Section */}
+      <div className="mt-20">
+        <div className="flex">
+          <b className="border px-5 py-3 text-sm">Description</b>
+          <p className="border px-5 py-3 text-sm">Reviews (122)</p>
+        </div>
+        <div className="flex flex-col gap-4 border px-6 py-6 text-sm text-gray-500">
+          <p>
+            An e-commerce website is an online platform that facilitates the
+            buying and selling of products or services over the internet. It
+            serves as a virtual marketplace where businesses and individuals can
+            showcase their products, interact with customers, and conduct
+            transactions without the need for a physical presence. E-commerce
+            websites have gained immense popularity due to their convenience,
+            accessibility, and the global reach they offer.
+          </p>
+          <p>
+            E-commerce websites typically display products or services along
+            with detailed descriptions, images, prices, and any available
+            variations (e.g., sizes, colors). Each product usually has its own
+            dedicated page with relevant information.
+          </p>
+        </div>
+      </div>
+      {/* Display Related Products  */}
+      <RelatedProducts
+      currentId={id}
+        category={details.category}
+        subCategory={details.subCategory}
+      />
         </div>
       </div>
     </motion.div>
   )
 }
 
-export default Details
+export default Product

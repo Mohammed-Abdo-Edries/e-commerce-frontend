@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "framer-motion"
 import '@dotlottie/player-component'
 import OurPolicy from '../components/OurPolicy';
 import NewsletterBox from '../components/NewsletterBox';
-import Product from '../components/product';
+import Product from '../components/productItem';
 const Home = () => {
   const { bestSellers } = useShopContext();
   return (
@@ -46,7 +46,7 @@ const Home = () => {
               id={item._id}
               price={item.price}
               imgURL={item.imgURL}
-              category={item.category}
+              subCategory={item.subCategory}
               />
             ))
           }

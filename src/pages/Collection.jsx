@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useShopContext } from "../context1/ShopContext";
-import Product from "../components/product";
+import Product from "../components/productItem";
 
 const Collection = () => {
   const { products } = useShopContext();
@@ -17,7 +17,6 @@ const Collection = () => {
       setCategory((prev) => [...prev, e.target.value]);
     }
   };
-console.log(products)
   const toggleSubCategory = (e) => {
     if (subCategory.includes(e.target.value)) {
       setSubCategory((prev) => prev.filter((item) => item !== e.target.value));
@@ -28,12 +27,6 @@ console.log(products)
 
   const applyFilter = () => {
     let productsCopy = products.slice();
-
-    // if (showSearch && search) {
-    //   productsCopy = productsCopy.filter((item) =>
-    //     item.name.toLowerCase().includes(search.toLowerCase())
-    //   );
-    // }
 
     if (category.length > 0) {
       productsCopy = productsCopy.filter((item) =>
@@ -60,15 +53,13 @@ console.log(products)
         setFilterProducts(fpCopy.sort((a, b) => b.price - a.price));
         break;
       default:
-        // applyFilter();
+        applyFilter();
         break;
     }
   };
 
   useEffect(() => {
-    // if (products.length > 0) {
       applyFilter();
-    // }
   }, [products, category, subCategory]);
 
   useEffect(() => {
@@ -98,7 +89,7 @@ console.log(products)
               <input
                 className="w-3"
                 type="checkbox"
-                value={"Men"}
+                value={"men"}
                 onChange={toggleCategory}
               />
               Men
@@ -107,7 +98,7 @@ console.log(products)
               <input
                 className="w-3"
                 type="checkbox"
-                value={"Women"}
+                value={"women"}
                 onChange={toggleCategory}
                 />
               Women
@@ -116,7 +107,7 @@ console.log(products)
               <input
                 className="w-3"
                 type="checkbox"
-                value={"Kids"}
+                value={"kids"}
                 onChange={toggleCategory}
               />
               Kids
@@ -135,7 +126,7 @@ console.log(products)
               <input
                 className="w-3"
                 type="checkbox"
-                value={"Topwear"}
+                value={"topwear"}
                 onChange={toggleSubCategory}
               />
               Topwear
@@ -144,7 +135,7 @@ console.log(products)
               <input
                 className="w-3"
                 type="checkbox"
-                value={"Bottomwear"}
+                value={"bottomwear"}
                 onChange={toggleSubCategory}
               />
               Bottomwear
@@ -153,7 +144,7 @@ console.log(products)
               <input
                 className="w-3"
                 type="checkbox"
-                value={"Winterwear"}
+                value={"winterwear"}
                 onChange={toggleSubCategory}
               />
               Winterwear
@@ -173,20 +164,6 @@ console.log(products)
             <option value="high-low">Sort By: High to Low</option>
           </select>
         </div>
-        <div>
-          {products.map((item,index) => (
-            <Product
-            key={index}
-            name={item.name}
-            description={item.description}
-            id={item._id}
-            price={item.price}
-            imgURL={item.imgURL}
-            category={item.category}
-            />
-          )
-          )}
-        </div>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 gap-y-6">          
           {filterProducts.map((item, index) => (
             <Product
@@ -197,6 +174,7 @@ console.log(products)
               price={item.price}
               imgURL={item.imgURL}
               category={item.category}
+              subCategory={item.subCategory}
               />
             ))
           }

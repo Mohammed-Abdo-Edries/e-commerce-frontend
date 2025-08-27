@@ -23,16 +23,16 @@ const Navbar = () => {
       <div className='flex justify-between'>
           <Link className='relative' to="/">
             <div className='logo text-black dark:text-zinc-200'>Luxury</div>
-            <span className='absolute bottom-4 right-2'>&reg;</span>
+            <span className='absolute bottom-2 -right-2 text-sm'>&reg;</span>
           </Link>
 
-        <ul className='hidden md:flex'>
-        <Link to="/" className='text-medium px-4' >Home</Link>
-        <Link to="/collection" className='text-medium px-4' >COLLECTION</Link>
-        <Link to="/about" className='text-medium px-4' >ABOUT</Link>
-        <Link to="/contact" className='text-medium px-4' >CONTACT</Link>
+        <ul className='hidden sm:flex text-sm'>
+        <Link to="/" className='text-medium px-2'>Home</Link>
+        <Link to="/collection" className='text-medium px-2' >COLLECTION</Link>
+        <Link to="/about" className='text-medium px-2' >ABOUT</Link>
+        <Link to="/contact" className='text-medium px-2' >CONTACT</Link>
         {user?.isAdmin? 
-        <Link to="/adminsonly" className='text-medium px-4' >Admin</Link>
+        <Link to="/adminsonly" className='text-medium px-2' >Admin</Link>
         :
         null
       }
@@ -59,7 +59,7 @@ const Navbar = () => {
                 animate="enter"
                 exit="exit"
                 transition={{ duration: 0.3 }}
-                className="text-purple-700  pr-2"
+                className="text-purple-700 pr-2"
               >
                 <BsFillMoonStarsFill  />
               </motion.div>
@@ -71,7 +71,7 @@ const Navbar = () => {
           <MobileMenu />
           {user?.isAdmin ?
             <div className='flex'>
-              <Link className='' to="/adminsonly"><div className='pl-2 pr-2 mt-1 text-2xl hover:scale-125 duration-300'><FcSettings /></div></Link>
+              <Link className='' to="/adminsonly"><div className='pl-2 pr-2 text-2xl hover:scale-125 duration-300'><FcSettings /></div></Link>
             </div>
             :
             null

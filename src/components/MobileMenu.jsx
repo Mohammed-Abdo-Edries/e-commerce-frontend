@@ -1,10 +1,12 @@
+import { AnimatePresence,motion } from "framer-motion"
 import { BiMenuAltRight } from "react-icons/bi"
 import Popup from "reactjs-popup"
 
 function MobileMenu() {
   return (
-    <Popup trigger={<button><BiMenuAltRight className='ml-2 text-2xl sm:hidden hover:scale-125 duration-300'/></button>} closeOnDocumentClick position={"bottom right"}>
-                    <ul className='w-60 rounded-md bg-white dark:bg-slate-950 dark:text-white animate-slideInDown'>
+      <Popup trigger={<button><BiMenuAltRight className='ml-2 text-2xl sm:hidden hover:scale-125 duration-300'/></button>} closeOnDocumentClick position={"bottom right"}>
+    <AnimatePresence>
+                    <motion.ul className='w-60 rounded-md bg-white dark:bg-slate-950 dark:text-white animate-slideInDown'>
                         <li className='pb-2 hover:pl-6 pl-4 py-2 border-slate-300 border-b-2'>
                             <a to='/' key={"home"} href="/home">Home</a>
                         </li>
@@ -17,7 +19,8 @@ function MobileMenu() {
                         <li className='pb-2 hover:pl-6 py-2 border-slate-300 pl-4 border-b-2'>
                             <a to='contact' key={"projects"} href="contact">Contact</a>
                         </li>
-                    </ul>
+                    </motion.ul>
+    </AnimatePresence>
                 </Popup>
   )
 }

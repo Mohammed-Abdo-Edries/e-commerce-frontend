@@ -59,7 +59,6 @@ export const ShopContextProvider = (props) => {
       useEffect(() => {
       getProductsData();
     },[])
-    // console.log(products)
     const bestSellers = products.filter(p => p.bestseller === true);
     const contextValue = { 
       cart,
