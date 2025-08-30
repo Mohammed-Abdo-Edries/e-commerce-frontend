@@ -87,7 +87,7 @@ const Product = () => {
       animate={{ y: 0, opacity: 1 }}
       transition={{ delay: .5, duration: .3 }} exit={{ opacity: 0, y: 20 }}>
       <div className='container mt-12 ml-8'>
-        <img src={`${url}/images/${details.imgURL}`} className='rounded-lg w-64 h-50' />
+        <img src={`${url}/images/${details.imgURL}`} className='rounded-lg w-full h-auto pr-12' />
         <div className='flex flex-col text-left mt-8'>
           <div className='font-bold text-2xl'>{details.name}</div>
           <div className='pt-2 font-bold text-2xl'>{details.category}</div>
@@ -121,28 +121,28 @@ const Product = () => {
             inCart
               ?
               <div className='flex my-2' >
-                <button className='bg-black px-3 py-2 text-white text-base' onClick={onClickRemoveCart} disabled={amount === 0}>-</button>
+                <button className='bg-black px-3 py-2 text-white dark:bg-white dark:text-black text-base' onClick={onClickRemoveCart} disabled={amount === 0}>-</button>
                 <div className='text-center w-8' >{amount}</div>
-                <button className='bg-black px-3 py-2 text-white text-base' onClick={onClickAddCart} >+</button>
+                <button className='bg-black px-3 py-2 text-white dark:bg-white dark:text-black text-base' onClick={onClickAddCart} >+</button>
               </div>
               :
-              <motion.button className='text-left bg-black px-4 py-2 text-white text-base w-36 my-4 animate-slideIn hover:scale-125 duration-300'
+              <motion.button className='text-left bg-black px-4 py-2 text-white dark:bg-white dark:text-black text-base w-36 my-4 animate-slideIn hover:scale-125 duration-300'
                 onClick={onClickAddCart}
               >ADD TO CART</motion.button>
           }
           <hr className="mt-8 sm:w-4/5" />
-          <div className="text-gray-500 mt-2 flex flex-col">
+          <div className="text-gray-500 mt-2 mr-8 flex flex-col">
             <p>100% Original product</p>
             <p>Cash on delivery available on this product.</p>
             <p>Easy return and exchange policy within 7 days.</p>
           </div>
           {/* Description & Review Section */}
-      <div className="mt-20">
+      <div className="mt-20 pr-12 sm:pr-0">
         <div className="flex">
-          <b className="border px-5 py-3 text-sm">Description</b>
-          <p className="border px-5 py-3 text-sm">Reviews (122)</p>
+          <b className="border pr-5 py-3 text-sm">Description</b>
+          <p className="border py-3 text-sm">Reviews (122)</p>
         </div>
-        <div className="flex flex-col gap-4 border px-6 py-6 text-sm text-gray-500">
+        <div className="flex flex-col border py-6 text-sm text-gray-500">
           <p>
             An e-commerce website is an online platform that facilitates the
             buying and selling of products or services over the internet. It
