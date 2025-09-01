@@ -21,6 +21,7 @@ const Product = () => {
     if (product) {
       setDetails(product);
       console.log(details);
+      console.log(product);
     }
   }, [id, products]);
   useEffect(() => {

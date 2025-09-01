@@ -11,7 +11,7 @@ const RelatedProducts = ({ currentId,category, subCategory }) => {
       let productsCopy = [...products];
       productsCopy = productsCopy.filter((item) => category === item.category);
       productsCopy = productsCopy.filter(
-        (item) => category === item.subCategory
+        (item) => subCategory === item.subCategory
       );
       if (currentId) {
           productsCopy = productsCopy.filter((item) => item._id !== currentId);
@@ -19,7 +19,9 @@ const RelatedProducts = ({ currentId,category, subCategory }) => {
       // console.log(productsCopy);
       // console.log(currentId);
       setRelated(productsCopy.slice(0, 5));
+      console.log(related);
     }
+    
   }, [products,category, subCategory, currentId]);
   return (
     <div className="my-24">
