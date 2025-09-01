@@ -20,8 +20,6 @@ const Product = () => {
     const product = products.find((p) => p._id === id || p.id === id);
     if (product) {
       setDetails(product);
-      console.log(details);
-      console.log(product);
     }
   }, [id, products]);
   useEffect(() => {
@@ -94,7 +92,7 @@ const Product = () => {
       initial={{ y: 20, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ delay: .5, duration: .3 }} exit={{ opacity: 0, y: 20 }}>
-      <div className='container mt-12 ml-8'>
+      <div className='container mt-12'>
         <img 
        src={ details.imgURL &&
            typeof details.imgURL === "string" && !details.imgURL.startsWith("http") 
@@ -157,7 +155,7 @@ const Product = () => {
           <b className="border pr-5 py-3 text-sm">Description</b>
           <p className="border py-3 text-sm">Reviews (122)</p>
         </div>
-        <div className="flex flex-col border py-6 text-sm text-gray-500">
+        <div className="flex flex-col py-6 text-sm text-gray-500">
           <p>
             An e-commerce website is an online platform that facilitates the
             buying and selling of products or services over the internet. It

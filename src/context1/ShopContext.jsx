@@ -72,7 +72,7 @@ export const ShopContextProvider = (props) => {
   }, []);
 
   useEffect(() => {
-    console.log("Merged products updated:", products);
+    console.log("Merged products:", products);
   }, [products]);
 
   const bestSellers = products.filter((p) => p.bestseller === true);
