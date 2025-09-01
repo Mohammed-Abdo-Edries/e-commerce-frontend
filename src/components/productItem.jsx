@@ -46,9 +46,13 @@ const Product = (props) => {
   return (
     <div className="mt-5 rounded-xl pb-4 dark:bg-slate-400" id={id}>
       <Link to={`/product/${id}`}>
-      <img
-        src={`${url}/images/${imgURL}`} 
-        alt={name}
+     <img
+  src={
+    typeof imgURL === "string" && !imgURL.startsWith("http") && !imgURL.startsWith("/")
+      ? `${url}/images/${imgURL}` 
+      : imgURL
+  }
+  alt={name}
         className="rounded-lg w-full h-auto object-cover"
         />
         </Link>

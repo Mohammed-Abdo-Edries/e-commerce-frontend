@@ -10,12 +10,19 @@ import { FaRegStar, FaStar } from 'react-icons/fa'
 const Product = () => {
   const { id } = useParams();
   const [details, setDetails] = useState([])
-  const { cart, setCart } = useShopContext();
+  const { cart, setCart, products } = useShopContext();
   const [inCart, setInCart] = useState(false);
   const [amount, setAmount] = useState(0);
   const [cookies, setCookies, removeCookie] = useCookies(['cart']);
   // const [size, setSize] = useState("");
 
+  useEffect(() => {
+    const product = products.find((p) => p._id === id || p.id === id);
+    if (product) {
+      setDetails(product);
+      console.log(details);
+    }
+  }, [id, products]);
   useEffect(() => {
     cart.forEach((item) => {
       if (item.id === id) {
@@ -24,20 +31,20 @@ const Product = () => {
       }
     });
   }, [id, cart, amount]);
-  useEffect(() => {
-    axios.get(`${url}/product/${id}`,
-      Headers = {
-        headers: {
-          "Content-Type": "multipart/form-data",
-          id: id
-        }
-      })
-      .then(response => {
-        setDetails(response.data);
-        console.log(response.data);
-      })
-      .catch(err => console.log(err))
-  }, [])
+  // useEffect(() => {
+  //   axios.get(`${url}/product/${id}`,
+  //     Headers = {
+  //       headers: {
+  //         "Content-Type": "multipart/form-data",
+  //         id: id
+  //       }
+  //     })
+  //     .then(response => {
+  //       setDetails(response.data);
+  //       console.log(response.data);
+  //     })
+  //     .catch(err => console.log(err))
+  // }, [])
   const onClickAddCart = () => {
     const currentIndex = cart.findIndex(item => item.id === id);
     if (currentIndex >= 0) {
@@ -87,7 +94,14 @@ const Product = () => {
       animate={{ y: 0, opacity: 1 }}
       transition={{ delay: .5, duration: .3 }} exit={{ opacity: 0, y: 20 }}>
       <div className='container mt-12 ml-8'>
-        <img src={`${url}/images/${details.imgURL}`} className='rounded-lg w-full h-auto pr-12' />
+        <img 
+       src={ details.imgURL &&
+           typeof details.imgURL === "string" && !details.imgURL.startsWith("http") 
+           && !details.imgURL.startsWith("/")
+             ? `${url}/images/${details.imgURL}`
+             : details.imgURL
+         } alt={details.name}
+         className='rounded-lg w-full h-auto pr-12' />
         <div className='flex flex-col text-left mt-8'>
           <div className='font-bold text-2xl'>{details.name}</div>
           <div className='pt-2 font-bold text-2xl'>{details.category}</div>
