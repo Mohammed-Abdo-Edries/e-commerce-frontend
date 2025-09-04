@@ -62,7 +62,7 @@ const Collection = () => {
 
   useEffect(() => {
       applyFilter();
-      console.log(products)
+      // console.log(products)
   }, [products, category, subCategory]);
 
   useEffect(() => {

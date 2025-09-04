@@ -25,13 +25,14 @@ export const ShopContextProvider = (props) => {
     let price = 0;
     let amount = 0;
     cart.forEach((item) => {
-      if (item.unitPrice && item.amount) {
+      if (item.price && item.amount) {
         price += item.unitPrice * item.amount;
         amount += item.amount;
       }
     });
     setTotalPrice(price);
     setTotalAmount(amount);
+    console.log(cart)
   }, [cart, cookies.cart]);
 
   // Theme

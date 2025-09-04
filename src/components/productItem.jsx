@@ -55,7 +55,6 @@ const Product = (props) => {
   alt={name}
         className="rounded-lg w-full h-auto object-cover"
         />
-        </Link>
       <div className="flex flex-col">
         <div className="pt-2">
           <div className='font-bold'>{name}</div>
@@ -65,32 +64,32 @@ const Product = (props) => {
         <div className='font-bold'>${price}</div>
         {/* {inCart ? (
           <div className="flex my-2">
-            <button
-              className="bg-purple-700 text-white text-base px-3 py-1 rounded-xl"
+          <button
+          className="bg-purple-700 text-white text-base px-3 py-1 rounded-xl"
               onClick={onClickRemoveCart}
               disabled={amount === 0}
-            >
+              >
               -
-            </button>
+              </button>
             <span className="text-center w-8 px-1 pt-1">{amount}</span>
             <button
-              className="bg-purple-700 text-white text-base px-3 py-1 rounded-xl"
-              onClick={onClickAddCart}
-            >
-              +
-            </button>
-          </div>
-        ) : (
-          <motion.button
-            initial={{ x: -250 }}
-            animate={{ x: 0 }}
-            transition={{ delay: 0.5 }}
-            className="bg-purple-700 px-3 py-2 text-white text-base my-2 rounded-xl w-32"
+            className="bg-purple-700 text-white text-base px-3 py-1 rounded-xl"
             onClick={onClickAddCart}
+            >
+            +
+            </button>
+            </div>
+            ) : (
+              <motion.button
+          initial={{ x: -250 }}
+          animate={{ x: 0 }}
+          transition={{ delay: 0.5 }}
+          className="bg-purple-700 px-3 py-2 text-white text-base my-2 rounded-xl w-32"
+          onClick={onClickAddCart}
           >
-            Add to cart
+          Add to cart
           </motion.button>
-        )} */}
+          )} */}
 
         {user?.isAdmin ? (
           <div className="">
@@ -108,6 +107,7 @@ const Product = (props) => {
           </div>
         ) : null}
       </div>
+              </Link>
     </div>
   );
 };

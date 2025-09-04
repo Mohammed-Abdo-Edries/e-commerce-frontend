@@ -6,6 +6,7 @@ import {BsCart4} from "react-icons/bs"
 
 function CartPopup() {
     const { cart,totalAmount,totalPrice, onClickRemove } = useShopContext();
+    // console.log(cart)
   return (
     <Popup trigger={<button className='ml-2 text-2xl hover:scale-125 duration-300'><BsCart4 /></button>} 
     position="bottom right" closeOnDocumentClick >
@@ -24,8 +25,9 @@ function CartPopup() {
           </div>
         }
         {cart.length ?
-        <div>
+        <div className='mt-4'>
             <div >Total Price: {totalPrice} $</div>
+            <div >Total Amount: {totalAmount} </div>
           <div className='flex mx-6 mt-4' >
             <button className='mr-4 py-1 px-2 bg-purple-700 cursor-pointer text-white rounded-lg' onClick={onClickRemove} >Remove All</button><hr />
             <button className="py-1 px-2 bg-purple-700 cursor-pointer text-white rounded-lg"><Link to="/checkout">checkout</Link></button>

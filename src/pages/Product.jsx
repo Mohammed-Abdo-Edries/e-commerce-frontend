@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useShopContext } from '../context1/ShopContext';
 import { useParams } from 'react-router-dom';
-import axios from 'axios'
 import { url } from "../http-common"
 import { useCookies } from 'react-cookie';
 import { motion } from "framer-motion"
@@ -21,14 +20,17 @@ const Product = () => {
     if (product) {
       setDetails(product);
     }
+    window.scrollTo(0, 0);
   }, [id, products]);
   useEffect(() => {
-    cart.forEach((item) => {
-      if (item.id === id) {
+    const item = cart.find((item) => item.id === id);
+      if (item) {
         setInCart(true);
         setAmount(item.amount);
-      }
-    });
+      } else {
+      setInCart(false);
+      setAmount(0);
+  }
   }, [id, cart, amount]);
   // useEffect(() => {
   //   axios.get(`${url}/product/${id}`,
@@ -44,49 +46,61 @@ const Product = () => {
   //     })
   //     .catch(err => console.log(err))
   // }, [])
-  const onClickAddCart = () => {
-    const currentIndex = cart.findIndex(item => item.id === id);
-    if (currentIndex >= 0) {
-      cart[currentIndex].amount += 1;
-      cart[currentIndex].price = details.price * cart[currentIndex].amount;
-      setAmount(amount + 1);
-      setCookies('cart', cart, { path: '/' });
-    } else {
-      setCart([...cart, {
+const onClickAddCart = () => {
+  const currentIndex = cart.findIndex(item => item.id === id);
+
+  if (currentIndex >= 0) {
+    const updatedCart = [...cart];
+    updatedCart[currentIndex].amount += 1;
+    updatedCart[currentIndex].price =
+      updatedCart[currentIndex].unitPrice * updatedCart[currentIndex].amount;
+
+    setCart(updatedCart);
+    setAmount(updatedCart[currentIndex].amount); 
+    setCookies("cart", updatedCart, { path: "/" });
+  } else {
+    const newCart = [
+      ...cart,
+      {
         id: id,
         name: details.name,
-        price: details.price,
+        unitPrice: details.price, 
+        price: details.price,    
         category: details.category,
-        amount: 1
-      }]);
-      setCookies('cart', cart, { path: '/' });
-    }
-  };
+        amount: 1,
+      },
+    ];
+
+    setCart(newCart);
+    setAmount(1);
+    setCookies("cart", newCart, { path: "/" });
+  }
+};
+
 
   const onClickRemoveCart = () => {
-    const currentIndex = cart.findIndex(item => item.id === id);
-    if (currentIndex >= 0) {
-      if (cart[currentIndex].amount === 1) {
-        const newCart = new Array([]);
-        cart.forEach((item, index) => {
-          index !== currentIndex && newCart.push(item);
-        })
-        if (cart.length === 1) {
-          removeCookie('cart', { path: '/' });
-        } else {
-          setCookies('cart', newCart, { path: '/' });
-        }
-        setInCart(false);
-        setCart(newCart);
-        setAmount(amount - 1);
-      } else {
-        cart[currentIndex].price -= cart[currentIndex].price / cart[currentIndex].amount;
-        cart[currentIndex].amount -= 1;
-        setAmount(amount - 1);
-        setCookies('cart', cart, { path: '/' });
-      }
+  const currentIndex = cart.findIndex(item => item.id === id);
+
+  if (currentIndex >= 0) {
+    const updatedCart = [...cart];
+
+    if (updatedCart[currentIndex].amount === 1) {
+      updatedCart.splice(currentIndex, 1);
+      setCart(updatedCart);
+      setCookies('cart', updatedCart, { path: '/' });
+
+      setInCart(false); 
+      setAmount(0);       
+    } else {
+      updatedCart[currentIndex].amount -= 1;
+      setCart(updatedCart);
+      setCookies('cart', updatedCart, { path: '/' });
+
+      setAmount(amount - 1);
     }
-  };
+  }
+};
+
   return (
     <motion.div id={details._id}
       initial={{ y: 20, opacity: 0 }}
