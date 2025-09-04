@@ -11,19 +11,19 @@ const Collection = () => {
   const [sortType, setSortType] = useState("relevant");
 
   const toggleCategory = (e) => {
-    const value = e.target.value.toLowerCase();
-    if (category.includes(value)) {
-      setCategory((prev) => prev.filter((item) => item !== value));
+    // const value = e.target.value.toLowerCase();
+    if (category.includes(e.target.value)) {
+      setCategory((prev) => prev.filter((item) => item !== e.target.value));
     } else {
-      setCategory((prev) => [...prev, value]);
+      setCategory((prev) => [...prev, e.target.value]);
     }
   };
   const toggleSubCategory = (e) => {
-    const value = e.target.value.toLowerCase();
-    if (subCategory.includes(value)) {
-      setSubCategory((prev) => prev.filter((item) => item !== value));
+    // const value = e.target.value.toLowerCase();
+    if (subCategory.includes(e.target.value)) {
+      setSubCategory((prev) => prev.filter((item) => item !== e.target.value));
     } else {
-      setSubCategory((prev) => [...prev, value]);
+      setSubCategory((prev) => [...prev, e.target.value]);
     }
   };
 
@@ -32,18 +32,14 @@ const Collection = () => {
     
     if (category.length > 0) {
       productsCopy = productsCopy.filter((item) =>
-      {
-      const value = item.category.toLowerCase()
-        category.includes(value)
-    });
+        category.includes(item.category)
+    );
     }
 
     if (subCategory.length > 0) {
       productsCopy = productsCopy.filter((item) =>
-      {
-        const value = item.subCategory.toLowerCase()
-        subCategory.includes(value)
-    });
+        subCategory.includes(item.subCategory)
+    );
     }
     setFilterProducts(productsCopy);
   };
